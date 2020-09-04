@@ -1,4 +1,6 @@
 # Never Settle For Windows
 Created by Hanna Flores
 
-- Gabriel Lopez 
+  Other Members:
+- Gabriel Lopez
+- Conner Lynch 
