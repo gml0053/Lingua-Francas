@@ -1,21 +1,27 @@
 //this pulls in our environment variables
-require('dotenv').config()
+require("dotenv").config();
 
-
-const express = require('express');
+const express = require("express");
 const app = express();
-const http = require('http').Server(app);
-const mongoose = require('mongoose');
+const http = require("http").Server(app);
+const mongoose = require("mongoose");
+var nunjucks = require("nunjucks");
+
 mongoose.connect(process.env.DB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	useFindAndModify: false,
 }); // connect to our database
 
-app.get('/', function(req, res) {
-    res.send('Hello world!');
+app.use(express.static("/public"));
+
+nunjucks.configure("views", {
+	autoescape: true,
+	express: app,
 });
 
-const server = http.listen(process.env.PORT ||  8080, function() {
-    console.log('listening on *:8080');
+require("./routing/basicroutes.js")(app); //include our file with the basic routing definitions
+
+const server = http.listen(process.env.PORT || 8080, function () {
+	console.log("listening on *:8080");
 });
