@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
+	googleId: String,
 	username: String,
 	firstName: String,
 	email: String,
