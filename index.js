@@ -24,7 +24,8 @@ mongoose.connect(process.env.DB_URL, {
 
 require("./handlers/passport.js")(passport); // pass passport for configuration
 
-app.use(express.static("/public"));
+app.use("/public", express.static(__dirname + "/public"));
+app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css"));
 
 // required for passport
 app.use(
@@ -37,7 +38,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
-nunjucks.configure("views", {
+nunjucks.configure("app", {
 	autoescape: true,
 	express: app,
 });

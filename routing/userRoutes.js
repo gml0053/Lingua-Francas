@@ -1,6 +1,6 @@
 module.exports = function (app, userHandler, passport) {
 	app.get("/login", function (req, res) {
-		res.render("index.html", { title: "Login Page" });
+		res.render("pages/login.njk");
 	});
 
 	app.get("/success", function (req, res) {
