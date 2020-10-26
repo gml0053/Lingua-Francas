@@ -34,7 +34,8 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use('/assets', express.static(__dirname + '/frontend/assets'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
-// required setup for passport
+// required for passport
+//this is temporary, later we will put secret in environment file
 app.use(
     session({
         secret: 'coywghno8c4gcowuhexn9hoigfwnnp39xhnwfg',
