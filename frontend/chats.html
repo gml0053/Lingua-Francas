@@ -1,84 +1,228 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <title>Projects - Lingua Francas</title>
+        <meta name="description" content="Conversational language learning web app" />
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css" />
+        <link rel="stylesheet" href="assets/css/Multi-step-form.css" />
+        <link rel="stylesheet" href="assets/css/untitled.css" />
+    </head>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Projects - Lingua Francas</title>
-    <meta name="description" content="Conversational language learning web app">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
-    <link rel="stylesheet" href="assets/css/untitled.css">
-</head>
-
-<body style="height: 100vh;">
-    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
-        <div class="container"><a class="navbar-brand logo" href="#">Lingua Francas</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse"
-                id="navbarNav">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link active" href="chats.html">Chat</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="discover.html">Discover</a></li>
-                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
-                </ul>
+    <body style="height: 100vh">
+        <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+            <div class="container">
+                <a class="navbar-brand logo" href="/">Lingua Francas</a
+                ><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav">
+                    <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link active" href="/chats">Chat</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="/discover">Discover</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-    <main class="page projets-page" style="height: 100vh;">
-        <section class="portfolio-block project-no-images" style="padding: 0px;height: 100%;margin-top: -4px;">
-            <div class="container" style="height: 100%;box-shadow: 0px 0px 10px 0px rgba(33,37,41,0.33);">
-                <div class="row" style="height: 100%;">
-                    <div class="col-lg-4 desktop-only" id="pullout" style="background: #dadada;padding: 0px;height: 100%;">
-                        <ul class="list-group" style="border-radius: 0px;">
-                            <li class="list-group-item" style="background: rgba(255,255,255,0);border: 1px none rgba(33,37,41,0) ;border-bottom-style: solid;border-bottom-color: rgba(33,37,41,0.15);" onclick="changeContact()">
-                                <div class="text-left d-inline-block" style="width: 30px;height: 30px;margin-right: 10px;background: #ffffff;border-radius: 100%;"><img style="width: 30px;height: 30px;margin-right: 20px;border-radius: 100%;"></div><span>Contact Name</span></li>
-                            <li class="list-group-item selected-contact" style="background: rgba(255,255,255,0);border: 1px none rgba(33,37,41,0) ;border-bottom-style: solid;border-bottom-color: rgba(33,37,41,0.15);"
-                                onclick="changeContact()">
-                                <div class="text-left d-inline-block" style="width: 30px;height: 30px;margin-right: 10px;background: #ffffff;border-radius: 100%;"><img style="width: 30px;height: 30px;margin-right: 20px;border-radius: 100%;"></div><span>Contact Name</span></li>
-                            <li class="list-group-item" style="background: rgba(255,255,255,0);border: 1px none rgba(33,37,41,0) ;border-bottom-style: solid;border-bottom-color: rgba(33,37,41,0.15);"
-                                onclick="changeContact()">
-                                <div class="text-left d-inline-block" style="width: 30px;height: 30px;margin-right: 10px;background: #ffffff;border-radius: 100%;"><img style="width: 30px;height: 30px;margin-right: 20px;border-radius: 100%;"></div><span>Contact Name</span></li>
-                            <li class="list-group-item" style="background: rgba(255,255,255,0);border: 1px none rgba(33,37,41,0) ;border-bottom-style: solid;border-bottom-color: rgba(33,37,41,0.15);"
-                                onclick="changeContact()">
-                                <div class="text-left d-inline-block" style="width: 30px;height: 30px;margin-right: 10px;background: #ffffff;border-radius: 100%;"><img style="width: 30px;height: 30px;margin-right: 20px;border-radius: 100%;"></div><span>Contact Name</span></li>
-                        </ul>
-                    </div>
-                    <div class="col d-flex flex-column flex-grow-1 flex-shrink-0" id="mainscreen" style="background: #ffffff;height: 100%;padding: 0px;">
-                        <div><button class="btn btn-light" type="button" style="height: 100%;" onclick="openNav()">&lt;</button></div><div class="chat-container d-flex flex-column overflow-auto flex-grow-1">
-    <div class="chat flex-grow-1">
-        <div class="mine message">My text</div>
-        <div class="yours message">Your text</div>
-        
-        <div class="yours message">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-        <div class="yours message">Your text</div>
-        <div class="mine message">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-        <div class="mine message">Your text</div>
-        <div class="mine message">My text</div>
-        <div class="yours message">Your text</div>
-        <div class="yours message">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-        <div class="yours message">Your text</div>
-        <div class="mine message">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-        <div class="mine message">Your text</div>
-        
-        
-        <div id="anchor"></div>
-    </div>
-</div>
+        </nav>
+        <main class="page projets-page" style="height: 100vh">
+            <section class="portfolio-block project-no-images" style="padding: 0px; height: 100%; margin-top: -4px">
+                <div class="container" style="height: 100%; box-shadow: 0px 0px 10px 0px rgba(33, 37, 41, 0.33)">
+                    <div class="row" style="height: 100%">
+                        <div
+                            class="col-lg-4 desktop-only"
+                            id="pullout"
+                            style="background: #dadada; padding: 0px; height: 100%"
+                        >
+                            <ul class="list-group" style="border-radius: 0px">
+                                <li
+                                    class="list-group-item"
+                                    style="
+                                        background: rgba(255, 255, 255, 0);
+                                        border: 1px none rgba(33, 37, 41, 0);
+                                        border-bottom-style: solid;
+                                        border-bottom-color: rgba(33, 37, 41, 0.15);
+                                    "
+                                    onclick="changeContact()"
+                                >
+                                    <div
+                                        class="text-left d-inline-block"
+                                        style="
+                                            width: 30px;
+                                            height: 30px;
+                                            margin-right: 10px;
+                                            background: #ffffff;
+                                            border-radius: 100%;
+                                        "
+                                    >
+                                        <img
+                                            style="width: 30px; height: 30px; margin-right: 20px; border-radius: 100%"
+                                        />
+                                    </div>
+                                    <span>Contact Name</span>
+                                </li>
+                                <li
+                                    class="list-group-item selected-contact"
+                                    style="
+                                        background: rgba(255, 255, 255, 0);
+                                        border: 1px none rgba(33, 37, 41, 0);
+                                        border-bottom-style: solid;
+                                        border-bottom-color: rgba(33, 37, 41, 0.15);
+                                    "
+                                    onclick="changeContact()"
+                                >
+                                    <div
+                                        class="text-left d-inline-block"
+                                        style="
+                                            width: 30px;
+                                            height: 30px;
+                                            margin-right: 10px;
+                                            background: #ffffff;
+                                            border-radius: 100%;
+                                        "
+                                    >
+                                        <img
+                                            style="width: 30px; height: 30px; margin-right: 20px; border-radius: 100%"
+                                        />
+                                    </div>
+                                    <span>Contact Name</span>
+                                </li>
+                                <li
+                                    class="list-group-item"
+                                    style="
+                                        background: rgba(255, 255, 255, 0);
+                                        border: 1px none rgba(33, 37, 41, 0);
+                                        border-bottom-style: solid;
+                                        border-bottom-color: rgba(33, 37, 41, 0.15);
+                                    "
+                                    onclick="changeContact()"
+                                >
+                                    <div
+                                        class="text-left d-inline-block"
+                                        style="
+                                            width: 30px;
+                                            height: 30px;
+                                            margin-right: 10px;
+                                            background: #ffffff;
+                                            border-radius: 100%;
+                                        "
+                                    >
+                                        <img
+                                            style="width: 30px; height: 30px; margin-right: 20px; border-radius: 100%"
+                                        />
+                                    </div>
+                                    <span>Contact Name</span>
+                                </li>
+                                <li
+                                    class="list-group-item"
+                                    style="
+                                        background: rgba(255, 255, 255, 0);
+                                        border: 1px none rgba(33, 37, 41, 0);
+                                        border-bottom-style: solid;
+                                        border-bottom-color: rgba(33, 37, 41, 0.15);
+                                    "
+                                    onclick="changeContact()"
+                                >
+                                    <div
+                                        class="text-left d-inline-block"
+                                        style="
+                                            width: 30px;
+                                            height: 30px;
+                                            margin-right: 10px;
+                                            background: #ffffff;
+                                            border-radius: 100%;
+                                        "
+                                    >
+                                        <img
+                                            style="width: 30px; height: 30px; margin-right: 20px; border-radius: 100%"
+                                        />
+                                    </div>
+                                    <span>Contact Name</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div
+                            class="col d-flex flex-column flex-grow-1 flex-shrink-0"
+                            id="mainscreen"
+                            style="background: #ffffff; height: 100%; padding: 0px"
+                        >
+                            <div>
+                                <button class="btn btn-light" type="button" style="height: 100%" onclick="openNav()">
+                                    &lt;
+                                </button>
+                            </div>
+                            <div class="chat-container d-flex flex-column overflow-auto flex-grow-1">
+                                <div class="chat flex-grow-1">
+                                    <div class="mine message">My text</div>
+                                    <div class="yours message">Your text</div>
 
-                        <div>
-                            <form class="d-flex flex-row" id="intputMessage" style="margin: 0px;padding: 10px;"><textarea class="form-control" style="margin-right: 1em;max-height: 20em;min-height: 2.5em;" rows="1" oninput="auto_grow(this)"></textarea><button class="btn btn-primary" type="button" style="height: 2.5em;">Send</button></form>
+                                    <div class="yours message">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                        culpa qui officia deserunt mollit anim id est laborum.
+                                    </div>
+                                    <div class="yours message">Your text</div>
+                                    <div class="mine message">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                        culpa qui officia deserunt mollit anim id est laborum.
+                                    </div>
+                                    <div class="mine message">Your text</div>
+                                    <div class="mine message">My text</div>
+                                    <div class="yours message">Your text</div>
+                                    <div class="yours message">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                        culpa qui officia deserunt mollit anim id est laborum.
+                                    </div>
+                                    <div class="yours message">Your text</div>
+                                    <div class="mine message">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                        culpa qui officia deserunt mollit anim id est laborum.
+                                    </div>
+                                    <div class="mine message">Your text</div>
+
+                                    <div id="anchor"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <form class="d-flex flex-row" id="intputMessage" style="margin: 0px; padding: 10px">
+                                    <textarea
+                                        class="form-control"
+                                        style="margin-right: 1em; max-height: 20em; min-height: 2.5em"
+                                        rows="1"
+                                        oninput="auto_grow(this)"
+                                    ></textarea
+                                    ><button class="btn btn-primary" type="button" style="height: 2.5em">Send</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
-    <script src="assets/js/theme.js"></script>
-</body>
-
+            </section>
+        </main>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+        <script src="assets/js/Multi-step-form.js"></script>
+        <script src="assets/js/theme.js"></script>
+    </body>
 </html>

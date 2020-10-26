@@ -1,0 +1,72 @@
+{% extends "base.html" %} {%block body%}
+
+<main class="page projets-page" style="height: 100vh">
+    <section class="portfolio-block project-no-images" style="padding: 0px; height: 100%; margin-top: -4px">
+        <div class="container" style="height: 100%; box-shadow: 0px 0px 10px 0px rgba(33, 37, 41, 0.33)">
+            <div class="row" style="height: 100%">
+                <div class="col-lg-4 desktop-only" id="pullout" style="background: #dadada; padding: 0px; height: 100%">
+                    <ul class="list-group" style="border-radius: 0px">
+                        <li
+                            class="list-group-item"
+                            style="
+                                background: rgba(255, 255, 255, 0);
+                                border: 1px none rgba(33, 37, 41, 0);
+                                border-bottom-style: solid;
+                                border-bottom-color: rgba(33, 37, 41, 0.15);
+                            "
+                            onclick="changeContact()"
+                        >
+                            <div
+                                class="text-left d-inline-block"
+                                style="
+                                    width: 30px;
+                                    height: 30px;
+                                    margin-right: 10px;
+                                    background: #ffffff;
+                                    border-radius: 100%;
+                                "
+                            >
+                                <img style="width: 30px; height: 30px; margin-right: 20px; border-radius: 100%" />
+                            </div>
+                            <span>Contact Name</span>
+                        </li>
+                    </ul>
+                </div>
+                <div
+                    class="col d-flex flex-column flex-grow-1 flex-shrink-0"
+                    id="mainscreen"
+                    style="background: #ffffff; height: 100%; padding: 0px"
+                >
+                    <div>
+                        <button class="btn btn-light" type="button" style="height: 100%" onclick="openNav()">
+                            &lt;
+                        </button>
+                    </div>
+                    <div class="chat-container d-flex flex-column overflow-auto flex-grow-1">
+                        <div class="chat flex-grow-1">
+                            <!--Chats go HERE classes .yours .message and .mine .message-->
+                            <div id="anchor"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <form class="chatsForm d-flex flex-row" id="intputMessage" style="margin: 0px; padding: 10px">
+                            <textarea
+                                class="chatsInput form-control"
+                                style="margin-right: 1em; max-height: 20em; min-height: 2.5em"
+                                rows="1"
+                                oninput="auto_grow(this)"
+                            ></textarea
+                            ><button class="btn btn-primary" type="submit" style="height: 2.5em">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{%endblock%} {%block scripts%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="assets/js/chats2.js"></script>
+{%endblock%}

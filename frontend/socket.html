@@ -1,0 +1,21 @@
+{% extends "base.html" %} {%block head%}<link rel="stylesheet" href="assets/css/style.css" />{%endblock%} {%block body%}
+<div class="container">
+    <div class="inbox">
+        <div class="inbox__people">
+            <h4>Active users</h4>
+        </div>
+        <div class="inbox__messages">
+            <div class="messages__history"></div>
+            <div class="fallback"></div>
+        </div>
+    </div>
+
+    <form class="message_form">
+        <input type="text" class="message_form__input" placeholder="Type a message" />
+        <button class="message_form__button" type="submit">Enter</button>
+    </form>
+</div>
+{%endblock%} {%block scripts%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="assets/js/main.js"></script>
+{%endblock%}

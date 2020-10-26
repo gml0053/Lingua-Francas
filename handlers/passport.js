@@ -1,7 +1,5 @@
-var passport = require("passport");
+var User = require("../models/user");
 var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
-
-var User = require("../models/user.js");
 
 module.exports = function (passport) {
   passport.serializeUser(function (user, done) {
@@ -23,14 +21,30 @@ module.exports = function (passport) {
         callbackURL: "/google/callback",
       },
       function (accessToken, refreshToken, profile, done) {
-        /* User.findOrCreate({ googleId: profile.id }, function (
-					err,
-					user
-				) {
-					return done(err, user);
-                });*/
-        console.log(profile);
-        return done(null, profile);
+        User.findOne(
+          {
+            googleID: profile.id,
+          },
+          function (err, localUser) {
+            if (!localUser) {
+              var newUser = new User();
+              console.log(profile.id);
+              newUser.googleID = profile.id;
+              newUser.displayName = profile.displayName;
+              newUser.givenName = profile.name.givenName;
+              newUser.image = profile.photos[0].value;
+
+              newUser.save(function (err) {
+                if (err) throw err;
+                console.log("newUser", newUser);
+                return done(null, newUser); //makes new local user that matches UNT user cred
+              });
+            } else {
+              console.log("localUser", localUser);
+              return done(null, localUser);
+            }
+          }
+        );
       }
     )
   );
