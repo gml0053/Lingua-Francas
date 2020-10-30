@@ -56,7 +56,8 @@ app.use(passport.session()); // persistent login sessions
 //configuration for nunjucks
 nunjucks.configure('frontend', {
     autoescape: true,
-    express: app
+    express: app,
+    watch: true
 });
 
 //now pull in the code for what subdirectories our website can serve

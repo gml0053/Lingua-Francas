@@ -8,13 +8,13 @@ module.exports = {
     },
 
     addFluency(user, language, callback) {
-        userModel.findOne(
+        userModel.findOneAndUpdate(
             {
                 _id: user._id
             },
-            async function (err, result) {
-                result.fluentIn.push(language);
-                await result.save();
+            { $push: { fluentIn: language } },
+            { new: false },
+            function (err, result) {
                 callback();
             }
         );

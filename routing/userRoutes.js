@@ -28,6 +28,7 @@ module.exports = function (app, passport, userHandler) {
     });
 
     app.get('/profile', loggedIn, function (req, res) {
+        console.log(req.user);
         res.render('editProfile.html', { profile: req.user, languages: languages });
     });
 
