@@ -5,13 +5,14 @@ const messageForm = document.querySelector('.chatsForm');
 const messageBox = document.querySelector('.chat');
 
 const newUserConnected = (user) => {
-    userName = user || `User${Math.floor(Math.random() * 1000000)}`;
+    userName = messageBox.dataset.userID;
     socket.emit('new user', userName);
     //addToUsersBox(userName);
 };
 
 const addNewMessage = ({ user, message }) => {
     const time = new Date();
+
     const formattedTime = time.toLocaleString('en-US', {
         hour: 'numeric',
         minute: 'numeric'

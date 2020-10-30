@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 var session = require('express-session');
 var nunjucks = require('nunjucks');
 var passport = require('passport');
+var bodyParser = require('body-parser');
 
 //load our database models
 var userModel = require('./models/user.js');
@@ -25,6 +26,12 @@ mongoose.connect(process.env.DB_URL, {
     useUnifiedTopology: true,
     useFindAndModify: false
 }); // connect to our database
+
+app.use(
+    bodyParser.urlencoded({
+        extended: false
+    })
+);
 
 //pull in our passport code and give it our instance of passport
 require('./handlers/passport.js')(passport); // pass passport for configuration

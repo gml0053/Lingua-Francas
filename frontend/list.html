@@ -1,8 +1,9 @@
 {% extends "base.html" %} {%block body%}
-<p>test</p>
-
-{% for item in allUsers %}
-<li>{{ item }}</li>
-{% else %}
-<li>This would display if the 'item' collection were empty</li>
-{% endfor %} {%endblock%}
+<main class="page container">
+    <ul class="list-group">
+        {% for item in allUsers %}
+        <li class="list-group-item">{{ item.displayName }}</li>
+        {% endfor %}
+    </ul>
+</main>
+{%endblock%}

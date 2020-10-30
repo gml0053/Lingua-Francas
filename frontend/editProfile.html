@@ -1,0 +1,25 @@
+{% extends "base.html" %} {%block body%}
+<main class="page container">
+    <ul class="list-group">
+        {% for attribute, value in profile %}
+        <li class="list-group-item">{{ attribute }}: {{ value }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="card">
+        <div class="card-body">
+            <form action="/addFluency" method="POST">
+                <div class="form-group">
+                    <label for="addedFluency">Add a fluent language?</label>
+                    <select class="form-control" id="addedFluency" name="addedFluency">
+                        {% for language in languages %}
+                        <option>{{language.English}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</main>
+{%endblock%}
