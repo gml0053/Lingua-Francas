@@ -21,7 +21,6 @@ const addNewMessage = ({ user, message }) => {
     const receivedMsg = `<p class="yours message">${message}</p>`;
 
     const myMsg = `<p class="mine message">${message}</p>`;
-    console.log(user);
     messageBox.innerHTML += user === userName ? myMsg : receivedMsg;
 };
 
@@ -37,8 +36,6 @@ messageForm.addEventListener('submit', (e) => {
         message: inputField.value,
         nick: userName
     });
-
-    console.log(userName);
 
     inputField.value = '';
 });
@@ -59,6 +56,5 @@ socket.on('user disconnected', function (userName) {
 });
 
 socket.on('chat message', function (data) {
-    console.log(data);
     addNewMessage({ user: data.nick, message: data.message });
 });

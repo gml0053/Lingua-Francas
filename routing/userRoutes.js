@@ -28,7 +28,6 @@ module.exports = function (app, passport, userHandler) {
     });
 
     app.get('/profile', loggedIn, function (req, res) {
-        console.log(req.user);
         res.render('editProfile.html', { profile: req.user, languages: languages });
     });
 
@@ -44,8 +43,28 @@ module.exports = function (app, passport, userHandler) {
 
     app.post('/addFluency', function (req, res) {
         var newLanguage = req.body.addedFluency;
-        console.log(newLanguage);
         userHandler.addFluency(req.user, newLanguage, function () {
+            res.redirect('back');
+        });
+    });
+
+    app.post('/removeFluency', function (req, res) {
+        var newLanguage = req.body.removedFluency;
+        userHandler.removeFluency(req.user, newLanguage, function () {
+            res.redirect('back');
+        });
+    });
+
+    app.post('/addLearning', function (req, res) {
+        var newLanguage = req.body.addedLearning;
+        userHandler.addLearning(req.user, newLanguage, function () {
+            res.redirect('back');
+        });
+    });
+
+    app.post('/removeLearning', function (req, res) {
+        var newLanguage = req.body.removedLearning;
+        userHandler.removeLearning(req.user, newLanguage, function () {
             res.redirect('back');
         });
     });

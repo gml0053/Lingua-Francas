@@ -4,8 +4,6 @@ module.exports = function (server) {
     const io = socket(server);
     const activeUsers = new Set();
 
-    console.log('h-100');
-
     io.on('connection', function (socket) {
         console.log('Made socket connection');
 

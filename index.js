@@ -19,7 +19,6 @@ var privateMessagesModel = require('./models/privateMessages.js');
 
 //load our code to handle these models
 var userHandler = require('./handlers/userHandler.js');
-console.log(userHandler);
 //connect mongoose to our database URL
 mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
