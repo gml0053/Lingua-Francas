@@ -1,16 +1,23 @@
 const socket = require('socket.io');
 
-module.exports = function (server) {
+module.exports = function (server, userHandler) {
     const io = socket(server);
     const activeUsers = new Set();
 
     io.on('connection', function (socket) {
         console.log('Made socket connection');
 
-        socket.on('new user', function (data) {
-            socket.userId = data;
+        socket.on('joinRoom', function (data) {
+            console.log('here');
+            socket.userId = data.googleID;
+            socket.join(data.roomID);
             activeUsers.add(data);
-            io.emit('new user', [...activeUsers]);
+
+            console.log(data.googleID, ' just joined room ', data.roomID);
+            io.emit('connect', {
+                googleID: [...activeUsers],
+                roomID: data.roomID
+            });
         });
 
         socket.on('disconnect', () => {
@@ -19,11 +26,21 @@ module.exports = function (server) {
         });
 
         socket.on('chat message', function (data) {
-            io.emit('chat message', data);
+            console.log('got messafe');
+            /*
+            data: {
+                message: inputField.value,
+                googleID: userName,
+                roomID: roomID,
+                timestamp: formattedTime
+            }*/
+            userHandler.saveMessage(data);
+            io.to(data.roomID).emit('chat message', data);
         });
 
         socket.on('typing', function (data) {
-            socket.broadcast.emit('typing', data);
+            console.log('got typing');
+            io.to(data.roomID).emit('typing', data);
         });
     });
 };

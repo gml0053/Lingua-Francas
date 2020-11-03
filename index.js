@@ -12,10 +12,11 @@ var passport = require('passport');
 var bodyParser = require('body-parser');
 
 //load our database models
-var userModel = require('./models/user.js');
-var serverModel = require('./models/server.js');
-var groupModel = require('./models/group.js');
-var privateMessagesModel = require('./models/privateMessages.js');
+require('./models/directMessage.js');
+require('./models/directChat.js');
+require('./models/user.js');
+require('./models/server.js');
+require('./models/group.js');
 
 //load our code to handle these models
 var userHandler = require('./handlers/userHandler.js');
@@ -69,4 +70,4 @@ const server = http.listen(process.env.PORT || 8080, function () {
 });
 
 //now pull in our websocket handler file and give it our server instance
-require('./handlers/sockets.js')(server);
+require('./handlers/sockets.js')(server, userHandler);

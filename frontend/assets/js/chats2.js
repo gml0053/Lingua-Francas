@@ -3,17 +3,22 @@ const socket = io();
 const inputField = document.querySelector('.chatsInput');
 const messageForm = document.querySelector('.chatsForm');
 const messageBox = document.querySelector('.chat');
+const googleID = messageBox.getAttribute('userID');
+var roomID = messageBox.getAttribute('roomID');
+var formattedTime;
 
-const newUserConnected = (user) => {
-    userName = messageBox.getAttribute('userID');
-    socket.emit('new user', userName);
-    //addToUsersBox(userName);
+window.onload = function () {
+    console.log('loaded');
+    socket.emit('joinRoom', {
+        googleID: googleID,
+        roomID: roomID
+    });
 };
 
 const addNewMessage = ({ user, message }) => {
     const time = new Date();
 
-    const formattedTime = time.toLocaleString('en-US', {
+    formattedTime = time.toLocaleString('en-US', {
         hour: 'numeric',
         minute: 'numeric'
     });
@@ -21,10 +26,8 @@ const addNewMessage = ({ user, message }) => {
     const receivedMsg = `<p class="yours message">${message}</p>`;
 
     const myMsg = `<p class="mine message">${message}</p>`;
-    messageBox.innerHTML += user === userName ? myMsg : receivedMsg;
+    messageBox.innerHTML += user === googleID ? myMsg : receivedMsg;
 };
-
-newUserConnected();
 
 messageForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -34,7 +37,9 @@ messageForm.addEventListener('submit', (e) => {
 
     socket.emit('chat message', {
         message: inputField.value,
-        nick: userName
+        googleID: googleID,
+        roomID: roomID,
+        timestamp: formattedTime
     });
 
     inputField.value = '';
@@ -43,18 +48,11 @@ messageForm.addEventListener('submit', (e) => {
 inputField.addEventListener('keyup', () => {
     socket.emit('typing', {
         isTyping: inputField.value.length > 0,
-        nick: userName
+        googleID: googleID,
+        roomID: roomID
     });
 });
 
-socket.on('new user', function (data) {
-    //data.map((user) => addToUsersBox(user));
-});
-
-socket.on('user disconnected', function (userName) {
-    //document.querySelector(`.${userName}-userlist`).remove();
-});
-
 socket.on('chat message', function (data) {
-    addNewMessage({ user: data.nick, message: data.message });
+    addNewMessage({ user: data.googleID, message: data.message });
 });

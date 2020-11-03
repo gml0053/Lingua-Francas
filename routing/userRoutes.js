@@ -31,6 +31,17 @@ module.exports = function (app, passport, userHandler) {
         res.render('editProfile.html', { profile: req.user, languages: languages });
     });
 
+    app.get('/user', loggedIn, function (req, res) {
+        var googleID = req.query.googleID;
+        userHandler.getProfileFromGoogleID(googleID, function (err, result) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render('userDetails.html', { profile: result });
+            }
+        });
+    });
+
     app.get('/discover', loggedIn, function (req, res) {
         userHandler.listAllUsers(function (result) {
             res.render('list.html', { allUsers: result });
@@ -38,33 +49,43 @@ module.exports = function (app, passport, userHandler) {
     });
 
     app.get('/chats', loggedIn, function (req, res) {
-        res.render('chats2.html', { googleID: req.user.googleID });
+        userHandler.getAllChats(req.user, function (chatList) {
+            res.render('chats2.html', { googleID: req.user.googleID, chatList: chatList, roomID: chatList[0] });
+        });
     });
 
-    app.post('/addFluency', function (req, res) {
+    app.post('/addFluency', loggedIn, function (req, res) {
         var newLanguage = req.body.addedFluency;
         userHandler.addFluency(req.user, newLanguage, function () {
             res.redirect('back');
         });
     });
 
-    app.post('/removeFluency', function (req, res) {
+    app.post('/removeFluency', loggedIn, function (req, res) {
         var newLanguage = req.body.removedFluency;
         userHandler.removeFluency(req.user, newLanguage, function () {
             res.redirect('back');
         });
     });
 
-    app.post('/addLearning', function (req, res) {
+    app.post('/addLearning', loggedIn, function (req, res) {
         var newLanguage = req.body.addedLearning;
         userHandler.addLearning(req.user, newLanguage, function () {
             res.redirect('back');
         });
     });
 
-    app.post('/removeLearning', function (req, res) {
+    app.post('/removeLearning', loggedIn, function (req, res) {
         var newLanguage = req.body.removedLearning;
         userHandler.removeLearning(req.user, newLanguage, function () {
+            res.redirect('back');
+        });
+    });
+
+    app.post('/initiate', loggedIn, function (req, res) {
+        var targetID = req.body.targetID || req.query.targetID;
+        console.log(targetID);
+        userHandler.initiateChat(req.user, targetID, function () {
             res.redirect('back');
         });
     });

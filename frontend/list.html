@@ -2,7 +2,10 @@
 <main class="page container">
     <ul class="list-group">
         {% for item in allUsers %}
-        <li class="list-group-item">{{ item.displayName }}</li>
+        <li class="list-group-item">
+            {{ item.displayName }}
+            <a class="btn btn-primary" href="/user?googleID={{item.googleID}}" role="button">Profile</a>
+        </li>
         {% endfor %}
     </ul>
 </main>

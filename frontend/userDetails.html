@@ -1,0 +1,8 @@
+{% extends "base.html" %} {%block body%}
+<main class="page container">
+    <div>{{profile}}</div>
+    <button type="button" class="btn btn-primary initiate" targetID="{{profile.googleID}}">Start Chatting!</button>
+</main>
+{%endblock%} {%block scripts%}
+<script src="assets/js/userDetails.js"></script>
+{%endblock%}

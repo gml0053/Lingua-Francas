@@ -10,7 +10,7 @@ var userSchema = mongoose.Schema({
     fluentIn: [String],
     learning: [String],
     dateRegistered: String, //for now; this will be a timestamp later
-    isOnline: Boolean
+    privateChats: [mongoose.model('directChat').schema] //all the one on one conversatoins
 });
 
 module.exports = mongoose.model('User', userSchema); //lets everyone else see this schema with the model name 'User'
