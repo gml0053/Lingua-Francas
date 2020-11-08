@@ -6,6 +6,7 @@
             <div class="row" style="height: 100%">
                 <div class="col-lg-4 desktop-only" id="pullout" style="background: #dadada; padding: 0px; height: 100%">
                     <ul class="list-group" style="border-radius: 0px">
+                        {% for chat in chats %}
                         <li
                             class="list-group-item"
                             style="
@@ -14,7 +15,7 @@
                                 border-bottom-style: solid;
                                 border-bottom-color: rgba(33, 37, 41, 0.15);
                             "
-                            onclick="changeContact()"
+                            onclick="changeContact({{chat._id}})"
                         >
                             <div
                                 class="text-left d-inline-block"
@@ -26,10 +27,16 @@
                                     border-radius: 100%;
                                 "
                             >
-                                <img style="width: 30px; height: 30px; margin-right: 20px; border-radius: 100%" />
+                                <img
+                                    src="{{chat.image}}"
+                                    style="width: 30px; height: 30px; margin-right: 20px; border-radius: 100%"
+                                />
                             </div>
-                            <span>Contact Name</span>
+                            <span>{{chat.displayName}}</span>
                         </li>
+                        {% else %}
+                        <li>You have no chats</li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div

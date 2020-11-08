@@ -10,7 +10,8 @@ var privateChatConversation = mongoose.Schema({
     startedOn: String, //date chat was accepted
     isBlocked: Boolean, //someone block chat AFTER it was already started?
     blockedBy: String, //who blocked it
-    messages: [privateChatMessage] //array of all the messages in this chat
+    image: String,
+    messages: [mongoose.model('directMessage').schema] //array of all the messages in this chat
 });
 
 module.exports = mongoose.model('directChat', privateChatConversation);

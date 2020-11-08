@@ -7,12 +7,30 @@ const googleID = messageBox.getAttribute('userID');
 var roomID = messageBox.getAttribute('roomID');
 var formattedTime;
 
+function getMessages(roomID) {
+    $.ajax({
+        type: 'GET',
+        url: '/messagesForChat',
+        data: {
+            roomID: roomID
+        },
+        dataType: 'html'
+    }).done(function (html) {
+        //location.reload();
+        console.log(html);
+        messageBox.innerHTML += html;
+    });
+}
+
 window.onload = function () {
     console.log('loaded');
-    socket.emit('joinRoom', {
-        googleID: googleID,
-        roomID: roomID
-    });
+    if (roomID != 'none') {
+        getMessages(roomID);
+        socket.emit('joinRoom', {
+            googleID: googleID,
+            roomID: roomID
+        });
+    }
 };
 
 const addNewMessage = ({ user, message }) => {

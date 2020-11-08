@@ -50,9 +50,27 @@ module.exports = function (app, passport, userHandler) {
 
     app.get('/chats', loggedIn, function (req, res) {
         userHandler.getAllChats(req.user, function (chatList) {
-            res.render('chats2.html', { googleID: req.user.googleID, chatList: chatList, roomID: chatList[0] });
+            if (chatList.length > 0) {
+                res.render('chats2.html', { googleID: req.user.googleID, chats: chatList, roomID: chatList[0]._id });
+            } else {
+                res.render('chats2.html', { googleID: req.user.googleID, chats: chatList, roomID: 'none' });
+            }
         });
     });
+
+    app.get(
+        '/messagesForChat',
+        loggedIn,
+        function (req, res) {
+            roomID = req.body.roomID || req.query.roomID;
+            userHandler.getMessagesForRoom(roomID, function (messages) {
+                res.render('innerMessages.html', { messages: messages, myID: req.user.googleID });
+            });
+        },
+        function (err, html) {
+            res.send(html);
+        }
+    );
 
     app.post('/addFluency', loggedIn, function (req, res) {
         var newLanguage = req.body.addedFluency;

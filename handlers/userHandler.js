@@ -146,11 +146,27 @@ module.exports = {
                 if (err) {
                     console.log(err);
                 } else {
-                    var chatIDs = [];
+                    var chats = [];
                     result.privateChats.forEach(function (privateChat) {
-                        chatIDs.push(privateChat._id);
+                        chats.push(privateChat);
                     });
-                    callback(chatIDs);
+                    callback(chats);
+                }
+            }
+        );
+    },
+
+    getMessagesForRoom(roomID, callback) {
+        directChatModel.findOne(
+            {
+                _id: roomID
+            },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var messages = result.messages;
+                    callback(messages);
                 }
             }
         );
