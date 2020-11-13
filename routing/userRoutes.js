@@ -8,6 +8,32 @@ module.exports = function (app, passport, userHandler) {
         res.render('signup.html');
     });
 
+    app.post(
+        '/locallogin',
+        passport.authenticate('local-login', {
+            successRedirect: '/profile', // redirect to the secure profile section
+            failureRedirect: '/login', // redirect back to the signup page if there is an error
+            failureFlash: true // allow flash messages
+        })
+    );
+
+    app.post(
+        '/localsignup',
+        passport.authenticate('local-signup', {
+            successRedirect: '/profile', // redirect to the secure profile section
+            failureRedirect: '/login', // redirect back to the signup page if there is an error
+            failureFlash: true // allow flash messages
+        })
+    );
+
+    // =====================================
+    // LOGOUT ==============================
+    // =====================================
+    app.get('/logout', function (req, res) {
+        req.logout();
+        res.redirect('/');
+    });
+
     app.get(
         '/google',
         passport.authenticate('google', {
@@ -32,18 +58,19 @@ module.exports = function (app, passport, userHandler) {
     });
 
     app.get('/user', loggedIn, function (req, res) {
-        var googleID = req.query.googleID;
-        userHandler.getProfileFromGoogleID(googleID, function (err, result) {
+        var userID = req.query.userID;
+        userHandler.getProfileFromUserID(userID, function (err, result) {
             if (err) {
                 console.log(err);
             } else {
+
                 res.render('userDetails.html', { profile: result });
             }
         });
     });
 
     app.get('/discover', loggedIn, function (req, res) {
-        userHandler.listAllUsers(function (result) {
+        userHandler.listAllUsersExceptMe(req.user._id, function (result) {
             res.render('list.html', { allUsers: result });
         });
     });
@@ -51,9 +78,9 @@ module.exports = function (app, passport, userHandler) {
     app.get('/chats', loggedIn, function (req, res) {
         userHandler.getAllChats(req.user, function (chatList) {
             if (chatList.length > 0) {
-                res.render('chats2.html', { googleID: req.user.googleID, chats: chatList, roomID: chatList[0]._id });
+                res.render('chats2.html', { userID: req.user._id, chats: chatList, roomID: chatList[0]._id });
             } else {
-                res.render('chats2.html', { googleID: req.user.googleID, chats: chatList, roomID: 'none' });
+                res.render('chats2.html', { userID: req.user._id, chats: chatList, roomID: 'none' });
             }
         });
     });
@@ -64,7 +91,7 @@ module.exports = function (app, passport, userHandler) {
         function (req, res) {
             roomID = req.body.roomID || req.query.roomID;
             userHandler.getMessagesForRoom(roomID, function (messages) {
-                res.render('innerMessages.html', { messages: messages, myID: req.user.googleID });
+                res.render('innerMessages.html', { messages: messages, myID: req.user._id });
             });
         },
         function (err, html) {
@@ -102,7 +129,6 @@ module.exports = function (app, passport, userHandler) {
 
     app.post('/initiate', loggedIn, function (req, res) {
         var targetID = req.body.targetID || req.query.targetID;
-        console.log(targetID);
         userHandler.initiateChat(req.user, targetID, function () {
             res.redirect('back');
         });

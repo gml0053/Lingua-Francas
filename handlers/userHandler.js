@@ -1,11 +1,17 @@
 const user = require('../models/user.js');
 var userModel = require('../models/user.js');
 var directChatModel = require('../models/directChat.js');
-var directMessageModel = require('../models/directMessage.js');
+//var directMessageModel = require('../models/directMessage.js');
 
 module.exports = {
     listAllUsers(callback) {
         userModel.find({}, function (err, result) {
+            callback(result);
+        });
+    },
+
+    listAllUsersExceptMe(userID, callback) {
+        userModel.find({ _id: { $ne: userID } }, function (err, result) {
             callback(result);
         });
     },
@@ -72,32 +78,40 @@ module.exports = {
         );
     },
 
-    initiateChat(user, inviteeID, callback) {
-        console.log(inviteeID);
+    getProfileFromUserID(userID, callback) {
         userModel.findOne(
             {
-                googleID: inviteeID
+                _id: userID
+            },
+            function (err, result) {
+                callback(err, result);
+            }
+        );
+    },
+
+    initiateChat(user, inviteeID, callback) {
+        userModel.findOne(
+            {
+                _id: inviteeID
             },
             function (err, invitee) {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log(invitee);
                     userModel.findOne(
                         {
-                            googleID: user.googleID
+                            _id: user._id
                         },
                         function (err, initiator) {
                             if (err) {
                                 console.log(err);
                             } else {
-                                console.log(initiator);
                                 //if we get here both users were fetched suvvessfully and we can add the new conversation to both
                                 //create chat document
                                 var newChat = new directChatModel();
-                                newChat.initiator = initiator.googleID;
+                                newChat.initiator = initiator._id;
                                 newChat.initiatorName = initiator.displayName;
-                                newChat.invitee = invitee.googleID;
+                                newChat.invitee = invitee._id;
                                 newChat.inviteeName = invitee.displayName;
                                 newChat.isAccepted = false;
                                 newChat.isRejected = false;
@@ -173,32 +187,24 @@ module.exports = {
     },
 
     saveMessage(data) {
-        /*
-        data: {
-            message: inputField.value,
-            googleID: userName,
-            roomID: roomID,
-            timestamp: formattedTime
-        }*/
-        var newMessage = new directMessageModel();
-        newMessage.sentBy = data.googleID;
-        newMessage.sentAt = data.timestamp;
-        newMessage.content = data.message;
-        newMessage.save(function (err, result) {
-            console.log('save message: ', result);
-            directChatModel.findOneAndUpdate(
-                {
-                    _id: data.roomID
-                },
-                {
-                    $push: {
-                        messages: result
+        //var newMessage = new directMessageModel();
+        //newMessage.sentBy = data._id;
+        //newMessage.sentAt = data.timestamp;
+        //newMessage.content = data.message;
+        directChatModel.findOneAndUpdate(
+            {
+                _id: data.roomID
+            },
+            {
+                $push: {
+                    messages: {
+                        sentBy: data.userID,
+                        sentAt: data.timestamp,
+                        content: data.message
                     }
-                },
-                function (err, resultChat) {
-                    console.log(resultChat);
                 }
-            );
-        });
+            },
+            function (err, resultChat) {}
+        );
     }
 };

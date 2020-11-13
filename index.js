@@ -10,6 +10,7 @@ var session = require('express-session');
 var nunjucks = require('nunjucks');
 var passport = require('passport');
 var bodyParser = require('body-parser');
+var flash = require('connect-flash');
 
 //load our database models
 require('./models/directMessage.js');
@@ -32,6 +33,8 @@ app.use(
         extended: false
     })
 );
+
+app.use(flash());
 
 //pull in our passport code and give it our instance of passport
 require('./handlers/passport.js')(passport); // pass passport for configuration

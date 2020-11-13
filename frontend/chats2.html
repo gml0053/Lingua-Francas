@@ -8,14 +8,14 @@
                     <ul class="list-group" style="border-radius: 0px">
                         {% for chat in chats %}
                         <li
-                            class="list-group-item"
+                            class="list-group-item chatRoom"
                             style="
                                 background: rgba(255, 255, 255, 0);
                                 border: 1px none rgba(33, 37, 41, 0);
                                 border-bottom-style: solid;
                                 border-bottom-color: rgba(33, 37, 41, 0.15);
                             "
-                            onclick="changeContact({{chat._id}})"
+                            roomID="{{chat._id}}"
                         >
                             <div
                                 class="text-left d-inline-block"
@@ -32,7 +32,7 @@
                                     style="width: 30px; height: 30px; margin-right: 20px; border-radius: 100%"
                                 />
                             </div>
-                            <span>{{chat.displayName}}</span>
+                            <span>{{chat._id}}</span>
                         </li>
                         {% else %}
                         <li>You have no chats</li>
@@ -50,7 +50,7 @@
                         </button>
                     </div>
                     <div class="chat-container d-flex flex-column overflow-auto flex-grow-1">
-                        <div class="chat flex-grow-1" userID="{{googleID}}" roomID="{{roomID}}">
+                        <div class="chat flex-grow-1" userID="{{userID}}" roomID="{{roomID}}">
                             <!--Chats go HERE classes .yours .message and .mine .message-->
                             <div id="anchor"></div>
                         </div>

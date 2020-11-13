@@ -5,19 +5,23 @@ module.exports = function (server, userHandler) {
     const activeUsers = new Set();
 
     io.on('connection', function (socket) {
-        console.log('Made socket connection');
-
         socket.on('joinRoom', function (data) {
-            console.log('here');
-            socket.userId = data.googleID;
+            socket.userId = data.userID;
             socket.join(data.roomID);
             activeUsers.add(data);
 
-            console.log(data.googleID, ' just joined room ', data.roomID);
+            console.log(data.userID, ' just joined room ', data.roomID);
             io.emit('connect', {
                 googleID: [...activeUsers],
                 roomID: data.roomID
             });
+        });
+
+        socket.on('switchRooms', function (data) {
+            socket.userId = data.userID;
+            socket.leave(data.oldRoomID);
+            socket.join(data.newRoomID);
+            console.log(data.userID, ' just joined room ', data.newRoomID);
         });
 
         socket.on('disconnect', () => {
@@ -26,7 +30,6 @@ module.exports = function (server, userHandler) {
         });
 
         socket.on('chat message', function (data) {
-            console.log('got messafe');
             /*
             data: {
                 message: inputField.value,
@@ -39,7 +42,6 @@ module.exports = function (server, userHandler) {
         });
 
         socket.on('typing', function (data) {
-            console.log('got typing');
             io.to(data.roomID).emit('typing', data);
         });
     });

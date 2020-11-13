@@ -3,9 +3,35 @@ const socket = io();
 const inputField = document.querySelector('.chatsInput');
 const messageForm = document.querySelector('.chatsForm');
 const messageBox = document.querySelector('.chat');
-const googleID = messageBox.getAttribute('userID');
+const userID = messageBox.getAttribute('userID');
 var roomID = messageBox.getAttribute('roomID');
 var formattedTime;
+
+$('.chatRoom').on('click', function (event) {
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    socket.emit('switchRooms', {
+        userID: userID,
+        oldRoomID: roomID,
+        newRoomID: $(this).attr('roomID')
+    });
+    roomID = $(this).attr('roomID');
+    changeContact(roomID);
+});
+
+function changeContact(roomID) {
+    $.ajax({
+        type: 'GET',
+        url: '/messagesForChat',
+        data: {
+            roomID: roomID
+        },
+        dataType: 'html'
+    }).done(function (html) {
+        messageBox.innerHTML = '';
+        messageBox.innerHTML += html;
+    });
+}
 
 function getMessages(roomID) {
     $.ajax({
@@ -16,18 +42,15 @@ function getMessages(roomID) {
         },
         dataType: 'html'
     }).done(function (html) {
-        //location.reload();
-        console.log(html);
         messageBox.innerHTML += html;
     });
 }
 
 window.onload = function () {
-    console.log('loaded');
     if (roomID != 'none') {
         getMessages(roomID);
         socket.emit('joinRoom', {
-            googleID: googleID,
+            userID: userID,
             roomID: roomID
         });
     }
@@ -44,7 +67,7 @@ const addNewMessage = ({ user, message }) => {
     const receivedMsg = `<p class="yours message">${message}</p>`;
 
     const myMsg = `<p class="mine message">${message}</p>`;
-    messageBox.innerHTML += user === googleID ? myMsg : receivedMsg;
+    messageBox.innerHTML += user === userID ? myMsg : receivedMsg;
 };
 
 messageForm.addEventListener('submit', (e) => {
@@ -55,7 +78,7 @@ messageForm.addEventListener('submit', (e) => {
 
     socket.emit('chat message', {
         message: inputField.value,
-        googleID: googleID,
+        userID: userID,
         roomID: roomID,
         timestamp: formattedTime
     });
@@ -66,11 +89,11 @@ messageForm.addEventListener('submit', (e) => {
 inputField.addEventListener('keyup', () => {
     socket.emit('typing', {
         isTyping: inputField.value.length > 0,
-        googleID: googleID,
+        userID: userID,
         roomID: roomID
     });
 });
 
 socket.on('chat message', function (data) {
-    addNewMessage({ user: data.googleID, message: data.message });
+    addNewMessage({ user: data.userID, message: data.message });
 });

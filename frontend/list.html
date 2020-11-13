@@ -3,8 +3,8 @@
     <ul class="list-group">
         {% for item in allUsers %}
         <li class="list-group-item">
-            {{ item.displayName }}
-            <a class="btn btn-primary" href="/user?googleID={{item.googleID}}" role="button">Profile</a>
+            {{ item.displayName }} &nbsp; {{item.email}} &nbsp; {{item._id}}
+            <a class="btn btn-primary" href="/user?userID={{item._id}}" role="button">Profile</a>
         </li>
         {% endfor %}
     </ul>
