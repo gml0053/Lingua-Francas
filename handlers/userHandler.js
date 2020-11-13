@@ -1,6 +1,7 @@
 const user = require('../models/user.js');
 var userModel = require('../models/user.js');
 var directChatModel = require('../models/directChat.js');
+const directChat = require('../models/directChat.js');
 //var directMessageModel = require('../models/directMessage.js');
 
 module.exports = {
@@ -108,41 +109,57 @@ module.exports = {
                             } else {
                                 //if we get here both users were fetched suvvessfully and we can add the new conversation to both
                                 //create chat document
-                                var newChat = new directChatModel();
-                                newChat.initiator = initiator._id;
-                                newChat.initiatorName = initiator.displayName;
-                                newChat.invitee = invitee._id;
-                                newChat.inviteeName = invitee.displayName;
-                                newChat.isAccepted = false;
-                                newChat.isRejected = false;
-                                newChat.startedOn = '';
-                                newChat.isBlocked = false;
-                                newChat.blockedBy = '';
-                                newChat.save(function (err, privateChat) {
-                                    if (err) {
-                                        console.log(err);
-                                    } else {
-                                        //add chat to invitee profile
-                                        initiator.privateChats.push(privateChat);
-                                        //add chat to invitee profile
-                                        invitee.privateChats.push(privateChat);
-
-                                        initiator.save(function (err, result) {
-                                            if (err) {
-                                                console.log(err);
-                                            } else {
-                                                invitee.save(function (err, result) {
+                                directChat.findOne(
+                                    {
+                                        $or: [
+                                            { initiator: initiator._id, invitee: invitee._id },
+                                            { initiator: invitee._id, invitee: initiator._id }
+                                        ]
+                                    },
+                                    function (err, result) {
+                                        if (err) {
+                                            console.log(err);
+                                        } else {
+                                            if (!result) {
+                                                var newChat = new directChatModel();
+                                                newChat.initiator = initiator._id;
+                                                newChat.initiatorName = initiator.displayName;
+                                                newChat.invitee = invitee._id;
+                                                newChat.inviteeName = invitee.displayName;
+                                                newChat.isAccepted = false;
+                                                newChat.isRejected = false;
+                                                newChat.startedOn = '';
+                                                newChat.isBlocked = false;
+                                                newChat.blockedBy = '';
+                                                newChat.save(function (err, privateChat) {
                                                     if (err) {
                                                         console.log(err);
                                                     } else {
-                                                        //we did all of it hooray
-                                                        callback();
+                                                        //add chat to invitee profile
+                                                        initiator.privateChats.push(privateChat);
+                                                        //add chat to invitee profile
+                                                        invitee.privateChats.push(privateChat);
+
+                                                        initiator.save(function (err, result) {
+                                                            if (err) {
+                                                                console.log(err);
+                                                            } else {
+                                                                invitee.save(function (err, result) {
+                                                                    if (err) {
+                                                                        console.log(err);
+                                                                    } else {
+                                                                        //we did all of it hooray
+                                                                        callback();
+                                                                    }
+                                                                });
+                                                            }
+                                                        });
                                                     }
                                                 });
                                             }
-                                        });
+                                        }
                                     }
-                                });
+                                );
                             }
                         }
                     );
