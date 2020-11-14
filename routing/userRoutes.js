@@ -63,7 +63,6 @@ module.exports = function (app, passport, userHandler) {
             if (err) {
                 console.log(err);
             } else {
-
                 res.render('userDetails.html', { profile: result });
             }
         });
