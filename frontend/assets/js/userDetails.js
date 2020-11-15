@@ -8,6 +8,7 @@ $('.initiate').on('click', function () {
         },
         dataType: 'json'
     }).done(function () {
+        console.log('done');
         location.reload();
     });
 });

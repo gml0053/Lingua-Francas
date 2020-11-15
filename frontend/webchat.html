@@ -32,7 +32,9 @@
         >
             <img
                 style="width: 35px; height: 35px; margin-right: 15px; background: rgb(96, 96, 96); border-radius: 50%"
-            /><span>{{chat._id}}</span>
+            /><span>
+                {%if chat.initiator == userID%} {{chat.inviteeName}} {%else%} {{chat.inviteeName}} {%endif%}
+            </span>
         </li>
         {% else %}
         <li>You have no chats</li>

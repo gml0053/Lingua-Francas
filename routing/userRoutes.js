@@ -37,7 +37,10 @@ module.exports = function (app, passport, userHandler) {
     app.get(
         '/google',
         passport.authenticate('google', {
-            scope: ['https://www.googleapis.com/auth/plus.login']
+            scope: [
+                'https://www.googleapis.com/auth/userinfo.profile',
+                'https://www.googleapis.com/auth/userinfo.email'
+            ]
         })
     );
 
@@ -129,7 +132,8 @@ module.exports = function (app, passport, userHandler) {
     app.post('/initiate', loggedIn, function (req, res) {
         var targetID = req.body.targetID || req.query.targetID;
         userHandler.initiateChat(req.user, targetID, function () {
-            res.redirect('back');
+            console.log('initiated');
+            res.json(['done']);
         });
     });
 };
