@@ -1,0 +1,52 @@
+.row {
+    margin-left: unset !important;
+    margin-right: unset !important;
+}
+
+.d-flex.double-column-container {
+    width: 100%;
+}
+
+.container {
+    height: 100%;
+}
+
+#mainscreen {
+    height: 100%;
+}
+
+#heightfix {
+    height: 100%;
+}
+
+#spacer {
+    width: 0px;
+}
+
+@media (min-width: 576px) {
+    #spacer {
+        width: 280px;
+    }
+}
+
+@media (min-width: 768px) {
+    #spacer {
+        width: 350px;
+    }
+}
+
+@media (min-width: 992px) {
+    #spacer {
+        width: 400px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #spacer {
+        width: 400px;
+    }
+}
+
+.active-convo {
+    background-color: #222222 !important;
+}

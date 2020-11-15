@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <title>LF2</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" />
+        <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
+        />
+
+        {%block head%}{%endblock%}
+    </head>
+
+    <body style="background: rgb(255, 255, 255); height: 100vh; max-height: 100vh">
+        <!-- Start: Off-Canvas Sidebar-Drawer Navbar -->
+        <nav
+            class="navbar navbar-dark fixed-top bg-dark off-canvas"
+            data-right-drawer="0"
+            data-open-drawer="1"
+            style="margin-bottom: 0px; padding: 0px"
+        >
+            <div class="container-fluid flex-column">
+                <button class="btn btn-dark drawer-knob" type="button" data-open="drawer">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="d-flex double-column-container" style="height: 100%">
+                    <!-- Start: small left sidebar -->
+                    <div class="d-flex flex-column" style="background: #222222">
+                        <a
+                            class="btn btn-primary"
+                            type="button"
+                            style="background: rgba(255, 255, 255, 0); width: 60px; height: 60px; border-style: none"
+                            href="/profile"
+                        >
+                            <i class="icon-user" style="background: rgba(255, 255, 255, 0); font-size: 25px"></i></a
+                        ><a
+                            class="btn btn-primary"
+                            type="button"
+                            style="background: rgba(255, 255, 255, 0); width: 60px; height: 60px; border-style: none"
+                            href="/chats"
+                        >
+                            <i class="icon-bubble" style="background: rgba(255, 255, 255, 0); font-size: 25px"></i></a
+                        ><a
+                            class="btn btn-primary"
+                            type="button"
+                            style="background: rgba(255, 255, 255, 0); width: 60px; height: 60px; border-style: none"
+                            href="/discover"
+                        >
+                            <i
+                                class="icon-magnifier"
+                                style="background: rgba(255, 255, 255, 0); font-size: 25px"
+                            ></i></a
+                        ><a
+                            class="btn btn-primary mt-auto"
+                            type="button"
+                            style="background: rgba(255, 255, 255, 0); width: 60px; height: 60px; border-style: none"
+                        >
+                            <i class="icon-settings" style="font-size: 25px"></i>
+                        </a>
+                    </div>
+                    <!-- End: small left sidebar -->
+                    <div class="d-flex flex-column flex-grow-1">
+                        <!--THIS IS THE PULL OUT MENU-->
+                        {%block pullout%}{%endblock%}
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- End: Off-Canvas Sidebar-Drawer Navbar -->
+
+        <div
+            class="container-fluid d-flex flex-row"
+            style="
+                padding: 0x;
+                padding-top: 0px;
+                padding-right: 0px;
+                padding-bottom: 0px;
+                padding-left: 0px;
+                height: 100%;
+                max-height: 100%;
+            "
+        >
+            <div class="flex-grow-0 flex-shrink-0" id="spacer"><span></span></div>
+            <div class="d-flex flex-column flex-grow-1 flex-shrink-1" id="mainscreen" style="height: 100%">
+                <!--THIS IS THE MAIN PAGE-->
+                {%block body%}{%endblock%}
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        {%block scripts%}{%endblock%}
+    </body>
+</html>

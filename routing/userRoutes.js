@@ -77,9 +77,9 @@ module.exports = function (app, passport, userHandler) {
     app.get('/chats', loggedIn, function (req, res) {
         userHandler.getAllChats(req.user, function (chatList) {
             if (chatList.length > 0) {
-                res.render('chats2.html', { userID: req.user._id, chats: chatList, roomID: chatList[0]._id });
+                res.render('webchat.html', { userID: req.user._id, chats: chatList, roomID: chatList[0]._id });
             } else {
-                res.render('chats2.html', { userID: req.user._id, chats: chatList, roomID: 'none' });
+                res.render('webchat.html', { userID: req.user._id, chats: chatList, roomID: 'none' });
             }
         });
     });

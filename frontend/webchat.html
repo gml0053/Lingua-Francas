@@ -1,0 +1,73 @@
+{% extends "webapp.html" %}
+
+<!--stylesheets-->
+{%block head%}
+<link rel="stylesheet" href="assets/css/customStyles.css" />
+<link rel="stylesheet" href="assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css" />
+<link rel="stylesheet" href="assets/css/chatStyles.css" />
+{%endblock%}
+
+<!--Left bar content-->
+{%block pullout%}
+<div class="d-flex align-items-baseline align-items-xl-center brand-line" style="padding-top: 5px">
+    <h5 style="color: rgb(208, 208, 208); margin-left: 10px">Conversations</h5>
+    <button
+        class="btn btn-primary ml-auto"
+        type="button"
+        data-dismiss="drawer"
+        style="background: rgba(188, 0, 0, 0); border-style: none"
+    >
+        <span class="sr-only">Toggle Navigation&nbsp;</span><i class="la la-angle-right"></i>
+    </button>
+</div>
+<!-- End: convolist header -->
+<div id="chat-list-container" style="height: 100%; max-height: 100%">
+    <ul class="list-group" style="color: rgb(208, 208, 208)">
+        {% for chat in chats %}
+        <!--class active-convo-->
+        <li
+            class="list-group-item chatRoom"
+            style="background: rgba(255, 255, 255, 0); border-style: none; padding-left: 10px"
+            roomID="{{chat._id}}"
+        >
+            <img
+                style="width: 35px; height: 35px; margin-right: 15px; background: rgb(96, 96, 96); border-radius: 50%"
+            /><span>{{chat._id}}</span>
+        </li>
+        {% else %}
+        <li>You have no chats</li>
+        {% endfor %}
+    </ul>
+</div>
+{%endblock%}
+
+<!--Body content-->
+{%block body%}
+
+<div class="chat-container d-flex flex-column overflow-auto flex-grow-1">
+    <div class="chat flex-grow-1" userID="{{userID}}" roomID="{{roomID}}">
+        <!--CHATS GO HERE-->
+    </div>
+</div>
+
+<div>
+    <form class="chatsForm d-flex flex-row" id="intputMessage" style="margin: 0px; padding: 10px">
+        <textarea
+            class="chatsInput form-control"
+            style="margin-right: 1em; max-height: 20em; min-height: 2.5em"
+            rows="1"
+            oninput="auto_grow(this)"
+        ></textarea
+        ><button class="btn btn-primary" type="submit" style="height: 2.5em">Send</button>
+    </form>
+</div>
+
+{%endblock%}
+
+<!--Scripts-->
+{%block scripts%}
+<script src="assets/js/Off-Canvas-Sidebar-Drawer-Navbar.js"></script>
+<script src="assets/js/Off-Canvas-Sidebar-Drawer-Navbar-1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="assets/js/chats2.js"></script>
+{%endblock%}
