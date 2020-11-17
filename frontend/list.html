@@ -1,23 +1,90 @@
-{% extends "webapp.html" %}
+{% extends "oneColumnTemplate.html" %}
 
 <!--stylesheets-->
 {%block head%}
 <link rel="stylesheet" href="assets/css/customStyles.css" />
 <link rel="stylesheet" href="assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css" />
+<style>
+    .flag-container {
+        height: 100%;
+    }
+    .miniflag {
+        margin: 5px;
+        box-shadow: 0 0.5px 0 0 #ffffff inset, 0 1px 2px 0 #b3b3b3;
+        border-radius: 2px;
+    }
+    .profile-item,
+    .search-card {
+        margin-bottom: 25px;
+    }
+</style>
 {%endblock%}
 
 <!--Main-->
 {%block body%}
-<main class="page container">
-    <ul class="list-group">
-        {% for item in allUsers %}
-        <li class="list-group-item">
-            {{ item.displayName }} &nbsp; {{item.email}} &nbsp; {{item._id}}
-            <a class="btn btn-primary" href="/user?userID={{item._id}}" role="button">Profile</a>
-        </li>
-        {% endfor %}
-    </ul>
-</main>
+
+<div class="row">
+    <div class="col">
+        <div class="card search-card">
+            <div class="card-body">
+                <form>
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text">Search all users</span></div>
+                        <input type="text" class="form-control" />
+                        <div class="input-group-append"><button class="btn btn-primary" type="button">Go!</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                {% for item in allUsers %}
+                <div class="profile-item">
+                    <div class="row">
+                        <div class="col-auto">
+                            <img class="rounded-circle" src="{{ item.image }}" style="width: 60px" />
+                        </div>
+                        <div class="col d-flex d-xl-flex align-items-xl-center">
+                            <span style="font-size: 24px">{{ item.displayName }}</span>
+                        </div>
+                        <div class="col-2">
+                            <div class="d-flex flex-row flex-wrap align-items-center flag-container">
+                                {% for language in item.fluentIn %}
+                                <img
+                                    class="miniflag"
+                                    src="https://flagcdn.com/{{language.code.slice(-2) | lower}}.svg"
+                                    width="30"
+                                    alt="{{language.code}}"
+                                />
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="d-flex flex-row flex-wrap align-items-center flag-container">
+                                {% for language in item.learning %}
+                                <img
+                                    class="miniflag"
+                                    src="https://flagcdn.com/{{language.code.slice(-2) | lower}}.svg"
+                                    width="30"
+                                    alt="{{language.code}}"
+                                />
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-auto d-flex d-xl-flex align-items-xl-center">
+                            <a class="btn btn-primary" href="/user?userID={{item._id}}" role="button">More</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 {%endblock%}
 
 <!--Scripts-->

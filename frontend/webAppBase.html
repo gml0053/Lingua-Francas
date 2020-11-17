@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <title>LF2</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
+        />
+        <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css" />
+        <link rel="stylesheet" href="assets/css/customStyles.css" />
+        <link rel="stylesheet" href="assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css" />
+        {%block head%}{%endblock%}
+    </head>
+
+    <body style="height: 100vh; max-height: 100vh; background: #434354">
+        <div class="container-fluid" style="height: 100%; padding: 0px; max-width: 1400px; background: #ffffff">
+            <!-- Start: Off-Canvas Sidebar-Drawer Navbar -->
+            <nav class="navbar navbar-dark fixed-top off-canvas" data-right-drawer="0" data-open-drawer="1">
+                <div class="container-fluid flex-column">
+                    <button class="btn btn-dark drawer-knob" type="button" data-open="drawer">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="d-flex double-column-container" style="height: 100%">
+                        <!-- Start: small left sidebar -->
+                        <div class="d-flex flex-column" id="mini-nav">
+                            <a
+                                class="btn btn-primary d-lg-flex justify-content-lg-center align-items-lg-center"
+                                type="button"
+                                style="
+                                    background: rgba(255, 255, 255, 0);
+                                    width: 60px;
+                                    height: 60px;
+                                    border-style: none;
+                                "
+                                href="/profile"
+                            >
+                                <i class="icon-user" style="background: rgba(255, 255, 255, 0); font-size: 25px"></i></a
+                            ><a
+                                class="btn btn-primary d-lg-flex justify-content-lg-center align-items-lg-center"
+                                type="button"
+                                style="
+                                    background: rgba(255, 255, 255, 0);
+                                    width: 60px;
+                                    height: 60px;
+                                    border-style: none;
+                                "
+                                href="/chats"
+                            >
+                                <i
+                                    class="icon-bubble"
+                                    style="background: rgba(255, 255, 255, 0); font-size: 25px"
+                                ></i></a
+                            ><a
+                                class="btn btn-primary d-lg-flex justify-content-lg-center align-items-lg-center"
+                                type="button"
+                                style="
+                                    background: rgba(255, 255, 255, 0);
+                                    width: 60px;
+                                    height: 60px;
+                                    border-style: none;
+                                "
+                                href="/discover"
+                            >
+                                <i
+                                    class="icon-magnifier"
+                                    style="background: rgba(255, 255, 255, 0); font-size: 25px"
+                                ></i></a
+                            ><a
+                                class="btn btn-primary mt-auto d-lg-flex justify-content-lg-center align-items-lg-center"
+                                type="button"
+                                style="
+                                    background: rgba(255, 255, 255, 0);
+                                    width: 60px;
+                                    height: 60px;
+                                    border-style: none;
+                                "
+                            >
+                                <i class="icon-settings" style="font-size: 25px"></i>
+                            </a>
+                        </div>
+                        <!-- End: small left sidebar -->
+                        <!-- Start: PULLOUT BLOCK -->
+                        <div class="d-flex flex-column flex-grow-1">
+                            <!-- Start: convolist header -->
+                            <div
+                                class="d-flex align-items-baseline align-items-xl-center brand-line"
+                                style="padding-top: 5px"
+                            >
+                                <h2 style="color: rgba(255, 255, 255, 0.8); margin-left: 10px; font-weight: normal">
+                                    {{NavTitle}}
+                                </h2>
+                                <button
+                                    class="btn btn-primary ml-auto"
+                                    id="collapse-btn"
+                                    type="button"
+                                    data-dismiss="drawer"
+                                    style="background: rgba(188, 0, 0, 0); border-style: none"
+                                >
+                                    <span class="sr-only">Toggle Navigation&nbsp;</span
+                                    ><i class="la la-angle-right"></i>
+                                </button>
+                            </div>
+                            <!-- End: convolist header -->
+                            {%block pullout%}{%endblock%}
+                        </div>
+                        <!-- End: PULLOUT BLOCK -->
+                    </div>
+                </div>
+            </nav>
+            <!-- End: Off-Canvas Sidebar-Drawer Navbar -->
+            <div class="d-flex flex-row" style="height: 100%">
+                <div class="flex-grow-0 flex-shrink-0" id="spacer">
+                    <span>Text</span>
+                </div>
+                <!-- Start: BODY BLOCK -->
+                <div
+                    class="d-flex flex-column flex-grow-1 flex-shrink-1 flex-fill"
+                    id="mainscreen"
+                    style="height: 100%; max-height: 100%; margin: auto"
+                >
+                    {%block body%}{%endblock%}
+                </div>
+                <!-- End: BODY BLOCK -->
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/Off-Canvas-Sidebar-Drawer-Navbar.js"></script>
+        <script src="assets/js/Off-Canvas-Sidebar-Drawer-Navbar-1.js"></script>
+        {%block scripts%}{%endblock%}
+    </body>
+</html>

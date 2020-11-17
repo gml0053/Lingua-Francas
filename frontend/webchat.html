@@ -1,14 +1,15 @@
-{% extends "webapp.html" %}
+{% set NavTitle = "Conversations" %} {% extends "webAppBase.html" %}
 
 <!--stylesheets-->
 {%block head%}
 <link rel="stylesheet" href="assets/css/customStyles.css" />
 <link rel="stylesheet" href="assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css" />
-<link rel="stylesheet" href="assets/css/chatStyles.css" />
+<link rel="stylesheet" href="assets/css/chats.css" />
 {%endblock%}
 
 <!--Left bar content-->
 {%block pullout%}
+<!--
 <div class="d-flex align-items-baseline align-items-xl-center brand-line" style="padding-top: 5px">
     <h5 style="color: rgb(208, 208, 208); margin-left: 10px">Conversations</h5>
     <button
@@ -20,6 +21,7 @@
         <span class="sr-only">Toggle Navigation&nbsp;</span><i class="la la-angle-right"></i>
     </button>
 </div>
+-->
 <!-- End: convolist header -->
 <div id="chat-list-container" style="height: 100%; max-height: 100%">
     <ul class="list-group" style="color: rgb(208, 208, 208)">

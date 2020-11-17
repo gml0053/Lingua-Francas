@@ -1,8 +1,76 @@
-{% extends "base.html" %} {%block body%}
-<main class="page container">
-    <div>{{profile}}</div>
-    <button type="button" class="btn btn-primary initiate" targetID="{{profile._id}}">Start Chatting!</button>
-</main>
+{% extends "oneColumnTemplate.html" %}
+
+<!--stylesheets-->
+{%block head%}
+<link rel="stylesheet" href="assets/css/customStyles.css" />
+<link rel="stylesheet" href="assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css" />
+<style>
+    .card {
+        margin-bottom: 30px;
+    }
+</style>
+{%endblock%} {%block body%}
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">About Me</h4>
+                <p class="card-text">{{profile}}</p>
+                <button type="button" class="btn btn-primary initiate" targetID="{{profile._id}}">
+                    Start Chatting!
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="margin-bottom: 30px">Native Languages</h4>
+                {% for language in profile.fluentIn %}
+                <div style="margin-bottom: 15px">
+                    <div><i class="fa fa-star"></i><span style="margin-left: 10px">{{language.English}}</span></div>
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            aria-valuenow="50"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style="width: 50%"
+                        >
+                            <span class="sr-only">50%</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="margin-bottom: 30px">Learning Languages</h4>
+                {% for language in profile.learning %}
+                <div style="margin-bottom: 15px">
+                    <div><i class="fa fa-star"></i><span style="margin-left: 10px">{{language.English}}</span></div>
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            aria-valuenow="50"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style="width: 50%"
+                        >
+                            <span class="sr-only">50%</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 {%endblock%} {%block scripts%}
 <script src="assets/js/userDetails.js"></script>
 {%endblock%}

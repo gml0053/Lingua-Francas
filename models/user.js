@@ -9,8 +9,18 @@ var userSchema = mongoose.Schema({
     image: String,
     email: String,
     password: String,
-    fluentIn: [String],
-    learning: [String],
+    fluentIn: [
+        {
+            code: String,
+            English: String
+        }
+    ],
+    learning: [
+        {
+            code: String,
+            English: String
+        }
+    ],
     dateRegistered: String, //for now; this will be a timestamp later
     privateChats: [mongoose.model('directChat').schema] //all the one on one conversatoins
 });

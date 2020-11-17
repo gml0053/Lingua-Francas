@@ -1,20 +1,9 @@
-.row {
-    margin-left: unset !important;
-    margin-right: unset !important;
-}
-
 .d-flex.double-column-container {
     width: 100%;
 }
 
-.container {
-    height: 100%;
-}
-
-#mainscreen {
-    height: 100%;
-}
-
+.container,
+#mainscreen,
 #heightfix {
     height: 100%;
 }
@@ -45,8 +34,4 @@
     #spacer {
         width: 400px;
     }
-}
-
-.active-convo {
-    background-color: #222222 !important;
 }

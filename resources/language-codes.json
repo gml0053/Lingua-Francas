@@ -1,738 +1,642 @@
 [
     {
-        "English": "Abkhazian",
-        "alpha2": "ab"
+        "code": "af-ZA",
+        "English": "Afrikaans (South Africa)"
     },
     {
-        "English": "Afar",
-        "alpha2": "aa"
+        "code": "ar-AE",
+        "English": "Arabic (U.A.E.)"
     },
     {
-        "English": "Afrikaans",
-        "alpha2": "af"
+        "code": "ar-BH",
+        "English": "Arabic (Bahrain)"
     },
     {
-        "English": "Akan",
-        "alpha2": "ak"
+        "code": "ar-DZ",
+        "English": "Arabic (Algeria)"
     },
     {
-        "English": "Albanian",
-        "alpha2": "sq"
+        "code": "ar-EG",
+        "English": "Arabic (Egypt)"
     },
     {
-        "English": "Amharic",
-        "alpha2": "am"
+        "code": "ar-IQ",
+        "English": "Arabic (Iraq)"
     },
     {
-        "English": "Arabic",
-        "alpha2": "ar"
+        "code": "ar-JO",
+        "English": "Arabic (Jordan)"
     },
     {
-        "English": "Aragonese",
-        "alpha2": "an"
+        "code": "ar-KW",
+        "English": "Arabic (Kuwait)"
     },
     {
-        "English": "Armenian",
-        "alpha2": "hy"
+        "code": "ar-LB",
+        "English": "Arabic (Lebanon)"
     },
     {
-        "English": "Assamese",
-        "alpha2": "as"
+        "code": "ar-LY",
+        "English": "Arabic (Libya)"
     },
     {
-        "English": "Avaric",
-        "alpha2": "av"
+        "code": "ar-MA",
+        "English": "Arabic (Morocco)"
     },
     {
-        "English": "Avestan",
-        "alpha2": "ae"
+        "code": "ar-OM",
+        "English": "Arabic (Oman)"
     },
     {
-        "English": "Aymara",
-        "alpha2": "ay"
+        "code": "ar-QA",
+        "English": "Arabic (Qatar)"
     },
     {
-        "English": "Azerbaijani",
-        "alpha2": "az"
+        "code": "ar-SA",
+        "English": "Arabic (Saudi Arabia)"
     },
     {
-        "English": "Bambara",
-        "alpha2": "bm"
+        "code": "ar-SY",
+        "English": "Arabic (Syria)"
     },
     {
-        "English": "Bashkir",
-        "alpha2": "ba"
+        "code": "ar-TN",
+        "English": "Arabic (Tunisia)"
     },
     {
-        "English": "Basque",
-        "alpha2": "eu"
+        "code": "ar-YE",
+        "English": "Arabic (Yemen)"
     },
     {
-        "English": "Belarusian",
-        "alpha2": "be"
+        "code": "az-AZ",
+        "English": "Azeri (Latin) (Azerbaijan)"
     },
     {
-        "English": "Bengali",
-        "alpha2": "bn"
+        "code": "az-AZ",
+        "English": "Azeri (Cyrillic) (Azerbaijan)"
     },
     {
-        "English": "Bihari languages",
-        "alpha2": "bh"
+        "code": "be-BY",
+        "English": "Belarusian (Belarus)"
     },
     {
-        "English": "Bislama",
-        "alpha2": "bi"
+        "code": "bg-BG",
+        "English": "Bulgarian (Bulgaria)"
     },
     {
-        "English": "Bokmål, Norwegian; Norwegian Bokmål",
-        "alpha2": "nb"
+        "code": "bs-BA",
+        "English": "Bosnian (Bosnia and Herzegovina)"
     },
     {
-        "English": "Bosnian",
-        "alpha2": "bs"
+        "code": "ca-ES",
+        "English": "Catalan (Spain)"
     },
     {
-        "English": "Breton",
-        "alpha2": "br"
+        "code": "cs-CZ",
+        "English": "Czech (Czech Republic)"
     },
     {
-        "English": "Bulgarian",
-        "alpha2": "bg"
+        "code": "cy-GB",
+        "English": "Welsh (United Kingdom)"
     },
     {
-        "English": "Burmese",
-        "alpha2": "my"
+        "code": "da-DK",
+        "English": "Danish (Denmark)"
     },
     {
-        "English": "Catalan; Valencian",
-        "alpha2": "ca"
+        "code": "de-AT",
+        "English": "German (Austria)"
     },
     {
-        "English": "Central Khmer",
-        "alpha2": "km"
+        "code": "de-CH",
+        "English": "German (Switzerland)"
     },
     {
-        "English": "Chamorro",
-        "alpha2": "ch"
+        "code": "de-DE",
+        "English": "German (Germany)"
     },
     {
-        "English": "Chechen",
-        "alpha2": "ce"
+        "code": "de-LI",
+        "English": "German (Liechtenstein)"
     },
     {
-        "English": "Chichewa; Chewa; Nyanja",
-        "alpha2": "ny"
+        "code": "de-LU",
+        "English": "German (Luxembourg)"
     },
     {
-        "English": "Chinese",
-        "alpha2": "zh"
+        "code": "dv-MV",
+        "English": "Divehi (Maldives)"
     },
     {
-        "English": "Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic",
-        "alpha2": "cu"
+        "code": "el-GR",
+        "English": "Greek (Greece)"
     },
     {
-        "English": "Chuvash",
-        "alpha2": "cv"
+        "code": "en-AU",
+        "English": "English (Australia)"
     },
     {
-        "English": "Cornish",
-        "alpha2": "kw"
+        "code": "en-BZ",
+        "English": "English (Belize)"
     },
     {
-        "English": "Corsican",
-        "alpha2": "co"
+        "code": "en-CA",
+        "English": "English (Canada)"
     },
     {
-        "English": "Cree",
-        "alpha2": "cr"
+        "code": "en-CB",
+        "English": "English (Caribbean)"
     },
     {
-        "English": "Croatian",
-        "alpha2": "hr"
+        "code": "en-GB",
+        "English": "English (United Kingdom)"
     },
     {
-        "English": "Czech",
-        "alpha2": "cs"
+        "code": "en-IE",
+        "English": "English (Ireland)"
     },
     {
-        "English": "Danish",
-        "alpha2": "da"
+        "code": "en-JM",
+        "English": "English (Jamaica)"
     },
     {
-        "English": "Divehi; Dhivehi; Maldivian",
-        "alpha2": "dv"
+        "code": "en-NZ",
+        "English": "English (New Zealand)"
     },
     {
-        "English": "Dutch; Flemish",
-        "alpha2": "nl"
+        "code": "en-PH",
+        "English": "English (Republic of the Philippines)"
     },
     {
-        "English": "Dzongkha",
-        "alpha2": "dz"
+        "code": "en-TT",
+        "English": "English (Trinidad and Tobago)"
     },
     {
-        "English": "English",
-        "alpha2": "en"
+        "code": "en-US",
+        "English": "English (United States)"
     },
     {
-        "English": "Esperanto",
-        "alpha2": "eo"
+        "code": "en-ZA",
+        "English": "English (South Africa)"
     },
     {
-        "English": "Estonian",
-        "alpha2": "et"
+        "code": "en-ZW",
+        "English": "English (Zimbabwe)"
     },
     {
-        "English": "Ewe",
-        "alpha2": "ee"
+        "code": "es-AR",
+        "English": "Spanish (Argentina)"
     },
     {
-        "English": "Faroese",
-        "alpha2": "fo"
+        "code": "es-BO",
+        "English": "Spanish (Bolivia)"
     },
     {
-        "English": "Fijian",
-        "alpha2": "fj"
+        "code": "es-CL",
+        "English": "Spanish (Chile)"
     },
     {
-        "English": "Finnish",
-        "alpha2": "fi"
+        "code": "es-CO",
+        "English": "Spanish (Colombia)"
     },
     {
-        "English": "French",
-        "alpha2": "fr"
+        "code": "es-CR",
+        "English": "Spanish (Costa Rica)"
     },
     {
-        "English": "Fulah",
-        "alpha2": "ff"
+        "code": "es-DO",
+        "English": "Spanish (Dominican Republic)"
     },
     {
-        "English": "Gaelic; Scottish Gaelic",
-        "alpha2": "gd"
+        "code": "es-EC",
+        "English": "Spanish (Ecuador)"
     },
     {
-        "English": "Galician",
-        "alpha2": "gl"
+        "code": "es-ES",
+        "English": "Spanish (Castilian)"
     },
     {
-        "English": "Ganda",
-        "alpha2": "lg"
+        "code": "es-ES",
+        "English": "Spanish (Spain)"
     },
     {
-        "English": "Georgian",
-        "alpha2": "ka"
+        "code": "es-GT",
+        "English": "Spanish (Guatemala)"
     },
     {
-        "English": "German",
-        "alpha2": "de"
+        "code": "es-HN",
+        "English": "Spanish (Honduras)"
     },
     {
-        "English": "Greek, Modern (1453-)",
-        "alpha2": "el"
+        "code": "es-MX",
+        "English": "Spanish (Mexico)"
     },
     {
-        "English": "Guarani",
-        "alpha2": "gn"
+        "code": "es-NI",
+        "English": "Spanish (Nicaragua)"
     },
     {
-        "English": "Gujarati",
-        "alpha2": "gu"
+        "code": "es-PA",
+        "English": "Spanish (Panama)"
     },
     {
-        "English": "Haitian; Haitian Creole",
-        "alpha2": "ht"
+        "code": "es-PE",
+        "English": "Spanish (Peru)"
     },
     {
-        "English": "Hausa",
-        "alpha2": "ha"
+        "code": "es-PR",
+        "English": "Spanish (Puerto Rico)"
     },
     {
-        "English": "Hebrew",
-        "alpha2": "he"
+        "code": "es-PY",
+        "English": "Spanish (Paraguay)"
     },
     {
-        "English": "Herero",
-        "alpha2": "hz"
+        "code": "es-SV",
+        "English": "Spanish (El Salvador)"
     },
     {
-        "English": "Hindi",
-        "alpha2": "hi"
+        "code": "es-UY",
+        "English": "Spanish (Uruguay)"
     },
     {
-        "English": "Hiri Motu",
-        "alpha2": "ho"
+        "code": "es-VE",
+        "English": "Spanish (Venezuela)"
     },
     {
-        "English": "Hungarian",
-        "alpha2": "hu"
+        "code": "et-EE",
+        "English": "Estonian (Estonia)"
     },
     {
-        "English": "Icelandic",
-        "alpha2": "is"
+        "code": "eu-ES",
+        "English": "Basque (Spain)"
     },
     {
-        "English": "Ido",
-        "alpha2": "io"
+        "code": "fa-IR",
+        "English": "Farsi (Iran)"
     },
     {
-        "English": "Igbo",
-        "alpha2": "ig"
+        "code": "fi-FI",
+        "English": "Finnish (Finland)"
     },
     {
-        "English": "Indonesian",
-        "alpha2": "id"
+        "code": "fo-FO",
+        "English": "Faroese (Faroe Islands)"
     },
     {
-        "English": "Interlingua (International Auxiliary Language Association)",
-        "alpha2": "ia"
+        "code": "fr-BE",
+        "English": "French (Belgium)"
     },
     {
-        "English": "Interlingue; Occidental",
-        "alpha2": "ie"
+        "code": "fr-CA",
+        "English": "French (Canada)"
     },
     {
-        "English": "Inuktitut",
-        "alpha2": "iu"
+        "code": "fr-CH",
+        "English": "French (Switzerland)"
     },
     {
-        "English": "Inupiaq",
-        "alpha2": "ik"
+        "code": "fr-FR",
+        "English": "French (France)"
     },
     {
-        "English": "Irish",
-        "alpha2": "ga"
+        "code": "fr-LU",
+        "English": "French (Luxembourg)"
     },
     {
-        "English": "Italian",
-        "alpha2": "it"
+        "code": "fr-MC",
+        "English": "French (Principality of Monaco)"
     },
     {
-        "English": "Japanese",
-        "alpha2": "ja"
+        "code": "gl-ES",
+        "English": "Galician (Spain)"
     },
     {
-        "English": "Javanese",
-        "alpha2": "jv"
+        "code": "gu-IN",
+        "English": "Gujarati (India)"
     },
     {
-        "English": "Kalaallisut; Greenlandic",
-        "alpha2": "kl"
+        "code": "he-IL",
+        "English": "Hebrew (Israel)"
     },
     {
-        "English": "Kannada",
-        "alpha2": "kn"
+        "code": "hi-IN",
+        "English": "Hindi (India)"
     },
     {
-        "English": "Kanuri",
-        "alpha2": "kr"
+        "code": "hr-BA",
+        "English": "Croatian (Bosnia and Herzegovina)"
     },
     {
-        "English": "Kashmiri",
-        "alpha2": "ks"
+        "code": "hr-HR",
+        "English": "Croatian (Croatia)"
     },
     {
-        "English": "Kazakh",
-        "alpha2": "kk"
+        "code": "hu-HU",
+        "English": "Hungarian (Hungary)"
     },
     {
-        "English": "Kikuyu; Gikuyu",
-        "alpha2": "ki"
+        "code": "hy-AM",
+        "English": "Armenian (Armenia)"
     },
     {
-        "English": "Kinyarwanda",
-        "alpha2": "rw"
+        "code": "id-ID",
+        "English": "Indonesian (Indonesia)"
     },
     {
-        "English": "Kirghiz; Kyrgyz",
-        "alpha2": "ky"
+        "code": "is-IS",
+        "English": "Icelandic (Iceland)"
     },
     {
-        "English": "Komi",
-        "alpha2": "kv"
+        "code": "it-CH",
+        "English": "Italian (Switzerland)"
     },
     {
-        "English": "Kongo",
-        "alpha2": "kg"
+        "code": "it-IT",
+        "English": "Italian (Italy)"
     },
     {
-        "English": "Korean",
-        "alpha2": "ko"
+        "code": "ja-JP",
+        "English": "Japanese (Japan)"
     },
     {
-        "English": "Kuanyama; Kwanyama",
-        "alpha2": "kj"
+        "code": "ka-GE",
+        "English": "Georgian (Georgia)"
     },
     {
-        "English": "Kurdish",
-        "alpha2": "ku"
+        "code": "kk-KZ",
+        "English": "Kazakh (Kazakhstan)"
     },
     {
-        "English": "Lao",
-        "alpha2": "lo"
+        "code": "kn-IN",
+        "English": "Kannada (India)"
     },
     {
-        "English": "Latin",
-        "alpha2": "la"
+        "code": "ko-KR",
+        "English": "Korean (Korea)"
     },
     {
-        "English": "Latvian",
-        "alpha2": "lv"
+        "code": "kok-IN",
+        "English": "Konkani (India)"
     },
     {
-        "English": "Limburgan; Limburger; Limburgish",
-        "alpha2": "li"
+        "code": "ky-KG",
+        "English": "Kyrgyz (Kyrgyzstan)"
     },
     {
-        "English": "Lingala",
-        "alpha2": "ln"
+        "code": "lt-LT",
+        "English": "Lithuanian (Lithuania)"
     },
     {
-        "English": "Lithuanian",
-        "alpha2": "lt"
+        "code": "lv-LV",
+        "English": "Latvian (Latvia)"
     },
     {
-        "English": "Luba-Katanga",
-        "alpha2": "lu"
+        "code": "mi-NZ",
+        "English": "Maori (New Zealand)"
     },
     {
-        "English": "Luxembourgish; Letzeburgesch",
-        "alpha2": "lb"
+        "code": "mk-MK",
+        "English": "FYRO Macedonian (Former Yugoslav Republic of Macedonia)"
     },
     {
-        "English": "Macedonian",
-        "alpha2": "mk"
+        "code": "mn-MN",
+        "English": "Mongolian (Mongolia)"
     },
     {
-        "English": "Malagasy",
-        "alpha2": "mg"
+        "code": "mr-IN",
+        "English": "Marathi (India)"
     },
     {
-        "English": "Malay",
-        "alpha2": "ms"
+        "code": "ms-BN",
+        "English": "Malay (Brunei Darussalam)"
     },
     {
-        "English": "Malayalam",
-        "alpha2": "ml"
+        "code": "ms-MY",
+        "English": "Malay (Malaysia)"
     },
     {
-        "English": "Maltese",
-        "alpha2": "mt"
+        "code": "mt-MT",
+        "English": "Maltese (Malta)"
     },
     {
-        "English": "Manx",
-        "alpha2": "gv"
+        "code": "nb-NO",
+        "English": "Norwegian (Bokm?l) (Norway)"
     },
     {
-        "English": "Maori",
-        "alpha2": "mi"
+        "code": "nl-BE",
+        "English": "Dutch (Belgium)"
     },
     {
-        "English": "Marathi",
-        "alpha2": "mr"
+        "code": "nl-NL",
+        "English": "Dutch (Netherlands)"
     },
     {
-        "English": "Marshallese",
-        "alpha2": "mh"
+        "code": "nn-NO",
+        "English": "Norwegian (Nynorsk) (Norway)"
     },
     {
-        "English": "Mongolian",
-        "alpha2": "mn"
+        "code": "ns-ZA",
+        "English": "Northern Sotho (South Africa)"
     },
     {
-        "English": "Nauru",
-        "alpha2": "na"
+        "code": "pa-IN",
+        "English": "Punjabi (India)"
     },
     {
-        "English": "Navajo; Navaho",
-        "alpha2": "nv"
+        "code": "pl-PL",
+        "English": "Polish (Poland)"
     },
     {
-        "English": "Ndebele, North; North Ndebele",
-        "alpha2": "nd"
+        "code": "ps-AR",
+        "English": "Pashto (Afghanistan)"
     },
     {
-        "English": "Ndebele, South; South Ndebele",
-        "alpha2": "nr"
+        "code": "pt-BR",
+        "English": "Portuguese (Brazil)"
     },
     {
-        "English": "Ndonga",
-        "alpha2": "ng"
+        "code": "pt-PT",
+        "English": "Portuguese (Portugal)"
     },
     {
-        "English": "Nepali",
-        "alpha2": "ne"
+        "code": "qu-BO",
+        "English": "Quechua (Bolivia)"
     },
     {
-        "English": "Northern Sami",
-        "alpha2": "se"
+        "code": "qu-EC",
+        "English": "Quechua (Ecuador)"
     },
     {
-        "English": "Norwegian",
-        "alpha2": "no"
+        "code": "qu-PE",
+        "English": "Quechua (Peru)"
     },
     {
-        "English": "Norwegian Nynorsk; Nynorsk, Norwegian",
-        "alpha2": "nn"
+        "code": "ro-RO",
+        "English": "Romanian (Romania)"
     },
     {
-        "English": "Occitan (post 1500)",
-        "alpha2": "oc"
+        "code": "ru-RU",
+        "English": "Russian (Russia)"
     },
     {
-        "English": "Ojibwa",
-        "alpha2": "oj"
+        "code": "sa-IN",
+        "English": "Sanskrit (India)"
     },
     {
-        "English": "Oriya",
-        "alpha2": "or"
+        "code": "se-FI",
+        "English": "Sami (Northern) (Finland)"
     },
     {
-        "English": "Oromo",
-        "alpha2": "om"
+        "code": "se-FI",
+        "English": "Sami (Skolt) (Finland)"
     },
     {
-        "English": "Ossetian; Ossetic",
-        "alpha2": "os"
+        "code": "se-FI",
+        "English": "Sami (Inari) (Finland)"
     },
     {
-        "English": "Pali",
-        "alpha2": "pi"
+        "code": "se-NO",
+        "English": "Sami (Northern) (Norway)"
     },
     {
-        "English": "Panjabi; Punjabi",
-        "alpha2": "pa"
+        "code": "se-NO",
+        "English": "Sami (Lule) (Norway)"
     },
     {
-        "English": "Persian",
-        "alpha2": "fa"
+        "code": "se-NO",
+        "English": "Sami (Southern) (Norway)"
     },
     {
-        "English": "Polish",
-        "alpha2": "pl"
+        "code": "se-SE",
+        "English": "Sami (Northern) (Sweden)"
     },
     {
-        "English": "Portuguese",
-        "alpha2": "pt"
+        "code": "se-SE",
+        "English": "Sami (Lule) (Sweden)"
     },
     {
-        "English": "Pushto; Pashto",
-        "alpha2": "ps"
+        "code": "se-SE",
+        "English": "Sami (Southern) (Sweden)"
     },
     {
-        "English": "Quechua",
-        "alpha2": "qu"
+        "code": "sk-SK",
+        "English": "Slovak (Slovakia)"
     },
     {
-        "English": "Romanian; Moldavian; Moldovan",
-        "alpha2": "ro"
+        "code": "sl-SI",
+        "English": "Slovenian (Slovenia)"
     },
     {
-        "English": "Romansh",
-        "alpha2": "rm"
+        "code": "sq-AL",
+        "English": "Albanian (Albania)"
     },
     {
-        "English": "Rundi",
-        "alpha2": "rn"
+        "code": "sr-BA",
+        "English": "Serbian (Latin) (Bosnia and Herzegovina)"
     },
     {
-        "English": "Russian",
-        "alpha2": "ru"
+        "code": "sr-BA",
+        "English": "Serbian (Cyrillic) (Bosnia and Herzegovina)"
     },
     {
-        "English": "Samoan",
-        "alpha2": "sm"
+        "code": "sr-SP",
+        "English": "Serbian (Latin) (Serbia and Montenegro)"
     },
     {
-        "English": "Sango",
-        "alpha2": "sg"
+        "code": "sr-SP",
+        "English": "Serbian (Cyrillic) (Serbia and Montenegro)"
     },
     {
-        "English": "Sanskrit",
-        "alpha2": "sa"
+        "code": "sv-FI",
+        "English": "Swedish (Finland)"
     },
     {
-        "English": "Sardinian",
-        "alpha2": "sc"
+        "code": "sv-SE",
+        "English": "Swedish (Sweden)"
     },
     {
-        "English": "Serbian",
-        "alpha2": "sr"
+        "code": "sw-KE",
+        "English": "Swahili (Kenya)"
     },
     {
-        "English": "Shona",
-        "alpha2": "sn"
+        "code": "syr-SY",
+        "English": "Syriac (Syria)"
     },
     {
-        "English": "Sichuan Yi; Nuosu",
-        "alpha2": "ii"
+        "code": "ta-IN",
+        "English": "Tamil (India)"
     },
     {
-        "English": "Sindhi",
-        "alpha2": "sd"
+        "code": "te-IN",
+        "English": "Telugu (India)"
     },
     {
-        "English": "Sinhala; Sinhalese",
-        "alpha2": "si"
+        "code": "th-TH",
+        "English": "Thai (Thailand)"
     },
     {
-        "English": "Slovak",
-        "alpha2": "sk"
+        "code": "tl-PH",
+        "English": "Tagalog (Philippines)"
     },
     {
-        "English": "Slovenian",
-        "alpha2": "sl"
+        "code": "tn-ZA",
+        "English": "Tswana (South Africa)"
     },
     {
-        "English": "Somali",
-        "alpha2": "so"
+        "code": "tr-TR",
+        "English": "Turkish (Turkey)"
     },
     {
-        "English": "Sotho, Southern",
-        "alpha2": "st"
+        "code": "tt-RU",
+        "English": "Tatar (Russia)"
     },
     {
-        "English": "Spanish; Castilian",
-        "alpha2": "es"
+        "code": "uk-UA",
+        "English": "Ukrainian (Ukraine)"
     },
     {
-        "English": "Sundanese",
-        "alpha2": "su"
+        "code": "ur-PK",
+        "English": "Urdu (Islamic Republic of Pakistan)"
     },
     {
-        "English": "Swahili",
-        "alpha2": "sw"
+        "code": "uz-UZ",
+        "English": "Uzbek (Latin) (Uzbekistan)"
     },
     {
-        "English": "Swati",
-        "alpha2": "ss"
+        "code": "uz-UZ",
+        "English": "Uzbek (Cyrillic) (Uzbekistan)"
     },
     {
-        "English": "Swedish",
-        "alpha2": "sv"
+        "code": "vi-VN",
+        "English": "Vietnamese (Viet Nam)"
     },
     {
-        "English": "Tagalog",
-        "alpha2": "tl"
+        "code": "xh-ZA",
+        "English": "Xhosa (South Africa)"
     },
     {
-        "English": "Tahitian",
-        "alpha2": "ty"
+        "code": "zh-CN",
+        "English": "Chinese (S)"
     },
     {
-        "English": "Tajik",
-        "alpha2": "tg"
+        "code": "zh-HK",
+        "English": "Chinese (Hong Kong)"
     },
     {
-        "English": "Tamil",
-        "alpha2": "ta"
+        "code": "zh-MO",
+        "English": "Chinese (Macau)"
     },
     {
-        "English": "Tatar",
-        "alpha2": "tt"
+        "code": "zh-SG",
+        "English": "Chinese (Singapore)"
     },
     {
-        "English": "Telugu",
-        "alpha2": "te"
+        "code": "zh-TW",
+        "English": "Chinese (T)"
     },
     {
-        "English": "Thai",
-        "alpha2": "th"
-    },
-    {
-        "English": "Tibetan",
-        "alpha2": "bo"
-    },
-    {
-        "English": "Tigrinya",
-        "alpha2": "ti"
-    },
-    {
-        "English": "Tonga (Tonga Islands)",
-        "alpha2": "to"
-    },
-    {
-        "English": "Tsonga",
-        "alpha2": "ts"
-    },
-    {
-        "English": "Tswana",
-        "alpha2": "tn"
-    },
-    {
-        "English": "Turkish",
-        "alpha2": "tr"
-    },
-    {
-        "English": "Turkmen",
-        "alpha2": "tk"
-    },
-    {
-        "English": "Twi",
-        "alpha2": "tw"
-    },
-    {
-        "English": "Uighur; Uyghur",
-        "alpha2": "ug"
-    },
-    {
-        "English": "Ukrainian",
-        "alpha2": "uk"
-    },
-    {
-        "English": "Urdu",
-        "alpha2": "ur"
-    },
-    {
-        "English": "Uzbek",
-        "alpha2": "uz"
-    },
-    {
-        "English": "Venda",
-        "alpha2": "ve"
-    },
-    {
-        "English": "Vietnamese",
-        "alpha2": "vi"
-    },
-    {
-        "English": "Volapük",
-        "alpha2": "vo"
-    },
-    {
-        "English": "Walloon",
-        "alpha2": "wa"
-    },
-    {
-        "English": "Welsh",
-        "alpha2": "cy"
-    },
-    {
-        "English": "Western Frisian",
-        "alpha2": "fy"
-    },
-    {
-        "English": "Wolof",
-        "alpha2": "wo"
-    },
-    {
-        "English": "Xhosa",
-        "alpha2": "xh"
-    },
-    {
-        "English": "Yiddish",
-        "alpha2": "yi"
-    },
-    {
-        "English": "Yoruba",
-        "alpha2": "yo"
-    },
-    {
-        "English": "Zhuang; Chuang",
-        "alpha2": "za"
-    },
-    {
-        "English": "Zulu",
-        "alpha2": "zu"
+        "code": "zu-ZA",
+        "English": "Zulu (South Africa)"
     }
 ]

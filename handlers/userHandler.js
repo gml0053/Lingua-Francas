@@ -1,8 +1,20 @@
 const user = require('../models/user.js');
+const fs = require('fs');
 var userModel = require('../models/user.js');
 var directChatModel = require('../models/directChat.js');
 const directChat = require('../models/directChat.js');
+
+let rawdata = fs.readFileSync('resources/language-codes.json');
+let languages = JSON.parse(rawdata);
 //var directMessageModel = require('../models/directMessage.js');
+
+function getCode(languageName, callback) {
+    languages.forEach(function (lang) {
+        if (lang.English == languageName) {
+            callback(lang.code);
+        }
+    });
+}
 
 module.exports = {
     listAllUsers(callback) {
@@ -18,16 +30,25 @@ module.exports = {
     },
 
     addFluency(user, language, callback) {
-        userModel.findOneAndUpdate(
-            {
-                _id: user._id
-            },
-            { $push: { fluentIn: language } },
-            { new: false },
-            function (err, result) {
-                callback();
-            }
-        );
+        getCode(language, function (code) {
+            userModel.findOneAndUpdate(
+                {
+                    _id: user._id
+                },
+                {
+                    $push: {
+                        fluentIn: {
+                            code: code,
+                            English: language
+                        }
+                    }
+                },
+                { new: false },
+                function (err, result) {
+                    callback();
+                }
+            );
+        });
     },
 
     removeFluency(user, language, callback) {
@@ -35,7 +56,7 @@ module.exports = {
             {
                 _id: user._id
             },
-            { $pull: { fluentIn: language } },
+            { $pull: { fluentIn: { English: language } } },
             { new: false },
             function (err, result) {
                 callback();
@@ -44,23 +65,33 @@ module.exports = {
     },
 
     addLearning(user, language, callback) {
-        userModel.findOneAndUpdate(
-            {
-                _id: user._id
-            },
-            { $push: { learning: language } },
-            { new: false },
-            function (err, result) {
-                callback();
-            }
-        );
+        getCode(language, function (code) {
+            userModel.findOneAndUpdate(
+                {
+                    _id: user._id
+                },
+                {
+                    $push: {
+                        learning: {
+                            code: code,
+                            English: language
+                        }
+                    }
+                },
+                { new: true },
+                function (err, result) {
+                    callback();
+                }
+            );
+        });
     },
+
     removeLearning(user, language, callback) {
         userModel.findOneAndUpdate(
             {
                 _id: user._id
             },
-            { $pull: { learning: language } },
+            { $pull: { learning: { English: language } } },
             { new: false },
             function (err, result) {
                 callback();
