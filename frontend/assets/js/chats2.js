@@ -19,6 +19,11 @@ $('.chatRoom').on('click', function (event) {
     changeContact(roomID);
 });
 
+function scrollToBottom() {
+    console.log('here');
+    messageBox.scrollTop = messageBox.scrollHeight;
+}
+
 function changeContact(roomID) {
     $.ajax({
         type: 'GET',
@@ -30,6 +35,7 @@ function changeContact(roomID) {
     }).done(function (html) {
         messageBox.innerHTML = '';
         messageBox.innerHTML += html;
+        scrollToBottom();
     });
 }
 
@@ -43,6 +49,7 @@ function getMessages(roomID) {
         dataType: 'html'
     }).done(function (html) {
         messageBox.innerHTML += html;
+        scrollToBottom();
     });
 }
 
@@ -68,6 +75,7 @@ const addNewMessage = ({ user, message }) => {
 
     const myMsg = `<p class="mine message">${message}</p>`;
     messageBox.innerHTML += user === userID ? myMsg : receivedMsg;
+    scrollToBottom();
 };
 
 messageForm.addEventListener('submit', (e) => {

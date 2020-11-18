@@ -35,7 +35,7 @@
             <img
                 style="width: 35px; height: 35px; margin-right: 15px; background: rgb(96, 96, 96); border-radius: 50%"
             /><span>
-                {%if chat.initiator == userID%} {{chat.inviteeName}} {%else%} {{chat.inviteeName}} {%endif%}
+                {%if chat.initiator == userID%} {{chat.inviteeName}} {%else%} {{chat.initiatorName}} {%endif%}
             </span>
         </li>
         {% else %}
@@ -48,22 +48,21 @@
 <!--Body content-->
 {%block body%}
 
-<div class="chat-container d-flex flex-column overflow-auto flex-grow-1">
-    <div class="chat flex-grow-1" userID="{{userID}}" roomID="{{roomID}}">
+<div class="chat-container d-flex flex-column justify-content-end flex-grow-1">
+    <div class="chat" userID="{{userID}}" roomID="{{roomID}}">
         <!--CHATS GO HERE-->
     </div>
-</div>
-
-<div>
-    <form class="chatsForm d-flex flex-row" id="intputMessage" style="margin: 0px; padding: 10px">
-        <textarea
-            class="chatsInput form-control"
-            style="margin-right: 1em; max-height: 20em; min-height: 2.5em"
-            rows="1"
-            oninput="auto_grow(this)"
-        ></textarea
-        ><button class="btn btn-primary" type="submit" style="height: 2.5em">Send</button>
-    </form>
+    <div>
+        <form class="chatsForm d-flex flex-row" id="intputMessage" style="margin: 0px; padding: 10px">
+            <textarea
+                class="chatsInput form-control"
+                style="margin-right: 1em; max-height: 20em; min-height: 2.5em"
+                rows="1"
+                oninput="auto_grow(this)"
+            ></textarea
+            ><button class="btn btn-primary" type="submit" style="height: 2.5em">Send</button>
+        </form>
+    </div>
 </div>
 
 {%endblock%}
