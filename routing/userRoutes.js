@@ -88,13 +88,13 @@ module.exports = function (app, passport, userHandler) {
 
     app.get('/chats', loggedIn, function (req, res) {
         userHandler.getAllChatsWithNames(req.user, function (chatList, nameList) {
+            console.log('messin around');
             console.log(chatList);
             if (chatList.length > 0) {
                 res.render('webchat.html', {
                     userID: req.user._id,
                     chats: chatList,
-                    roomID: chatList[0],
-                    names: nameList
+                    roomID: chatList[0].id
                 });
             } else {
                 res.render('webchat.html', { userID: req.user._id, chats: chatList, roomID: 'none' });
