@@ -1,43 +1,39 @@
 {
-  "name": "lingua-francas",
-  "version": "1.0.0",
-  "description": "language learning chat app",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "debug": "nodemon index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/banana-pudding/Lingua-Francas.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/banana-pudding/Lingua-Francas/issues"
-  },
-  "homepage": "https://github.com/banana-pudding/Lingua-Francas#readme",
-  "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.19.0",
-    "bootstrap": "^4.5.2",
-    "connect-flash": "^0.1.1",
-    "crypto": "^1.0.1",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "gulp-nunjucks-render": "^2.2.3",
-    "mongoose": "^5.10.3",
-    "nodemon": "^2.0.4",
-    "nunjucks": "^3.2.2",
-    "passport": "^0.4.1",
-    "passport-google-oauth": "^2.0.0",
-    "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.0.1",
-    "socket.io": "^2.3.0"
-  },
-  "devDependencies": {
-    "prettier": "^2.2.0",
-    "prettier-plugin-nunjucks": "git+ssh://git@github.com/justrhysism/prettier-plugin-nunjucks.git"
-  }
+    "name": "lingua-francas",
+    "version": "1.0.0",
+    "description": "language learning chat app",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "debug": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/banana-pudding/Lingua-Francas.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/banana-pudding/Lingua-Francas/issues"
+    },
+    "homepage": "https://github.com/banana-pudding/Lingua-Francas#readme",
+    "dependencies": {
+        "bcrypt-nodejs": "0.0.3",
+        "body-parser": "^1.19.0",
+        "bootstrap": "^4.5.2",
+        "connect-flash": "^0.1.1",
+        "crypto": "^1.0.1",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "gulp-nunjucks-render": "^2.2.3",
+        "mongoose": "^5.10.3",
+        "nodemon": "^2.0.4",
+        "nunjucks": "^3.2.2",
+        "passport": "^0.4.1",
+        "passport-google-oauth": "^2.0.0",
+        "passport-local": "^1.0.0",
+        "passport-local-mongoose": "^6.0.1",
+        "socket.io": "^2.3.0"
+    }
 }
