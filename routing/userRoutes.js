@@ -58,7 +58,14 @@ module.exports = function (app, passport, userHandler) {
 
     app.get('/profile', loggedIn, function (req, res) {
         userHandler.getNewInvitations(req.user, function (newInvitations) {
-            res.render('editProfile.html', { profile: req.user, languages: languages, invitations: newInvitations });
+            userHandler.getPendingInvitations(req.user, function (pendingInvitations) {
+                res.render('editProfile.html', {
+                    profile: req.user,
+                    languages: languages,
+                    invitations: newInvitations,
+                    outgoing: pendingInvitations
+                });
+            });
         });
     });
 
@@ -80,9 +87,10 @@ module.exports = function (app, passport, userHandler) {
     });
 
     app.get('/chats', loggedIn, function (req, res) {
-        userHandler.getAcceptedChats(req.user, function (chatList) {
+        userHandler.getAllChats(req.user, function (chatList) {
+            console.log(chatList);
             if (chatList.length > 0) {
-                res.render('webchat.html', { userID: req.user._id, chats: chatList, roomID: chatList[0]._id });
+                res.render('webchat.html', { userID: req.user._id, chats: chatList, roomID: chatList[0] });
             } else {
                 res.render('webchat.html', { userID: req.user._id, chats: chatList, roomID: 'none' });
             }

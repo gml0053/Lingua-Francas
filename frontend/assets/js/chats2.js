@@ -54,6 +54,7 @@ function getMessages(roomID) {
 }
 
 window.onload = function () {
+    console.log(roomID);
     if (roomID != 'none') {
         getMessages(roomID);
         socket.emit('joinRoom', {

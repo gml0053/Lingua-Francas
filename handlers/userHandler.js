@@ -187,11 +187,12 @@ module.exports = {
                                                         });
                                                     }
                                                 });
+                                            } else {
+                                                callback();
                                             }
                                         }
                                     }
                                 );
-                                callback();
                             }
                         }
                     );
@@ -209,17 +210,28 @@ module.exports = {
                 if (err) {
                     console.log(err);
                 } else {
-                    var chats = [];
+                    var chats = [],
+                        promises = [];
+                    console.log('getting chats for', user.privateChats);
+
                     result.privateChats.forEach(function (privateChat) {
-                        directChatModel.findById(privateChat, function (err, result) {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                chats.push(privateChat);
-                            }
-                        });
+                        console.log('one chat', privateChat);
+                        promises.push(
+                            directChatModel.findById(privateChat, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    console.log(privateChat);
+                                    chats.push(privateChat);
+                                }
+                            })
+                        );
                     });
-                    callback(chats);
+
+                    console.log(chats);
+                    Promise.all(promises).then(function () {
+                        callback(chats);
+                    });
                 }
             }
         );
@@ -253,6 +265,7 @@ module.exports = {
     },
 
     getNewInvitations(user, callback) {
+        console.log('getting invitations');
         userModel.findOne(
             {
                 _id: user._id
@@ -269,8 +282,55 @@ module.exports = {
                                 if (err) {
                                     console.log(err);
                                 } else {
-                                    console.log(result);
-                                    if (!privateChat.isAccepted && !privateChat.isRejected) {
+                                    console.log('one chat', result.invitee, 'myid', user._id);
+                                    console.log(!privateChat.isAccepted);
+                                    console.log(!privateChat.isRejected);
+                                    console.log(privateChat.invitee === user._id);
+                                    if (
+                                        !privateChat.isAccepted &&
+                                        !privateChat.isRejected &&
+                                        privateChat.invitee == user._id
+                                    ) {
+                                        console.log('pushing chat');
+                                        chats.push(result);
+                                    }
+                                }
+                            })
+                        );
+                    });
+
+                    Promise.all(promises).then(function () {
+                        console.log('Got chats', chats);
+                        callback(chats);
+                    });
+                }
+            }
+        );
+    },
+
+    getPendingInvitations(user, callback) {
+        userModel.findOne(
+            {
+                _id: user._id
+            },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var chats = [],
+                        promises = [];
+                    result.privateChats.forEach(function (privateChat) {
+                        promises.push(
+                            directChatModel.findById(privateChat, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    console.log('one chat', result);
+                                    if (
+                                        !privateChat.isAccepted &&
+                                        !privateChat.isRejected &&
+                                        privateChat.initiator == user._id
+                                    ) {
                                         chats.push(result);
                                     }
                                 }
