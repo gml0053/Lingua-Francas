@@ -16,14 +16,12 @@
         <li
             class="list-group-item chatRoom"
             style="background: rgba(255, 255, 255, 0); border-style: none; padding-left: 10px"
-            roomID="{{ chat }}"
+            roomID="{{ chat.id }}"
         >
             <img
                 style="width: 35px; height: 35px; margin-right: 15px; background: rgb(96, 96, 96); border-radius: 50%"
             />
-            <span>
-                {% if chat.initiator == userID %} {{ chat.inviteeName }} {% else %} {{ chat.initiatorName }} {% endif %}
-            </span>
+            <span> {{chat.name}} </span>
         </li>
         {% else %}
         <li class="list-group-item" style="background: rgba(255, 255, 255, 0); border-style: none; padding-left: 10px">

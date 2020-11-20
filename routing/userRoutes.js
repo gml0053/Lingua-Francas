@@ -87,10 +87,15 @@ module.exports = function (app, passport, userHandler) {
     });
 
     app.get('/chats', loggedIn, function (req, res) {
-        userHandler.getAllChats(req.user, function (chatList) {
+        userHandler.getAllChatsWithNames(req.user, function (chatList, nameList) {
             console.log(chatList);
             if (chatList.length > 0) {
-                res.render('webchat.html', { userID: req.user._id, chats: chatList, roomID: chatList[0] });
+                res.render('webchat.html', {
+                    userID: req.user._id,
+                    chats: chatList,
+                    roomID: chatList[0],
+                    names: nameList
+                });
             } else {
                 res.render('webchat.html', { userID: req.user._id, chats: chatList, roomID: 'none' });
             }

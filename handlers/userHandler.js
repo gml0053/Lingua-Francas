@@ -237,6 +237,51 @@ module.exports = {
         );
     },
 
+    getAllChatsWithNames(user, callback) {
+        userModel.findOne(
+            {
+                _id: user._id
+            },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var chats = [],
+                        promises = [];
+                    console.log('getting chats for', user.privateChats);
+
+                    result.privateChats.forEach(function (privateChat) {
+                        console.log('one chat', privateChat);
+                        promises.push(
+                            directChatModel.findById(privateChat, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    if (result.invitee == user._id) {
+                                        chats.push({
+                                            id: privateChat,
+                                            name: result.initiatorName
+                                        });
+                                    } else {
+                                        chats.push({
+                                            id: privateChat,
+                                            name: result.inviteeName
+                                        });
+                                    }
+                                }
+                            })
+                        );
+                    });
+
+                    console.log(chats);
+                    Promise.all(promises).then(function () {
+                        callback(chats);
+                    });
+                }
+            }
+        );
+    },
+
     getAcceptedChats(user, callback) {
         userModel.findOne(
             {
