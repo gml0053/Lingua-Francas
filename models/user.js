@@ -22,7 +22,7 @@ var userSchema = mongoose.Schema({
         }
     ],
     dateRegistered: String, //for now; this will be a timestamp later
-    privateChats: [mongoose.model('directChat').schema] //all the one on one conversatoins
+    privateChats: [String] //IDs of private chats this user is a part of
 });
 
 // methods ======================

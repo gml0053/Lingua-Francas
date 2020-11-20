@@ -57,7 +57,9 @@ module.exports = function (app, passport, userHandler) {
     });
 
     app.get('/profile', loggedIn, function (req, res) {
-        res.render('editProfile.html', { profile: req.user, languages: languages });
+        userHandler.getNewInvitations(req.user, function (newInvitations) {
+            res.render('editProfile.html', { profile: req.user, languages: languages, invitations: newInvitations });
+        });
     });
 
     app.get('/user', loggedIn, function (req, res) {
@@ -78,7 +80,7 @@ module.exports = function (app, passport, userHandler) {
     });
 
     app.get('/chats', loggedIn, function (req, res) {
-        userHandler.getAllChats(req.user, function (chatList) {
+        userHandler.getAcceptedChats(req.user, function (chatList) {
             if (chatList.length > 0) {
                 res.render('webchat.html', { userID: req.user._id, chats: chatList, roomID: chatList[0]._id });
             } else {
@@ -132,8 +134,21 @@ module.exports = function (app, passport, userHandler) {
     app.post('/initiate', loggedIn, function (req, res) {
         var targetID = req.body.targetID || req.query.targetID;
         userHandler.initiateChat(req.user, targetID, function () {
-            console.log('initiated');
             res.json(['done']);
+        });
+    });
+
+    app.get('/acceptInvite', loggedIn, function (req, res) {
+        var chatID = req.body.chatID || req.query.chatID;
+        userHandler.acceptInvite(req.user, chatID, function () {
+            res.redirect('back');
+        });
+    });
+
+    app.get('/rejectInvite', loggedIn, function (req, res) {
+        var chatID = req.body.chatID || req.query.chatID;
+        userHandler.rejectInvite(req.user, chatID, function () {
+            res.redirect('back');
         });
     });
 };

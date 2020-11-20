@@ -167,9 +167,9 @@ module.exports = {
                                                         console.log(err);
                                                     } else {
                                                         //add chat to invitee profile
-                                                        initiator.privateChats.push(privateChat);
+                                                        initiator.privateChats.push(privateChat._id);
                                                         //add chat to invitee profile
-                                                        invitee.privateChats.push(privateChat);
+                                                        invitee.privateChats.push(privateChat._id);
 
                                                         initiator.save(function (err, result) {
                                                             if (err) {
@@ -211,9 +211,178 @@ module.exports = {
                 } else {
                     var chats = [];
                     result.privateChats.forEach(function (privateChat) {
-                        chats.push(privateChat);
+                        directChatModel.findById(privateChat, function (err, result) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                chats.push(privateChat);
+                            }
+                        });
                     });
                     callback(chats);
+                }
+            }
+        );
+    },
+
+    getAcceptedChats(user, callback) {
+        userModel.findOne(
+            {
+                _id: user._id
+            },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var chats = [];
+                    result.privateChats.forEach(function (privateChat) {
+                        if (privateChat.isAccepted) {
+                            directChatModel.findById(privateChat, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    chats.push(privateChat);
+                                }
+                            });
+                        }
+                    });
+                    callback(chats);
+                }
+            }
+        );
+    },
+
+    getNewInvitations(user, callback) {
+        userModel.findOne(
+            {
+                _id: user._id
+            },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var chats = [],
+                        promises = [];
+                    result.privateChats.forEach(function (privateChat) {
+                        promises.push(
+                            directChatModel.findById(privateChat, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    console.log(result);
+                                    if (!privateChat.isAccepted && !privateChat.isRejected) {
+                                        chats.push(result);
+                                    }
+                                }
+                            })
+                        );
+                    });
+
+                    Promise.all(promises).then(function () {
+                        console.log(chats);
+                        callback(chats);
+                    });
+                }
+            }
+        );
+    },
+
+    getRejectedInvitations(user, callback) {
+        userModel.findOne(
+            {
+                _id: user._id
+            },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var chats = [],
+                        promises = [];
+                    result.privateChats.forEach(function (privateChat) {
+                        promises.push(
+                            directChatModel.findById(privateChat, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    if (!privateChat.isAccepted && privateChat.isRejected) {
+                                        chats.push(result);
+                                    }
+                                }
+                            })
+                        );
+                    });
+                    Promise.all(promises).then(function () {
+                        console.log(chats);
+                        callback(chats);
+                    });
+                }
+            }
+        );
+    },
+
+    acceptInvite(user, chatID, callback) {
+        userModel.findOne(
+            {
+                _id: user._id
+            },
+            function (err, result1) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    directChatModel.findOne(
+                        {
+                            _id: chatID,
+                            invitee: user._id
+                        },
+                        function (err, result2) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                result2.isAccepted = true;
+                                result2.save(function (err, result3) {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        callback();
+                                    }
+                                });
+                            }
+                        }
+                    );
+                }
+            }
+        );
+    },
+
+    rejectInvite(user, chatID, callback) {
+        userModel.findOne(
+            {
+                _id: user._id
+            },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    directChatModel.findOne(
+                        {
+                            _id: chatID,
+                            invitee: user._id
+                        },
+                        function (err, result) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                result.isRejected = true;
+                                result.save(function (err, result) {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        callback();
+                                    }
+                                });
+                            }
+                        }
+                    );
                 }
             }
         );
