@@ -20,7 +20,6 @@ $('.chatRoom').on('click', function (event) {
 });
 
 function scrollToBottom() {
-    console.log('here');
     messageBox.scrollTop = messageBox.scrollHeight;
 }
 
@@ -54,7 +53,6 @@ function getMessages(roomID) {
 }
 
 window.onload = function () {
-    console.log(roomID);
     if (roomID != 'none') {
         getMessages(roomID);
         socket.emit('joinRoom', {
@@ -72,9 +70,14 @@ const addNewMessage = ({ user, message }) => {
         minute: 'numeric'
     });
 
-    const receivedMsg = `<p class="yours message">${message}</p>`;
-
-    const myMsg = `<p class="mine message">${message}</p>`;
+    var receivedMsg, myMsg;
+    if (messageBox.innerHTML == '') {
+        receivedMsg = `<p class="yours message" style="margin-top:auto">${message}</p>`;
+        myMsg = `<p class="mine message" style="margin-top:auto">${message}</p>`;
+    } else {
+        receivedMsg = `<p class="yours message">${message}</p>`;
+        myMsg = `<p class="mine message">${message}</p>`;
+    }
     messageBox.innerHTML += user === userID ? myMsg : receivedMsg;
     scrollToBottom();
 };

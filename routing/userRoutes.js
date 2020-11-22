@@ -87,9 +87,7 @@ module.exports = function (app, passport, userHandler) {
     });
 
     app.get('/chats', loggedIn, function (req, res) {
-        userHandler.getAllChatsWithNames(req.user, function (chatList, nameList) {
-            console.log('messin around');
-            console.log(chatList);
+        userHandler.getAcceptedChats(req.user, function (chatList) {
             if (chatList.length > 0) {
                 res.render('webchat.html', {
                     userID: req.user._id,
@@ -146,7 +144,7 @@ module.exports = function (app, passport, userHandler) {
 
     app.post('/initiate', loggedIn, function (req, res) {
         var targetID = req.body.targetID || req.query.targetID;
-        userHandler.initiateChat(req.user, targetID, function () {
+        userHandler.inviteToChat(req.user, targetID, function () {
             res.json(['done']);
         });
     });

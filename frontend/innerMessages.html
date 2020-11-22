@@ -1,5 +1,5 @@
 {% for message in messages %} {% if message.sentBy == myID %}
-<p class="mine message">{{message.content}}</p>
+<p class="mine message" {% if loop.first %} style="margin-top: auto" {% endif %}>{{message.content}}</p>
 {% else %}
-<p class="yours message">{{message.content}}</p>
+<p class="yours message" {% if loop.first %} style="margin-top: auto" {% endif %}>{{message.content}}</p>
 {% endif %} {% endfor %}

@@ -51,7 +51,7 @@ module.exports = function (passport) {
 
                             // set the user's local credentials
                             newUser.email = email;
-                            newUser.name = req.body.name;
+                            newUser.displayName = req.body.name;
                             newUser.password = newUser.generateHash(password);
 
                             // save the user
@@ -131,7 +131,7 @@ module.exports = function (passport) {
 
                             newUser.save(function (err) {
                                 if (err) throw err;
-                                return done(null, newUser); //makes new local user that matches UNT user cred
+                                return done(null, newUser);
                             });
                         } else {
                             return done(null, localUser);

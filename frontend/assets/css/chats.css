@@ -4,6 +4,7 @@
     flex-direction: column;
     padding: 10px;
     overflow-y: auto;
+    height: 100%;
 }
 
 .message {
