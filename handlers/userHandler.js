@@ -187,7 +187,7 @@ module.exports = {
         var initiator = await userModel.findById(user._id);
         var groupChat = await groupChatModel.findById(groupID);
         var invitee = await userModel.findById(inviteeID);
-    }
+    },
 
     async getAllChatsWithNames(user, callback) {
         var thisUser = await userModel.findById(user._id);
