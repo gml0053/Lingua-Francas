@@ -136,6 +136,12 @@ module.exports = function (app, passport, userHandler) {
         }
     );
 
+    app.post("/createNewGroup", loggedIn, function (req, res) {
+        userHandler.createNewGroupChat(req.user, function (param) {
+            //maybe
+        });
+    });
+
     app.post("/addFluency", loggedIn, function (req, res) {
         var newLanguage = req.body.addedFluency;
         userHandler.addFluency(req.user, newLanguage, function () {

@@ -1,8 +1,10 @@
-const fs = require('fs');
-var userModel = require('../models/user.js');
-var directChatModel = require('../models/directChat.js');
+const fs = require("fs");
+var userModel = require("../models/user.js");
+var directChatModel = require("../models/directChat.js");
+var groupChatModel = require("../models/groupChat.js");
+var directChatModel = require("../models/groupChat.js");
 
-let rawdata = fs.readFileSync('resources/language-codes.json');
+let rawdata = fs.readFileSync("resources/language-codes.json");
 let languages = JSON.parse(rawdata);
 //var directMessageModel = require('../models/directMessage.js');
 
@@ -31,15 +33,15 @@ module.exports = {
         getCode(language, function (code) {
             userModel.findOneAndUpdate(
                 {
-                    _id: user._id
+                    _id: user._id,
                 },
                 {
                     $push: {
                         fluentIn: {
                             code: code,
-                            English: language
-                        }
-                    }
+                            English: language,
+                        },
+                    },
                 },
                 { new: false },
                 function (err, result) {
@@ -52,7 +54,7 @@ module.exports = {
     removeFluency(user, language, callback) {
         userModel.findOneAndUpdate(
             {
-                _id: user._id
+                _id: user._id,
             },
             { $pull: { fluentIn: { English: language } } },
             { new: false },
@@ -66,15 +68,15 @@ module.exports = {
         getCode(language, function (code) {
             userModel.findOneAndUpdate(
                 {
-                    _id: user._id
+                    _id: user._id,
                 },
                 {
                     $push: {
                         learning: {
                             code: code,
-                            English: language
-                        }
-                    }
+                            English: language,
+                        },
+                    },
                 },
                 { new: true },
                 function (err, result) {
@@ -87,7 +89,7 @@ module.exports = {
     removeLearning(user, language, callback) {
         userModel.findOneAndUpdate(
             {
-                _id: user._id
+                _id: user._id,
             },
             { $pull: { learning: { English: language } } },
             { new: false },
@@ -100,10 +102,10 @@ module.exports = {
     updateBio(user, newBio, callback) {
         userModel.findOneAndUpdate(
             {
-                _id: user._id
+                _id: user._id,
             },
             {
-                bio: newBio
+                bio: newBio,
             },
             function (err, result) {
                 if (err) {
@@ -118,7 +120,7 @@ module.exports = {
     getProfileFromGoogleID(googleID, callback) {
         userModel.findOne(
             {
-                googleID: googleID
+                googleID: googleID,
             },
             function (err, result) {
                 callback(err, result);
@@ -129,7 +131,7 @@ module.exports = {
     getProfileFromUserID(userID, callback) {
         userModel.findOne(
             {
-                _id: userID
+                _id: userID,
             },
             function (err, result) {
                 callback(err, result);
@@ -143,8 +145,8 @@ module.exports = {
         var existingChat = await directChatModel.findOne({
             $or: [
                 { initiator: initiator._id, invitee: invitee._id },
-                { initiator: invitee._id, invitee: initiator._id }
-            ]
+                { initiator: invitee._id, invitee: initiator._id },
+            ],
         });
 
         if (!existingChat) {
@@ -155,9 +157,9 @@ module.exports = {
             newChat.inviteeName = invitee.displayName;
             newChat.isAccepted = false;
             newChat.isRejected = false;
-            newChat.startedOn = '';
+            newChat.startedOn = "";
             newChat.isBlocked = false;
-            newChat.blockedBy = '';
+            newChat.blockedBy = "";
 
             var privateChat = await newChat.save();
             initiator.privateChats.push(privateChat._id);
@@ -170,6 +172,23 @@ module.exports = {
         }
     },
 
+    async createNewGroupChat(user) {
+        var initiator = await userModel.findById(user._id);
+        var newGroup = new groupChatModel();
+        newGroup.initiator = initiator._id;
+        newGroup.initiatorName = initiator.displayName;
+        var groupChat = await newGroup.save();
+        initiator.groupChats.push(groupChat._id);
+        await initiator.save();
+        callback();
+    },
+
+    async inviteOtherToGroup(user, groupID, inviteeID) {
+        var initiator = await userModel.findById(user._id);
+        var groupChat = await groupChatModel.findById(groupID);
+        var invitee = await userModel.findById(inviteeID);
+    }
+
     async getAllChatsWithNames(user, callback) {
         var thisUser = await userModel.findById(user._id);
         var chats = [];
@@ -177,22 +196,30 @@ module.exports = {
             if (thisUser.privateChats.length == 0) {
                 resolve();
             } else {
-                thisUser.privateChats.forEach(async function (privateChat, index, array) {
+                thisUser.privateChats.forEach(async function (
+                    privateChat,
+                    index,
+                    array
+                ) {
                     var result = await directChatModel.findById(privateChat);
                     if (result.invitee == user._id) {
-                        var otherUser = await userModel.findById(result.initiator);
+                        var otherUser = await userModel.findById(
+                            result.initiator
+                        );
                         chats.push({
                             id: privateChat,
                             name: otherUser.displayName,
-                            image: otherUser.image
+                            image: otherUser.image,
                         });
                         if (index === array.length - 1) resolve();
                     } else {
-                        var otherUser = await userModel.findById(result.invitee);
+                        var otherUser = await userModel.findById(
+                            result.invitee
+                        );
                         chats.push({
                             id: privateChat,
                             name: otherUser.displayName,
-                            image: otherUser.image
+                            image: otherUser.image,
                         });
                         if (index === array.length - 1) resolve();
                     }
@@ -211,9 +238,9 @@ module.exports = {
         var chats = [];
         var accepted = await directChatModel.find({
             _id: {
-                $in: thisUser.privateChats
+                $in: thisUser.privateChats,
             },
-            isAccepted: true
+            isAccepted: true,
         });
         if (accepted.length > 0) {
             var grabComponents = new Promise(function (resolve, reject) {
@@ -223,15 +250,17 @@ module.exports = {
                         chats.push({
                             id: chat._id,
                             name: otherUser.displayName,
-                            image: otherUser.image
+                            image: otherUser.image,
                         });
                         if (index === array.length - 1) resolve();
                     } else {
-                        var otherUser = await userModel.findById(chat.initiator);
+                        var otherUser = await userModel.findById(
+                            chat.initiator
+                        );
                         chats.push({
                             id: chat._id,
                             name: otherUser.displayName,
-                            image: otherUser.image
+                            image: otherUser.image,
                         });
                         if (index === array.length - 1) resolve();
                     }
@@ -250,11 +279,11 @@ module.exports = {
         var thisUser = await userModel.findById(user._id);
         var newInvitations = await directChatModel.find({
             _id: {
-                $in: thisUser.privateChats
+                $in: thisUser.privateChats,
             },
             invitee: thisUser._id,
             isAccepted: false,
-            isRejected: false
+            isRejected: false,
         });
         return newInvitations;
     },
@@ -263,11 +292,11 @@ module.exports = {
         var thisUser = await userModel.findById(user._id);
         var pendingInvitations = await directChatModel.find({
             _id: {
-                $in: thisUser.privateChats
+                $in: thisUser.privateChats,
             },
             initiator: thisUser._id,
             isAccepted: false,
-            isRejected: false
+            isRejected: false,
         });
         return pendingInvitations;
     },
@@ -276,11 +305,11 @@ module.exports = {
         var thisUser = await userModel.findById(user._id);
         var newInvitations = await directChatModel.find({
             _id: {
-                $in: thisUser.privateChats
+                $in: thisUser.privateChats,
             },
             invitee: thisUser._id,
             isAccepted: false,
-            isRejected: true
+            isRejected: true,
         });
         return newInvitations;
     },
@@ -289,11 +318,11 @@ module.exports = {
         var thisUser = await userModel.findById(user._id);
         var newInvitations = await directChatModel.find({
             _id: {
-                $in: thisUser.privateChats
+                $in: thisUser.privateChats,
             },
             initiator: thisUser._id,
             isAccepted: false,
-            isRejected: true
+            isRejected: true,
         });
         return newInvitations;
     },
@@ -301,7 +330,7 @@ module.exports = {
     async acceptInvite(user, chatID, callback) {
         var invitation = await directChatModel.findOne({
             _id: chatID,
-            invitee: user._id
+            invitee: user._id,
         });
         invitation.isAccepted = true;
         invitation.save(function (err, result) {
@@ -316,7 +345,7 @@ module.exports = {
     async rejectInvite(user, chatID, callback) {
         var invitation = await directChatModel.findOne({
             _id: chatID,
-            invitee: user._id
+            invitee: user._id,
         });
         invitation.isAccepted = false;
         invitation.isRejected = true;
@@ -332,7 +361,7 @@ module.exports = {
     getMessagesForRoom(roomID, callback) {
         directChatModel.findOne(
             {
-                _id: roomID
+                _id: roomID,
             },
             function (err, result) {
                 if (err) {
@@ -352,18 +381,18 @@ module.exports = {
         //newMessage.content = data.message;
         directChatModel.findOneAndUpdate(
             {
-                _id: data.roomID
+                _id: data.roomID,
             },
             {
                 $push: {
                     messages: {
                         sentBy: data.userID,
                         sentAt: data.timestamp,
-                        content: data.message
-                    }
-                }
+                        content: data.message,
+                    },
+                },
             },
             function (err, resultChat) {}
         );
-    }
+    },
 };

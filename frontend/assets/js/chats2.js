@@ -137,6 +137,15 @@ $(function () {
         }
     });
 
+    $(".createGroup").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "/createNewGroup",
+        }).always(function () {
+            location.reload();
+        });
+    });
+
     $(".chatRoom").on("click", function (event) {
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -227,64 +236,3 @@ $(function () {
         });
     });
 });
-
-/* referenced: https://github.com/ezesundayeze/anonymouse-realtime-chat-app/tree/master/public/js
-
-//isTyping event
-
-messageInput.addEventListener("keypress", () =>  {
-    socket.emit("typing", { user: "userID", message: "is typing..."  });
-    });
-    socket.on("notifyTyping", data  =>  {
-    typing.innerText  =  data.user  +  "  "  +  data.message;
-    console.log(data.user  +  data.message);
-    });
-    //stop typing
-    messageInput.addEventListener("keyup", () =>  {
-    socket.emit("stopTyping", "");
-    });
-    socket.on("notifyStopTyping", () =>  {
-    typing.innerText  =  "";
-    
-    }); */
-
-/*
-// Functions to use in chats/group chats, display username, then the chat box
-(function() {
-$("form").submit(function(e) {
-    let  li  =  document.createElement("li");
-    e.preventDefault();
-  
-    messages.appendChild(li).append($("#message").val());
-    let  span  =  document.createElement("span");
-    socket.emit("chat message", $("#message").val()); 
-    messages.appendChild(span).append("by "  +  userID  +  ": "  +  "just now");
-    $("#message").val("");
-return  false;
-
-});
-})();
-
-
-
-    // fetching messages from the database
-    (function() {
-    fetch("/chats")
-    .then(data  =>  {
-    return  data.json();
-    })
-    .then(json  =>  {
-    json.map(data  =>  {
-    let  li  =  document.createElement("li");
-    let messages = document.getElementById("messages")
-    let  span  =  document.createElement("span");
-    messages.appendChild(li).append(data.message);
-
-    messages
-        .appendChild(span)
-        .append("by "  +  data.sender  +  ": "  +  formatTimeAgo(data.createdAt)); // for most recent message sent when you hover over it
-    });
-    });
-    })();
-    
-    */
