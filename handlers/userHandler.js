@@ -97,6 +97,24 @@ module.exports = {
         );
     },
 
+    updateBio(user, newBio, callback) {
+        userModel.findOneAndUpdate(
+            {
+                _id: user._id
+            },
+            {
+                bio: newBio
+            },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    callback();
+                }
+            }
+        );
+    },
+
     getProfileFromGoogleID(googleID, callback) {
         userModel.findOne(
             {
@@ -238,12 +256,12 @@ module.exports = {
             isAccepted: false,
             isRejected: false
         });
-        callback(newInvitations);
+        return newInvitations;
     },
 
     async getPendingInvitations(user, callback) {
         var thisUser = await userModel.findById(user._id);
-        var newInvitations = await directChatModel.find({
+        var pendingInvitations = await directChatModel.find({
             _id: {
                 $in: thisUser.privateChats
             },
@@ -251,10 +269,10 @@ module.exports = {
             isAccepted: false,
             isRejected: false
         });
-        callback(newInvitations);
+        return pendingInvitations;
     },
 
-    async getRejectedInvitations(user, callback) {
+    async getIncomingRejections(user, callback) {
         var thisUser = await userModel.findById(user._id);
         var newInvitations = await directChatModel.find({
             _id: {
@@ -264,7 +282,20 @@ module.exports = {
             isAccepted: false,
             isRejected: true
         });
-        callback(newInvitations);
+        return newInvitations;
+    },
+
+    async getOutgoingRejections(user, callback) {
+        var thisUser = await userModel.findById(user._id);
+        var newInvitations = await directChatModel.find({
+            _id: {
+                $in: thisUser.privateChats
+            },
+            initiator: thisUser._id,
+            isAccepted: false,
+            isRejected: true
+        });
+        return newInvitations;
     },
 
     async acceptInvite(user, chatID, callback) {

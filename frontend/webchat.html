@@ -47,10 +47,10 @@
         <i class="typingStatus" userID="{{ userID }}"></i>
         <form class="chatsForm d-flex flex-row" id="intputMessage" style="margin: 0px; padding: 10px">
             <textarea
-                class="chatsInput form-control"
+                class="chatsInput autoExpand form-control"
+                id="inputBox"
                 style="margin-right: 1em; max-height: 20em; min-height: 2.5em"
                 rows="1"
-                oninput="auto_grow(this)"
             ></textarea>
             <button class="btn btn-primary" type="submit" style="height: 2.5em">Send</button>
         </form>
@@ -61,8 +61,6 @@
 <!--Scripts-->
 
 {% block scripts %}
-<script src="assets/js/Off-Canvas-Sidebar-Drawer-Navbar.js"></script>
-<script src="assets/js/Off-Canvas-Sidebar-Drawer-Navbar-1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script src="assets/js/chats2.js"></script>
 {% endblock %}
