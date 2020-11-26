@@ -107,7 +107,7 @@ inputField.addEventListener('keypress', () => {
     });
 
     socket.on("notifyTyping", ()  =>  {
-        typing.innerText  =    +  " is typing... ";
+        typing.innerText  =  userID  +  " is typing... ";
     });
 
         //stop typing
