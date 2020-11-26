@@ -1,56 +1,51 @@
-const socket = require('socket.io');
+const socket = require("socket.io");
 
 module.exports = function (server, userHandler) {
     const io = socket(server);
     const activeUsers = new Set();
 
-    io.on('connection', function (socket) {
-        socket.on('joinRoom', function (data) {
-            socket.userId = data.userID;
+    io.on("connection", function (socket) {
+        socket.on("joinRoom", function (data) {
+            socket.userID = data.userID;
             socket.join(data.roomID);
             activeUsers.add(data);
 
-            console.log(data.userID, ' just joined room ', data.roomID);
-            io.emit('connect', {
+            console.log(data.userID, " just joined room ", data.roomID);
+            io.emit("connect", {
                 googleID: [...activeUsers],
-                roomID: data.roomID
+                roomID: data.roomID,
             });
         });
 
-        socket.on('switchRooms', function (data) {
-            socket.userId = data.userID;
+        socket.on("switchRooms", function (data) {
+            socket.userID = data.userID;
             socket.leave(data.oldRoomID);
             socket.join(data.newRoomID);
-            console.log(data.userID, ' just joined room ', data.newRoomID);
+            console.log(data.userID, " just joined room ", data.newRoomID);
         });
 
-        socket.on('disconnect', () => {
+        socket.on("disconnect", () => {
             activeUsers.delete(socket.userId);
-            io.emit('user disconnected', socket.userId);
+            io.emit("user disconnected", socket.userId);
         });
 
-        socket.on('chat message', function (data) {
-            /*
-            data: {
-                message: inputField.value,
-                googleID: userName,
-                roomID: roomID,
-                timestamp: formattedTime
-            }*/
+        socket.on("chat message", function (data) {
             userHandler.saveMessage(data);
-            io.to(data.roomID).emit('chat message', data);
+            io.to(data.roomID).emit("chat message", data);
         });
 
-        socket.on('typing', function (data) {
-            io.to(data.roomID).emit('typing', data);
-            socket.broadcast.emit("notifyTyping", {
-                user: data.userID
-              });
+        socket.on("typing", function (data) {
+            io.to(data.roomID).emit("notifyTyping", {
+                typingID: data.userID,
+                typingUser: data.displayName,
+            });
         });
 
-        socket.on('stopTyping', function (data) {
-            socket.broadcast.emit("notifyStopTyping");
+        socket.on("stopTyping", function (data) {
+            io.to(data.roomID).emit("notifyStopTyping", {
+                typingID: data.userID,
+                typingUser: data.displayName,
+            });
         });
-
     });
 };
