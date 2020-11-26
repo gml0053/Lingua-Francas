@@ -43,6 +43,14 @@ module.exports = function (server, userHandler) {
 
         socket.on('typing', function (data) {
             io.to(data.roomID).emit('typing', data);
+            socket.broadcast.emit("notifyTyping", {
+                user: data.userID
+              });
         });
+
+        socket.on('stopTyping', function (data) {
+            socket.broadcast.emit("notifyStopTyping");
+        });
+
     });
 };
