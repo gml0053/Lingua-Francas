@@ -11,23 +11,65 @@
 {% block pullout %}
 <div id="chat-list-container" style="height: 100%; max-height: 100%">
     <ul class="list-group" style="color: rgb(208, 208, 208)">
+        <li
+            class="list-group-item create-Group"
+            style="
+                background: rgba(255, 255, 255, 0);
+                border-style: none;
+                padding-left: 10px;
+            "
+        >
+            <img
+                style="
+                    width: 35px;
+                    height: 35px;
+                    margin-right: 15px;
+                    background: rgb(96, 96, 96);
+                    border-radius: 50%;
+                "
+            />
+            <span> Create a new group? </span>
+        </li>
         {% for chat in chats %}
         <!--class active-convo-->
         <li
             class="list-group-item chatRoom"
-            style="background: rgba(255, 255, 255, 0); border-style: none; padding-left: 10px"
+            style="
+                background: rgba(255, 255, 255, 0);
+                border-style: none;
+                padding-left: 10px;
+            "
             roomID="{{ chat.id }}"
         >
             <img
-                style="width: 35px; height: 35px; margin-right: 15px; background: rgb(96, 96, 96); border-radius: 50%"
+                style="
+                    width: 35px;
+                    height: 35px;
+                    margin-right: 15px;
+                    background: rgb(96, 96, 96);
+                    border-radius: 50%;
+                "
                 src="{{chat.image}}"
             />
             <span> {{chat.name}} </span>
         </li>
         {% else %}
-        <li class="list-group-item" style="background: rgba(255, 255, 255, 0); border-style: none; padding-left: 10px">
+        <li
+            class="list-group-item"
+            style="
+                background: rgba(255, 255, 255, 0);
+                border-style: none;
+                padding-left: 10px;
+            "
+        >
             <img
-                style="width: 35px; height: 35px; margin-right: 15px; background: rgb(96, 96, 96); border-radius: 50%"
+                style="
+                    width: 35px;
+                    height: 35px;
+                    margin-right: 15px;
+                    background: rgb(96, 96, 96);
+                    border-radius: 50%;
+                "
             />
             <span> You don't have any active chats yet </span>
         </li>
@@ -40,19 +82,34 @@
 
 {% block body %}
 <div class="chat-container d-flex flex-column justify-content-end flex-grow-1">
-    <div class="chat" userID="{{ userID }}" roomID="{{roomID}}">
+    <div
+        class="chat"
+        userID="{{ userID }}"
+        roomID="{{roomID}}"
+        displayName="{{displayName}}"
+    >
         <!--CHATS GO HERE-->
     </div>
     <div>
         <i class="typingStatus" userID="{{ userID }}"></i>
-        <form class="chatsForm d-flex flex-row" id="intputMessage" style="margin: 0px; padding: 10px">
+        <form
+            class="chatsForm d-flex flex-row"
+            id="intputMessage"
+            style="margin: 0px; padding: 10px"
+        >
             <textarea
                 class="chatsInput autoExpand form-control"
                 id="inputBox"
                 style="margin-right: 1em; max-height: 20em; min-height: 2.5em"
                 rows="1"
             ></textarea>
-            <button class="btn btn-primary" type="submit" style="height: 2.5em">Send</button>
+            <button
+                class="btn btn-primary submit-btn"
+                type="button"
+                style="height: 2.5em"
+            >
+                Send
+            </button>
         </form>
     </div>
 </div>
