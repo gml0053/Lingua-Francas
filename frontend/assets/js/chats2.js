@@ -1,6 +1,7 @@
 const socket = io();
 
 const inputField = document.querySelector('.chatsInput');
+const typing = document.querySelector('.typingStatus');
 const messageForm = document.querySelector('.chatsForm');
 const messageBox = document.querySelector('.chat');
 const userID = messageBox.getAttribute('userID');
@@ -98,17 +99,28 @@ messageForm.addEventListener('submit', (e) => {
     inputField.value = '';
 });
 
-inputField.addEventListener('keyup', () => {
+inputField.addEventListener('keypress', () => {
     socket.emit('typing', {
         isTyping: inputField.value.length > 0,
         userID: userID,
         roomID: roomID
     });
-});
 
-socket.on('chat message', function (data) {
-    addNewMessage({ user: data.userID, message: data.message });
-});
+    socket.on("notifyTyping", ()  =>  {
+        typing.innerText  =    +  " is typing... ";
+    });
+
+        //stop typing
+    inputField.addEventListener("blur", () =>  {
+        socket.emit("stopTyping", "");
+        });
+        socket.on("notifyStopTyping", () =>  {
+        typing.innerText  =  "";});
+    });
+
+    socket.on('chat message', function (data) {
+        addNewMessage({ user: data.userID, message: data.message });
+    });
 
 /* referenced: https://github.com/ezesundayeze/anonymouse-realtime-chat-app/tree/master/public/js
 
