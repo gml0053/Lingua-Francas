@@ -137,9 +137,7 @@ module.exports = function (app, passport, userHandler) {
     );
 
     app.post("/createNewGroup", loggedIn, function (req, res) {
-        userHandler.createNewGroupChat(req.user, function (param) {
-            //maybe
-        });
+        //userHandler.createNewGroupChat(req.user, function (param) {});
     });
 
     app.post("/addFluency", loggedIn, function (req, res) {
