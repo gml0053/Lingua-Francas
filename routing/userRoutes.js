@@ -56,16 +56,19 @@ module.exports = function (app, passport, userHandler) {
         res.render('success.html');
     });
 
-    app.get('/profile', loggedIn, function (req, res) {
-        userHandler.getNewInvitations(req.user, function (newInvitations) {
-            userHandler.getPendingInvitations(req.user, function (pendingInvitations) {
-                res.render('editProfile.html', {
-                    profile: req.user,
-                    languages: languages,
-                    invitations: newInvitations,
-                    outgoing: pendingInvitations
-                });
-            });
+    app.get('/profile', loggedIn, async function (req, res) {
+        var newInvitations = await userHandler.getNewInvitations(req.user);
+        var pendingInvitations = await userHandler.getPendingInvitations(req.user);
+        var incomingRejections = await userHandler.getIncomingRejections(req.user);
+        var outgoingRejections = await userHandler.getOutgoingRejections(req.user);
+
+        res.render('editProfile.html', {
+            profile: req.user,
+            languages: languages,
+            invitations: newInvitations,
+            outgoing: pendingInvitations,
+            incomingRejections: incomingRejections,
+            outgoingRejections: outgoingRejections
         });
     });
 
@@ -138,6 +141,13 @@ module.exports = function (app, passport, userHandler) {
     app.post('/removeLearning', loggedIn, function (req, res) {
         var newLanguage = req.body.removedLearning;
         userHandler.removeLearning(req.user, newLanguage, function () {
+            res.redirect('back');
+        });
+    });
+
+    app.post('/updateBio', loggedIn, function (req, res) {
+        var newBio = req.body.newBio;
+        userHandler.updateBio(req.user, newBio, function () {
             res.redirect('back');
         });
     });

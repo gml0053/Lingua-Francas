@@ -13,6 +13,26 @@
 {%endblock%} {%block body%}
 
 <main style="padding: 15px; padding-top: 30px; padding-bottom: 0px; padding-right: 30px; padding-left: 30px">
+    <div class="row">
+        <div class="col-auto">
+            <img
+                src="{{profile.image}}"
+                alt="profile"
+                class="rounded-circle shadow"
+                style="width: 96px; height: 96px"
+            />
+        </div>
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h4 class="card-title">{{profile.displayName}}</h4>
+                    <p class="card-text">{{profile.email}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--New incoming invitations this user has not decided on yet-->
     {%if invitations.length > 0%}
     <div class="row">
         <div class="col">
@@ -35,34 +55,55 @@
         </div>
     </div>
     {%endif%}
+
     <div class="row">
         <div class="col">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-body">
-                    <h4 class="card-title">About Me</h4>
-                    <p class="card-text">{{profile}}</p>
+                    <div class="d-flex align-items-baseline">
+                        <h4>About Me</h4>
+                        <a
+                            class="ml-2 small"
+                            data-toggle="collapse"
+                            data-target=".multi-collapse"
+                            aria-controls="bioedit"
+                            aria-controls="bioview"
+                        >
+                            Edit your biography
+                        </a>
+                    </div>
+
+                    <p class="card-text collapse multi-collapse show" id="bioview">{{profile.bio}}</p>
+                    <div class="collapse multi-collapse" id="bioedit">
+                        <form action="/updateBio" method="post">
+                            <div class="form-group">
+                                <label for="newBio">Update your biography</label>
+                                <textarea class="form-control" name="newBio" id="newBio" rows="10">
+{{profile.bio}}</textarea
+                                >
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-body">
                     <h4 class="card-title" style="margin-bottom: 30px">Native Languages</h4>
                     {% for language in profile.fluentIn %}
                     <div style="margin-bottom: 15px">
-                        <div><i class="fa fa-star"></i><span style="margin-left: 10px">{{language.English}}</span></div>
-                        <div class="progress">
-                            <div
-                                class="progress-bar"
-                                aria-valuenow="50"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                                style="width: 50%"
-                            >
-                                <span class="sr-only">50%</span>
-                            </div>
+                        <div>
+                            <img
+                                class="miniflag rounded border"
+                                src="https://flagcdn.com/{{language.code.slice(-2) | lower}}.svg"
+                                width="30"
+                                alt="{{language.code}}"
+                            />
+                            <span style="margin-left: 10px">{{language.English}}</span>
                         </div>
                     </div>
                     {% endfor %}
@@ -118,22 +159,19 @@
             </div>
         </div>
         <div class="col">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-body">
                     <h4 class="card-title" style="margin-bottom: 30px">Learning Languages</h4>
                     {% for language in profile.learning %}
                     <div style="margin-bottom: 15px">
-                        <div><i class="fa fa-star"></i><span style="margin-left: 10px">{{language.English}}</span></div>
-                        <div class="progress">
-                            <div
-                                class="progress-bar"
-                                aria-valuenow="50"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                                style="width: 50%"
-                            >
-                                <span class="sr-only">50%</span>
-                            </div>
+                        <div>
+                            <img
+                                class="miniflag rounded border"
+                                src="https://flagcdn.com/{{language.code.slice(-2) | lower}}.svg"
+                                width="30"
+                                alt="{{language.code}}"
+                            />
+                            <span style="margin-left: 10px">{{language.English}}</span>
                         </div>
                     </div>
                     {% endfor %}
@@ -188,81 +226,60 @@
             </div>
         </div>
     </div>
+
+    <!--Invitations this user created that have not been decided-->
+    {% if outgoing.length > 0 %}
+    <div class="row">
+        <div class="col">
+            <ul class="list-group fake-card">
+                {% for thisInvitation in outgoing %}
+                <li class="list-group-item">
+                    You invited {{thisInvitation.inviteeName}}
+                    <a class="btn btn-primary" href="/user?userID={{thisInvitation.invitee}}" role="button"
+                        >View Profile</a
+                    >
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <!--Incoming invitations this user rejected-->
+    {% if incomingRejections.length > 0 %}
+    <div class="row">
+        <div class="col">
+            <ul class="list-group fake-card">
+                {% for thisRejection in incomingRejections %}
+                <li class="list-group-item">
+                    You rejected {{thisRejection.initiatorName}}
+                    <a class="btn btn-primary" href="/user?userID={{thisRejection.initiator}}" role="button"
+                        >View Profile</a
+                    >
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <!--Invitations this user created that the other user rejected-->
+    {% if outgoingRejections.length > 0 %}
+    <div class="row">
+        <div class="col">
+            <ul class="list-group fake-card">
+                {% for thisRejection in outgoingRejections %}
+                <li class="list-group-item">
+                    {{thisRejection.inviteeName}} rejected your invitation to chat
+                    <a class="btn btn-primary" href="/user?userID={{thisRejection.initiator}}" role="button"
+                        >View Profile</a
+                    >
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
 </main>
-
-<!--
-<p>{{profile}}</p>
-
-<a href="/logout">logout</a>
-<div class="row">
-    <div class="col">
-        <div class="card">
-            <div class="card-body">
-                <form action="/addFluency" method="POST">
-                    <div class="form-group">
-                        <label for="addedFluency">Add a fluent language?</label>
-                        <select class="form-control" id="addedFluency" name="addedFluency">
-                            {% for language in languages %}
-                            <option>{{language.English}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <form action="/removeFluency" method="POST">
-                    <div class="form-group">
-                        <label for="removedFluency">Remove a fluent language?</label>
-                        <select class="form-control" id="removedFluency" name="removedFluency">
-                            {% for language in profile.fluentIn %}
-                            <option>{{language}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <div class="card-body">
-                <form action="/addLearning" method="POST">
-                    <div class="form-group">
-                        <label for="addedLearning">Add a learning language?</label>
-                        <select class="form-control" id="addedFluency" name="addedLearning">
-                            {% for language in languages %}
-                            <option>{{language.English}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <form action="/removeLearning" method="POST">
-                    <div class="form-group">
-                        <label for="removedLearning">Remove a learning language?</label>
-                        <select class="form-control" id="removedLearning" name="removedLearning">
-                            {% for language in profile.learning %}
-                            <option>{{language}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
--->
 
 {%endblock%}

@@ -19,7 +19,12 @@
 .mine.message {
     color: white;
     margin-left: auto;
-    background: linear-gradient(to bottom, #0ea0ff 0%, #7f70f5 100%);
+    background-image: radial-gradient(
+        circle farthest-corner at 11.7% 80.6%,
+        rgba(249, 185, 255, 1) 0%,
+        rgba(177, 172, 255, 1) 49.3%,
+        rgba(98, 203, 255, 1) 89%
+    );
     background-attachment: fixed;
     position: relative;
 }

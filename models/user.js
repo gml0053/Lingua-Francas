@@ -6,6 +6,7 @@ var userSchema = mongoose.Schema({
     googleID: String,
     displayName: String,
     givenName: String,
+    bio: String,
     image: String,
     email: String,
     password: String,

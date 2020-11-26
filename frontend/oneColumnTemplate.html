@@ -19,15 +19,14 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
         />
-        <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css" />
         <link rel="stylesheet" href="assets/css/customStyles.css" />
         <link rel="stylesheet" href="assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css" />
 
         {%block head%}{%endblock%}
     </head>
 
-    <body style="background: #434354; height: 100vh; max-height: 100vh">
-        <div class="container-fluid" style="height: 100%; padding: 0px; max-width: 1400px; background: white">
+    <body style="height: 100vh; max-height: 100vh">
+        <div class="container-fluid" style="min-height: 100%; padding: 0px; background: white">
             <!-- Start: Off-Canvas Sidebar-Drawer Navbar -->
             <nav
                 class="navbar navbar-dark fixed-top off-canvas"
@@ -114,7 +113,7 @@
                 </div>
             </nav>
             <!-- End: Off-Canvas Sidebar-Drawer Navbar -->
-            <div class="d-flex flex-row" style="height: 100%">
+            <div class="d-flex flex-row" style="height: 100vh">
                 <div class="flex-grow-0 flex-shrink-0" id="spacer"><span></span></div>
                 <div
                     class="d-flex flex-column flex-grow-1 flex-shrink-1 flex-fill"

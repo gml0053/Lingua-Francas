@@ -24,8 +24,8 @@
         {%block head%}{%endblock%}
     </head>
 
-    <body style="height: 100vh; max-height: 100vh; background: #434354">
-        <div class="container-fluid" style="height: 100%; padding: 0px; max-width: 1400px; background: #ffffff">
+    <body style="height: 100vh; max-height: 100vh">
+        <div class="container-fluid" style="min-height: 100%; padding: 0px; background: #ffffff">
             <!-- Start: Off-Canvas Sidebar-Drawer Navbar -->
             <nav class="navbar navbar-dark fixed-top off-canvas" data-right-drawer="0" data-open-drawer="1">
                 <div class="container-fluid flex-column">
@@ -99,7 +99,7 @@
                                 style="padding-top: 5px"
                             >
                                 <h2 style="color: rgba(255, 255, 255, 0.8); margin-left: 10px; font-weight: normal">
-                                    {{NavTitle}}
+                                    Conversations
                                 </h2>
                                 <button
                                     class="btn btn-primary ml-auto"
@@ -120,9 +120,9 @@
                 </div>
             </nav>
             <!-- End: Off-Canvas Sidebar-Drawer Navbar -->
-            <div class="d-flex flex-row" style="height: 100%">
+            <div class="d-flex flex-row" style="height: 100vh">
                 <div class="flex-grow-0 flex-shrink-0" id="spacer">
-                    <span>Text</span>
+                    <span></span>
                 </div>
                 <!-- Start: BODY BLOCK -->
                 <div
