@@ -40,6 +40,7 @@
                 padding-left: 10px;
             "
             roomID="{{ chat.id }}"
+            isGroup="false"
         >
             <img
                 style="
@@ -73,6 +74,39 @@
             />
             <span> You don't have any active chats yet </span>
         </li>
+        {%endfor%} {% for group in groups %}
+        <!--class active-convo-->
+        <li
+            class="list-group-item chatRoom"
+            style="
+                background: rgba(255, 255, 255, 0);
+                border-style: none;
+                padding-left: 10px;
+            "
+            roomID="{{ group.id }}"
+            isGroup="true"
+        >
+            <img
+                style="
+                    width: 35px;
+                    height: 35px;
+                    margin-right: 15px;
+                    background: rgb(96, 96, 96);
+                    border-radius: 50%;
+                "
+                src="{{group.image}}"
+            />
+            <span> {{group.name}} </span>
+            <button
+                type="button"
+                class="btn btn-primary add-people"
+                groupID="{{group.id}}"
+                data-toggle="modal"
+                data-target="#exampleModalCenter"
+            >
+                Add people
+            </button>
+        </li>
         {%endfor%}
     </ul>
 </div>
@@ -86,6 +120,7 @@
         class="chat"
         userID="{{ userID }}"
         roomID="{{roomID}}"
+        isGroup="{{isGroup}}"
         displayName="{{displayName}}"
     >
         <!--CHATS GO HERE-->
@@ -113,6 +148,7 @@
         </form>
     </div>
 </div>
+
 {% endblock %}
 
 <!--Scripts-->

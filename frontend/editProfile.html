@@ -12,7 +12,15 @@
 </style>
 {%endblock%} {%block body%}
 
-<main style="padding: 15px; padding-top: 30px; padding-bottom: 0px; padding-right: 30px; padding-left: 30px">
+<main
+    style="
+        padding: 15px;
+        padding-top: 30px;
+        padding-bottom: 0px;
+        padding-right: 30px;
+        padding-left: 30px;
+    "
+>
     <div class="row">
         <div class="col-auto">
             <img
@@ -33,20 +41,52 @@
     </div>
 
     <!--New incoming invitations this user has not decided on yet-->
-    {%if invitations.length > 0%}
     <div class="row">
         <div class="col">
             <ul class="list-group fake-card">
-                {% for privateChat in invitations %} {%if privateChat.initiator != userID%}
+                {% for privateChat in invitations.privateInvites %} {%if
+                privateChat.initiator != userID%}
                 <li class="list-group-item">
                     New chat invitation from {{privateChat.initiatorName}}
-                    <a class="btn btn-primary" href="/user?userID={{privateChat.initiator}}" role="button"
+                    <a
+                        class="btn btn-primary"
+                        href="/user?userID={{privateChat.initiator}}"
+                        role="button"
                         >View Profile</a
                     >
-                    <a class="btn btn-success" href="/acceptInvite?chatID={{privateChat._id}}" role="button"
+                    <a
+                        class="btn btn-success"
+                        href="/acceptInvite?chatID={{privateChat._id}}"
+                        role="button"
                         >Accept Invitation</a
                     >
-                    <a class="btn btn-danger" href="/rejectInvite?chatID={{privateChat._id}}" role="button"
+                    <a
+                        class="btn btn-danger"
+                        href="/rejectInvite?chatID={{privateChat._id}}"
+                        role="button"
+                        >Reject Invitation</a
+                    >
+                </li>
+                {%endif%} {%endfor%} {% for groupChat in
+                invitations.groupInvites %} {%if groupChat.initiator != userID%}
+                <li class="list-group-item">
+                    New chat invitation from {{groupChat.initiatorName}}
+                    <a
+                        class="btn btn-primary"
+                        href="/user?userID={{groupChat.initiator}}"
+                        role="button"
+                        >View Profile</a
+                    >
+                    <a
+                        class="btn btn-success"
+                        href="/acceptGroupInvite?chatID={{groupChat._id}}"
+                        role="button"
+                        >Accept Invitation</a
+                    >
+                    <a
+                        class="btn btn-danger"
+                        href="/rejectGroupInvite?chatID={{groupChat._id}}"
+                        role="button"
                         >Reject Invitation</a
                     >
                 </li>
@@ -54,7 +94,6 @@
             </ul>
         </div>
     </div>
-    {%endif%}
 
     <div class="row">
         <div class="col">
@@ -73,16 +112,30 @@
                         </a>
                     </div>
 
-                    <p class="card-text collapse multi-collapse show" id="bioview">{{profile.bio}}</p>
+                    <p
+                        class="card-text collapse multi-collapse show"
+                        id="bioview"
+                    >
+                        {{profile.bio}}
+                    </p>
                     <div class="collapse multi-collapse" id="bioedit">
                         <form action="/updateBio" method="post">
                             <div class="form-group">
-                                <label for="newBio">Update your biography</label>
-                                <textarea class="form-control" name="newBio" id="newBio" rows="10">
+                                <label for="newBio"
+                                    >Update your biography</label
+                                >
+                                <textarea
+                                    class="form-control"
+                                    name="newBio"
+                                    id="newBio"
+                                    rows="10"
+                                >
 {{profile.bio}}</textarea
                                 >
                             </div>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">
+                                Update
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -93,7 +146,9 @@
         <div class="col">
             <div class="card shadow">
                 <div class="card-body">
-                    <h4 class="card-title" style="margin-bottom: 30px">Native Languages</h4>
+                    <h4 class="card-title" style="margin-bottom: 30px">
+                        Native Languages
+                    </h4>
                     {% for language in profile.fluentIn %}
                     <div style="margin-bottom: 15px">
                         <div>
@@ -103,7 +158,9 @@
                                 width="30"
                                 alt="{{language.code}}"
                             />
-                            <span style="margin-left: 10px">{{language.English}}</span>
+                            <span style="margin-left: 10px"
+                                >{{language.English}}</span
+                            >
                         </div>
                     </div>
                     {% endfor %}
@@ -125,14 +182,29 @@
                                 <br />
                                 <form action="/addFluency" method="POST">
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text">Add</span></div>
-                                        <select class="form-control" id="addedFluency" name="addedFluency">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"
+                                                >Add</span
+                                            >
+                                        </div>
+                                        <select
+                                            class="form-control"
+                                            id="addedFluency"
+                                            name="addedFluency"
+                                        >
                                             {% for language in languages %}
-                                            <option>{{language.English}}</option>
+                                            <option>
+                                                {{language.English}}
+                                            </option>
                                             {% endfor %}
                                         </select>
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">OK</button>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary"
+                                            >
+                                                OK
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -140,15 +212,29 @@
                                 <form action="/removeFluency" method="POST">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">Remove</span>
+                                            <span class="input-group-text"
+                                                >Remove</span
+                                            >
                                         </div>
-                                        <select class="form-control" id="removedFluency" name="removedFluency">
-                                            {% for language in profile.fluentIn %}
-                                            <option>{{language.English}}</option>
+                                        <select
+                                            class="form-control"
+                                            id="removedFluency"
+                                            name="removedFluency"
+                                        >
+                                            {% for language in profile.fluentIn
+                                            %}
+                                            <option>
+                                                {{language.English}}
+                                            </option>
                                             {% endfor %}
                                         </select>
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">OK</button>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary"
+                                            >
+                                                OK
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -161,7 +247,9 @@
         <div class="col">
             <div class="card shadow">
                 <div class="card-body">
-                    <h4 class="card-title" style="margin-bottom: 30px">Learning Languages</h4>
+                    <h4 class="card-title" style="margin-bottom: 30px">
+                        Learning Languages
+                    </h4>
                     {% for language in profile.learning %}
                     <div style="margin-bottom: 15px">
                         <div>
@@ -171,7 +259,9 @@
                                 width="30"
                                 alt="{{language.code}}"
                             />
-                            <span style="margin-left: 10px">{{language.English}}</span>
+                            <span style="margin-left: 10px"
+                                >{{language.English}}</span
+                            >
                         </div>
                     </div>
                     {% endfor %}
@@ -192,14 +282,29 @@
                                 <br />
                                 <form action="/addLearning" method="POST">
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text">Add</span></div>
-                                        <select class="form-control" id="addedLearning" name="addedLearning">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"
+                                                >Add</span
+                                            >
+                                        </div>
+                                        <select
+                                            class="form-control"
+                                            id="addedLearning"
+                                            name="addedLearning"
+                                        >
                                             {% for language in languages %}
-                                            <option>{{language.English}}</option>
+                                            <option>
+                                                {{language.English}}
+                                            </option>
                                             {% endfor %}
                                         </select>
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">OK</button>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary"
+                                            >
+                                                OK
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -207,15 +312,29 @@
                                 <form action="/removeLearning" method="POST">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">Remove</span>
+                                            <span class="input-group-text"
+                                                >Remove</span
+                                            >
                                         </div>
-                                        <select class="form-control" id="removedLearning" name="removedLearning">
-                                            {% for language in profile.learning %}
-                                            <option>{{language.English}}</option>
+                                        <select
+                                            class="form-control"
+                                            id="removedLearning"
+                                            name="removedLearning"
+                                        >
+                                            {% for language in profile.learning
+                                            %}
+                                            <option>
+                                                {{language.English}}
+                                            </option>
                                             {% endfor %}
                                         </select>
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">OK</button>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary"
+                                            >
+                                                OK
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -235,7 +354,10 @@
                 {% for thisInvitation in outgoing %}
                 <li class="list-group-item">
                     You invited {{thisInvitation.inviteeName}}
-                    <a class="btn btn-primary" href="/user?userID={{thisInvitation.invitee}}" role="button"
+                    <a
+                        class="btn btn-primary"
+                        href="/user?userID={{thisInvitation.invitee}}"
+                        role="button"
                         >View Profile</a
                     >
                 </li>
@@ -253,7 +375,10 @@
                 {% for thisRejection in incomingRejections %}
                 <li class="list-group-item">
                     You rejected {{thisRejection.initiatorName}}
-                    <a class="btn btn-primary" href="/user?userID={{thisRejection.initiator}}" role="button"
+                    <a
+                        class="btn btn-primary"
+                        href="/user?userID={{thisRejection.initiator}}"
+                        role="button"
                         >View Profile</a
                     >
                 </li>
@@ -270,8 +395,12 @@
             <ul class="list-group fake-card">
                 {% for thisRejection in outgoingRejections %}
                 <li class="list-group-item">
-                    {{thisRejection.inviteeName}} rejected your invitation to chat
-                    <a class="btn btn-primary" href="/user?userID={{thisRejection.initiator}}" role="button"
+                    {{thisRejection.inviteeName}} rejected your invitation to
+                    chat
+                    <a
+                        class="btn btn-primary"
+                        href="/user?userID={{thisRejection.initiator}}"
+                        role="button"
                         >View Profile</a
                     >
                 </li>

@@ -1,0 +1,15 @@
+<ul class="list-group list-group-flush">
+    {% for item in allUsers %}
+    <div class="list-group-item">
+        <p>{{item.displayName}}</p>
+        <button
+            type="button"
+            class="btn btn-primary send-invite"
+            userID="{{item._id}}"
+            groupID="{{groupID}}"
+        >
+            Invite
+        </button>
+    </div>
+    {%endfor%}
+</ul>

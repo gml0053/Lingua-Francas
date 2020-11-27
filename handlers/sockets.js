@@ -30,7 +30,12 @@ module.exports = function (server, userHandler) {
         });
 
         socket.on("chat message", function (data) {
-            userHandler.saveMessage(data);
+            if (data.isGroup == "true") {
+                userHandler.saveGroupMessage(data);
+            } else {
+                userHandler.saveMessage(data);
+            }
+
             io.to(data.roomID).emit("chat message", data);
         });
 

@@ -7,6 +7,7 @@ var roomID = messageBox.getAttribute("roomID");
 var displayName = messageBox.getAttribute("displayName");
 var drawer = $(".navbar.fixed-top.off-canvas");
 var formattedTime;
+var isInGroup = messageBox.getAttribute("isGroup");
 
 var previousScrollHeight = 0;
 
@@ -41,11 +42,14 @@ function changeContact(roomID) {
         url: "/messagesForChat",
         data: {
             roomID: roomID,
+            isGroup: isInGroup,
         },
         dataType: "html",
     }).done(function (html) {
         messageBox.innerHTML = "";
         messageBox.innerHTML += html;
+        messageBox.setAttribute("roomID", roomID);
+        messageBox.setAttribute("isGroup", isInGroup);
         scrollToBottom();
     });
 }
@@ -56,6 +60,7 @@ function getMessages(roomID) {
         url: "/messagesForChat",
         data: {
             roomID: roomID,
+            isGroup: isInGroup,
         },
         dataType: "html",
     }).done(function (html) {
@@ -69,6 +74,7 @@ function sendMessage() {
         message: $("#inputBox").val(),
         userID: userID,
         roomID: roomID,
+        isGroup: isInGroup,
         displayName: displayName,
         timestamp: formattedTime,
     });
@@ -77,6 +83,18 @@ function sendMessage() {
 
     $("#inputBox").val("");
     $("#inputBox").attr("rows", 1);
+}
+
+function inviteToGroup(userID, groupID) {
+    console.log("client side");
+    $.ajax({
+        type: "POST",
+        url: "/sendInvite",
+        data: {
+            userID: userID,
+            groupID: groupID,
+        },
+    });
 }
 
 function updateTextbox(text) {
@@ -100,7 +118,16 @@ function addNewMessage({ user, message }) {
         receivedMsg = `<p class="yours message">${message}</p>`;
         myMsg = `<p class="mine message">${message}</p>`;
     }
-    messageBox.innerHTML += user === userID ? myMsg : receivedMsg;
+
+    if (isInGroup == "true") {
+        messageBox.innerHTML +=
+            user === userID
+                ? `<p>${user}</p>` + myMsg
+                : `<p>${user}</p>` + receivedMsg;
+    } else {
+        messageBox.innerHTML += user === userID ? myMsg : receivedMsg;
+    }
+
     scrollToBottom();
 }
 
@@ -138,11 +165,32 @@ $(function () {
     });
 
     $(".createGroup").on("click", function () {
+        console.log("click");
         $.ajax({
             type: "POST",
             url: "/createNewGroup",
         }).always(function () {
+            console.log("here");
             location.reload();
+        });
+    });
+
+    $(".add-people").on("click", function (event) {
+        $("#exampleModalCenter").modal("show");
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $.ajax({
+            type: "GET",
+            url: "/listUsers",
+            data: {
+                groupID: $(this).attr("groupID"),
+            },
+        }).done(function (html) {
+            $(".append-users").empty();
+            $(".append-users").append(html);
+            $(".send-invite").on("click", function () {
+                inviteToGroup($(this).attr("userID"), $(this).attr("groupID"));
+            });
         });
     });
 
@@ -153,9 +201,11 @@ $(function () {
             userID: userID,
             oldRoomID: roomID,
             newRoomID: $(this).attr("roomID"),
+            isGroup: $(this).attr("isGroup"),
             displayName: displayName,
         });
         roomID = $(this).attr("roomID");
+        isInGroup = $(this).attr("isGroup");
         changeContact(roomID);
         newCloseDrawer(drawer);
     });

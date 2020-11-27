@@ -2,7 +2,7 @@ const fs = require("fs");
 var userModel = require("../models/user.js");
 var directChatModel = require("../models/directChat.js");
 var groupChatModel = require("../models/groupChat.js");
-var directChatModel = require("../models/groupChat.js");
+var groupChatModel = require("../models/groupChat.js");
 
 let rawdata = fs.readFileSync("resources/language-codes.json");
 let languages = JSON.parse(rawdata);
@@ -166,13 +166,15 @@ module.exports = {
             invitee.privateChats.push(privateChat._id);
             await initiator.save();
             await invitee.save();
+            console.log("created private chat");
             callback();
         } else {
             callback();
         }
     },
 
-    async createNewGroupChat(user) {
+    async createNewGroupChat(user, callback) {
+        console.log("creating new group");
         var initiator = await userModel.findById(user._id);
         var newGroup = new groupChatModel();
         newGroup.initiator = initiator._id;
@@ -180,13 +182,23 @@ module.exports = {
         var groupChat = await newGroup.save();
         initiator.groupChats.push(groupChat._id);
         await initiator.save();
+        console.log(newGroup);
         callback();
     },
 
-    async inviteOtherToGroup(user, groupID, inviteeID) {
-        var initiator = await userModel.findById(user._id);
+    async inviteOtherToGroup(user, groupID, inviteeID, callback) {
         var groupChat = await groupChatModel.findById(groupID);
         var invitee = await userModel.findById(inviteeID);
+        groupChat.invitees.push({
+            inviteeID: invitee._id,
+            inviteeName: invitee.displayName,
+            isAccepted: false,
+            isRejected: false,
+        });
+        await groupChat.save();
+        invitee.groupChats.push(groupChat._id);
+        await invitee.save();
+        callback();
     },
 
     async getAllChatsWithNames(user, callback) {
@@ -231,6 +243,50 @@ module.exports = {
         newPromise.then(function () {
             callback(chats);
         });
+    },
+
+    async getAcceptedGroups(user, callback) {
+        var thisUser = await userModel.findById(user._id);
+        var chats = [];
+        var accepted = await groupChatModel.find({
+            _id: {
+                $in: thisUser.groupChats,
+            },
+            $or: [
+                {
+                    initiator: thisUser._id,
+                },
+                {
+                    invitees: {
+                        $elemMatch: {
+                            inviteeID: thisUser._id,
+                            isAccepted: true,
+                            isRejected: false,
+                        },
+                    },
+                },
+            ],
+        });
+        console.log(accepted);
+        if (accepted.length > 0) {
+            var grabComponents = new Promise(function (resolve, reject) {
+                accepted.forEach(async function (chat, index, array) {
+                    var initiator = await userModel.findById(chat.initiator);
+                    chats.push({
+                        id: chat._id,
+                        name: initiator.displayName + "Group Chat",
+                        image: initiator.image,
+                    });
+                    if (index === array.length - 1) resolve();
+                });
+            });
+
+            grabComponents.then(function () {
+                callback(chats);
+            });
+        } else {
+            callback(chats);
+        }
     },
 
     async getAcceptedChats(user, callback) {
@@ -285,7 +341,22 @@ module.exports = {
             isAccepted: false,
             isRejected: false,
         });
-        return newInvitations;
+        var newGroupInvitations = await groupChatModel.find({
+            _id: {
+                $in: thisUser.groupChats,
+            },
+            invitees: {
+                $elemMatch: {
+                    inviteeID: thisUser._id,
+                    isAccepted: false,
+                    isRejected: false,
+                },
+            },
+        });
+        return {
+            privateInvites: newInvitations,
+            groupInvites: newGroupInvitations,
+        };
     },
 
     async getPendingInvitations(user, callback) {
@@ -342,6 +413,46 @@ module.exports = {
         });
     },
 
+    async acceptGroupInvite(user, chatID, callback) {
+        await groupChatModel.findOneAndUpdate(
+            {
+                _id: chatID,
+                invitees: {
+                    $elemMatch: {
+                        inviteeID: user._id,
+                        isAccepted: false,
+                        isRejected: false,
+                    },
+                },
+            },
+            {
+                $set: {
+                    "invitees.$.isAccepted": true,
+                },
+            }
+        );
+        callback();
+    },
+
+    async rejectGroupInvite(user, chatID, callback) {
+        await groupChatModel.findOneAndUpdate(
+            {
+                _id: chatID,
+                $elemMatch: {
+                    inviteeID: user._id,
+                    isAccepted: false,
+                    isRejected: false,
+                },
+            },
+            {
+                $set: {
+                    "invitees.$.isRejected": true,
+                },
+            }
+        );
+        callback();
+    },
+
     async rejectInvite(user, chatID, callback) {
         var invitation = await directChatModel.findOne({
             _id: chatID,
@@ -374,12 +485,50 @@ module.exports = {
         );
     },
 
+    getMessagesForGroup(roomID, callback) {
+        groupChatModel.findOne(
+            {
+                _id: roomID,
+            },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var messages = result.messages;
+                    callback(messages);
+                }
+            }
+        );
+    },
+
     saveMessage(data) {
         //var newMessage = new directMessageModel();
         //newMessage.sentBy = data._id;
         //newMessage.sentAt = data.timestamp;
         //newMessage.content = data.message;
         directChatModel.findOneAndUpdate(
+            {
+                _id: data.roomID,
+            },
+            {
+                $push: {
+                    messages: {
+                        sentBy: data.userID,
+                        sentAt: data.timestamp,
+                        content: data.message,
+                    },
+                },
+            },
+            function (err, resultChat) {}
+        );
+    },
+
+    saveGroupMessage(data) {
+        //var newMessage = new directMessageModel();
+        //newMessage.sentBy = data._id;
+        //newMessage.sentAt = data.timestamp;
+        //newMessage.content = data.message;
+        groupChatModel.findOneAndUpdate(
             {
                 _id: data.roomID,
             },

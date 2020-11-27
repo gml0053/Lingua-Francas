@@ -99,35 +99,15 @@ module.exports = function (app, passport, userHandler) {
         });
     });
 
-    app.get("/chats", loggedIn, function (req, res) {
-        userHandler.getAcceptedChats(req.user, function (chatList) {
-            if (chatList.length > 0) {
-                res.render("webchat.html", {
-                    userID: req.user._id,
-                    chats: chatList,
-                    roomID: chatList[0].id,
-                    displayName: req.user.displayName,
-                });
-            } else {
-                res.render("webchat.html", {
-                    userID: req.user._id,
-                    chats: chatList,
-                    roomID: "none",
-                    displayName: req.user.displayName,
-                });
-            }
-        });
-    });
-
     app.get(
-        "/messagesForChat",
+        "/listUsers",
         loggedIn,
         function (req, res) {
-            roomID = req.body.roomID || req.query.roomID;
-            userHandler.getMessagesForRoom(roomID, function (messages) {
-                res.render("innerMessages.html", {
-                    messages: messages,
-                    myID: req.user._id,
+            var groupID = req.body.groupID || req.query.groupID;
+            userHandler.listAllUsersExceptMe(req.user._id, function (result) {
+                res.render("nameList.html", {
+                    allUsers: result,
+                    groupID: groupID,
                 });
             });
         },
@@ -136,8 +116,71 @@ module.exports = function (app, passport, userHandler) {
         }
     );
 
+    app.get("/chats", loggedIn, function (req, res) {
+        userHandler.getAcceptedChats(req.user, function (chatList) {
+            userHandler.getAcceptedGroups(req.user, function (groupList) {
+                var startRoom = "none";
+                var isInGroup = false;
+                if (chatList.length > 0) {
+                    startRoom = chatList[0].id;
+                } else if (groupList.length > 0) {
+                    startRoom = groupList[0].id;
+                    isInGroup = true;
+                }
+                res.render("webchat.html", {
+                    userID: req.user._id,
+                    chats: chatList,
+                    groups: groupList,
+                    roomID: startRoom,
+                    isGroup: isInGroup,
+                    displayName: req.user.displayName,
+                });
+            });
+        });
+    });
+
+    app.get(
+        "/messagesForChat",
+        loggedIn,
+        function (req, res) {
+            roomID = req.body.roomID || req.query.roomID;
+            isGroup = req.body.isGroup || req.query.isGroup;
+            console.log(isGroup);
+            if (isGroup == "true") {
+                userHandler.getMessagesForGroup(roomID, function (messages) {
+                    res.render("innerMessages.html", {
+                        messages: messages,
+                        myID: req.user._id,
+                    });
+                });
+            } else {
+                userHandler.getMessagesForRoom(roomID, function (messages) {
+                    res.render("innerMessages.html", {
+                        messages: messages,
+                        myID: req.user._id,
+                    });
+                });
+            }
+        },
+        function (err, html) {
+            res.send(html);
+        }
+    );
+
     app.post("/createNewGroup", loggedIn, function (req, res) {
-        //userHandler.createNewGroupChat(req.user, function (param) {});
+        userHandler.createNewGroupChat(req.user, function () {
+            res.send("okay");
+        });
+    });
+
+    app.post("/sendInvite", loggedIn, function (req, res) {
+        console.log("inviting");
+        userID = req.body.userID || req.query.userID;
+        groupID = req.body.groupID || req.query.groupID;
+        userHandler.inviteOtherToGroup(req.user, groupID, userID, function () {
+            console.log("here");
+            //done
+        });
     });
 
     app.post("/addFluency", loggedIn, function (req, res) {
@@ -192,6 +235,20 @@ module.exports = function (app, passport, userHandler) {
     app.get("/rejectInvite", loggedIn, function (req, res) {
         var chatID = req.body.chatID || req.query.chatID;
         userHandler.rejectInvite(req.user, chatID, function () {
+            res.redirect("back");
+        });
+    });
+
+    app.get("/acceptGroupInvite", loggedIn, function (req, res) {
+        var chatID = req.body.chatID || req.query.chatID;
+        userHandler.acceptGroupInvite(req.user, chatID, function () {
+            res.redirect("back");
+        });
+    });
+
+    app.get("/rejectGroupInvite", loggedIn, function (req, res) {
+        var chatID = req.body.chatID || req.query.chatID;
+        userHandler.rejectGroupInvite(req.user, chatID, function () {
             res.redirect("back");
         });
     });

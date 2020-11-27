@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
+var mongoose = require("mongoose");
+var bcrypt = require("bcrypt-nodejs");
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
@@ -13,17 +13,18 @@ var userSchema = mongoose.Schema({
     fluentIn: [
         {
             code: String,
-            English: String
-        }
+            English: String,
+        },
     ],
     learning: [
         {
             code: String,
-            English: String
-        }
+            English: String,
+        },
     ],
     dateRegistered: String, //for now; this will be a timestamp later
-    privateChats: [String] //IDs of private chats this user is a part of
+    privateChats: [String], //IDs of private chats this user is a part of
+    groupChats: [String], //IDs of group chats this user is a part of
 });
 
 // methods ======================
@@ -37,4 +38,4 @@ userSchema.methods.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema); //lets everyone else see this schema with the model name 'User'
+module.exports = mongoose.model("User", userSchema); //lets everyone else see this schema with the model name 'User'

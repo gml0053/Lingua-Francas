@@ -16,7 +16,11 @@
             <div class="card-body">
                 <h4 class="card-title">About Me</h4>
                 <p class="card-text">{{profile}}</p>
-                <button type="button" class="btn btn-primary initiate" targetID="{{profile._id}}">
+                <button
+                    type="button"
+                    class="btn btn-primary initiate"
+                    targetID="{{profile._id}}"
+                >
                     Start Chatting!
                 </button>
             </div>
@@ -27,10 +31,17 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title" style="margin-bottom: 30px">Native Languages</h4>
+                <h4 class="card-title" style="margin-bottom: 30px">
+                    Native Languages
+                </h4>
                 {% for language in profile.fluentIn %}
                 <div style="margin-bottom: 15px">
-                    <div><i class="fa fa-star"></i><span style="margin-left: 10px">{{language.English}}</span></div>
+                    <div>
+                        <i class="fa fa-star"></i
+                        ><span style="margin-left: 10px"
+                            >{{language.English}}</span
+                        >
+                    </div>
                     <div class="progress">
                         <div
                             class="progress-bar"
@@ -50,10 +61,17 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title" style="margin-bottom: 30px">Learning Languages</h4>
+                <h4 class="card-title" style="margin-bottom: 30px">
+                    Learning Languages
+                </h4>
                 {% for language in profile.learning %}
                 <div style="margin-bottom: 15px">
-                    <div><i class="fa fa-star"></i><span style="margin-left: 10px">{{language.English}}</span></div>
+                    <div>
+                        <i class="fa fa-star"></i
+                        ><span style="margin-left: 10px"
+                            >{{language.English}}</span
+                        >
+                    </div>
                     <div class="progress">
                         <div
                             class="progress-bar"
