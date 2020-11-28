@@ -17,6 +17,7 @@ var groupChatModel = mongoose.Schema({
     messages: [
         {
             sentBy: String, //googleID of sender
+            displayName: String,
             sentAt: String, //timestamp of send
             content: String, //actual message text
         },

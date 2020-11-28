@@ -1,0 +1,29 @@
+{% for message in messages %} {% if message.sentBy == myID %}
+<p
+    class="mine message"
+    {%
+    if
+    loop.first
+    %}
+    style="margin-top: auto"
+    {%
+    endif
+    %}
+>
+    <span class="small">{{message.displayName}}<br /></span>{{message.content}}
+</p>
+{% else %}
+<p
+    class="yours message"
+    {%
+    if
+    loop.first
+    %}
+    style="margin-top: auto"
+    {%
+    endif
+    %}
+>
+    <span class="small">{{message.displayName}}<br /></span>{{message.content}}
+</p>
+{% endif %} {% endfor %}

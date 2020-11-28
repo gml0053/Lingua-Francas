@@ -148,7 +148,7 @@ module.exports = function (app, passport, userHandler) {
             console.log(isGroup);
             if (isGroup == "true") {
                 userHandler.getMessagesForGroup(roomID, function (messages) {
-                    res.render("innerMessages.html", {
+                    res.render("innerGroupMessages.html", {
                         messages: messages,
                         myID: req.user._id,
                     });

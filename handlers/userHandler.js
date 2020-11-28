@@ -536,6 +536,7 @@ module.exports = {
                 $push: {
                     messages: {
                         sentBy: data.userID,
+                        displayName: data.displayName,
                         sentAt: data.timestamp,
                         content: data.message,
                     },

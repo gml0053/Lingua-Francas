@@ -70,6 +70,7 @@ function getMessages(roomID) {
 }
 
 function sendMessage() {
+    console.log(displayName);
     socket.emit("chat message", {
         message: $("#inputBox").val(),
         userID: userID,
@@ -102,7 +103,7 @@ function updateTextbox(text) {
     //$('#cagetextbox').attr("rows", Math.max.apply(null, text.split("\n").map(function(a){alert(a.length);return a.length;})));
 }
 
-function addNewMessage({ user, message }) {
+function addNewMessage({ user, message, displayName }) {
     const time = new Date();
 
     formattedTime = time.toLocaleString("en-US", {
@@ -110,23 +111,29 @@ function addNewMessage({ user, message }) {
         minute: "numeric",
     });
 
+    console.log(displayName);
+
     var receivedMsg, myMsg;
+    var senderSpan = ``;
+    if (isInGroup) {
+        senderSpan = `<span class="small">${displayName}<br></span>`;
+    }
     if (messageBox.innerHTML == "") {
-        receivedMsg = `<p class="yours message" style="margin-top:auto">${message}</p>`;
-        myMsg = `<p class="mine message" style="margin-top:auto">${message}</p>`;
+        receivedMsg =
+            `<p class="yours message" style="margin-top:auto">` +
+            senderSpan +
+            `${message}</p>`;
+        myMsg =
+            `<p class="mine message" style="margin-top:auto">` +
+            senderSpan +
+            `${message}</p>`;
     } else {
-        receivedMsg = `<p class="yours message">${message}</p>`;
-        myMsg = `<p class="mine message">${message}</p>`;
+        receivedMsg =
+            `<p class="yours message">` + senderSpan + `${message}</p>`;
+        myMsg = `<p class="mine message">` + senderSpan + `${message}</p>`;
     }
 
-    if (isInGroup == "true") {
-        messageBox.innerHTML +=
-            user === userID
-                ? `<p>${user}</p>` + myMsg
-                : `<p>${user}</p>` + receivedMsg;
-    } else {
-        messageBox.innerHTML += user === userID ? myMsg : receivedMsg;
-    }
+    messageBox.innerHTML += user === userID ? myMsg : receivedMsg;
 
     scrollToBottom();
 }
@@ -149,7 +156,12 @@ $(function () {
     }
 
     socket.on("chat message", function (data) {
-        addNewMessage({ user: data.userID, message: data.message });
+        console.log(data.displayName);
+        addNewMessage({
+            user: data.userID,
+            message: data.message,
+            displayName: data.displayName,
+        });
     });
 
     socket.on("notifyTyping", (data) => {
