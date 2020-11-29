@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 var boardPostSchema = mongoose.Schema({
     posterID: String,
-    poserName: String,
+    posterName: String,
     posterImage: String,
     language: String,
     content: String,

@@ -165,6 +165,11 @@ module.exports = {
         callback();
     },
 
+    async getAllPosts(callback) {
+        var boardPosts = await boardPostModel.find({});
+        callback(boardPosts);
+    },
+
     /*
     ============================================================
                     MESSAGES PRIVATE AND GROUP

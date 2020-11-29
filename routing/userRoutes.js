@@ -182,6 +182,12 @@ module.exports = function (app, passport, userHandler) {
         });
     });
 
+    app.get("/messageBoard", loggedIn, function (req, res) {
+        userHandler.getAllPosts(function (allPosts) {
+            res.render("messageBoard.html", { boardPosts: allPosts });
+        });
+    });
+
     /*
     =========================================================
     CHATS INVITES AND MESSAGE

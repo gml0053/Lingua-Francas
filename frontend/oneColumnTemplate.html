@@ -2,31 +2,49 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+        />
         <title>Lingua Francas</title>
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
         />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Nunito+Sans"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
+        />
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         />
-        <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"
+        />
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
         />
         <link rel="stylesheet" href="assets/css/customStyles.css" />
-        <link rel="stylesheet" href="assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css" />
+        <link
+            rel="stylesheet"
+            href="assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css"
+        />
 
         {%block head%}{%endblock%}
     </head>
 
     <body style="height: 100vh; max-height: 100vh">
-        <div class="container-fluid" style="min-height: 100%; padding: 0px; background: white">
+        <div
+            class="container-fluid"
+            style="min-height: 100%; padding: 0px; background: white"
+        >
             <!-- Start: Off-Canvas Sidebar-Drawer Navbar -->
             <nav
                 class="navbar navbar-dark fixed-top off-canvas"
@@ -35,12 +53,21 @@
                 style="margin-bottom: 0px; padding: 0px"
             >
                 <div class="container-fluid flex-column">
-                    <button class="btn btn-dark drawer-knob" type="button" data-open="drawer">
+                    <button
+                        class="btn btn-dark drawer-knob"
+                        type="button"
+                        data-open="drawer"
+                    >
                         <i class="fas fa-bars"></i>
                     </button>
-                    <div class="d-flex double-column-container" style="height: 100%">
+                    <div
+                        class="d-flex double-column-container"
+                        style="height: 100%"
+                    >
                         <!-- Start: small left sidebar -->
-                        <div class="d-flex flex-column flex-grow-1 align-items-start">
+                        <div
+                            class="d-flex flex-column flex-grow-1 align-items-start"
+                        >
                             <a
                                 class="btn btn-primary d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-start"
                                 role="button"
@@ -52,8 +79,17 @@
                                     padding-left: 17px;
                                 "
                                 href="/profile"
-                                ><i class="icon-user" style="background: rgba(255, 255, 255, 0); font-size: 25px"></i
-                                ><span style="font-size: 24px; margin-left: 15px">My Profile</span></a
+                                ><i
+                                    class="icon-user"
+                                    style="
+                                        background: rgba(255, 255, 255, 0);
+                                        font-size: 25px;
+                                    "
+                                ></i
+                                ><span
+                                    style="font-size: 24px; margin-left: 15px"
+                                    >My Profile</span
+                                ></a
                             >
                             <a
                                 class="btn btn-primary d-flex justify-content-center align-items-center justify-content-xl-start"
@@ -66,8 +102,17 @@
                                     padding-left: 17px;
                                 "
                                 href="/chats"
-                                ><i class="icon-bubble" style="background: rgba(255, 255, 255, 0); font-size: 25px"></i
-                                ><span style="font-size: 24px; margin-left: 15px">Messages</span></a
+                                ><i
+                                    class="icon-bubble"
+                                    style="
+                                        background: rgba(255, 255, 255, 0);
+                                        font-size: 25px;
+                                    "
+                                ></i
+                                ><span
+                                    style="font-size: 24px; margin-left: 15px"
+                                    >Messages</span
+                                ></a
                             ><a
                                 class="btn btn-primary d-flex justify-content-center align-items-center justify-content-xl-start"
                                 role="button"
@@ -81,9 +126,38 @@
                                 href="/discover"
                                 ><i
                                     class="icon-magnifier"
-                                    style="background: rgba(255, 255, 255, 0); font-size: 25px"
+                                    style="
+                                        background: rgba(255, 255, 255, 0);
+                                        font-size: 25px;
+                                    "
                                 ></i
-                                ><span style="font-size: 24px; margin-left: 15px">Discover</span></a
+                                ><span
+                                    style="font-size: 24px; margin-left: 15px"
+                                    >Discover</span
+                                ></a
+                            >
+                            <a
+                                class="btn btn-primary d-flex justify-content-center align-items-center justify-content-xl-start"
+                                role="button"
+                                style="
+                                    background: rgba(255, 255, 255, 0);
+                                    height: 60px;
+                                    border-style: none;
+                                    width: 100%;
+                                    padding-left: 17px;
+                                "
+                                href="/messageBoard"
+                                ><i
+                                    class="icon-globe"
+                                    style="
+                                        background: rgba(255, 255, 255, 0);
+                                        font-size: 25px;
+                                    "
+                                ></i
+                                ><span
+                                    style="font-size: 24px; margin-left: 15px"
+                                    >Message Board</span
+                                ></a
                             >
                             <a
                                 class="btn btn-primary d-flex justify-content-center align-items-center mt-auto justify-content-xl-start"
@@ -95,8 +169,14 @@
                                     width: 100%;
                                     padding-left: 17px;
                                 "
-                                ><i class="icon-settings" style="font-size: 25px"></i
-                                ><span style="font-size: 24px; margin-left: 15px">Settings</span></a
+                                ><i
+                                    class="icon-settings"
+                                    style="font-size: 25px"
+                                ></i
+                                ><span
+                                    style="font-size: 24px; margin-left: 15px"
+                                    >Settings</span
+                                ></a
                             >
                         </div>
                         <!-- End: small left sidebar --><button
@@ -104,17 +184,25 @@
                             id="collapse-btn"
                             type="button"
                             data-dismiss="drawer"
-                            style="background: rgba(188, 0, 0, 0); border-style: none"
+                            style="
+                                background: rgba(188, 0, 0, 0);
+                                border-style: none;
+                            "
                         >
                             <span class="sr-only">Toggle Navigation&nbsp;</span
-                            ><i class="la la-angle-right" style="margin-top: 10px"></i>
+                            ><i
+                                class="la la-angle-right"
+                                style="margin-top: 10px"
+                            ></i>
                         </button>
                     </div>
                 </div>
             </nav>
             <!-- End: Off-Canvas Sidebar-Drawer Navbar -->
             <div class="d-flex flex-row" style="height: 100vh">
-                <div class="flex-grow-0 flex-shrink-0" id="spacer"><span></span></div>
+                <div class="flex-grow-0 flex-shrink-0" id="spacer">
+                    <span></span>
+                </div>
                 <div
                     class="d-flex flex-column flex-grow-1 flex-shrink-1 flex-fill"
                     id="mainscreen"
