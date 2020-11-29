@@ -4,6 +4,11 @@ module.exports = function (app, passport, userHandler) {
     let rawdata = fs.readFileSync("resources/language-codes.json");
     let languages = JSON.parse(rawdata);
 
+    /*
+    =========================================================
+    LOG IN OR OUT
+    =========================================================
+    */
     app.get("/login", function (req, res) {
         res.render("signup.html");
     });
@@ -26,9 +31,6 @@ module.exports = function (app, passport, userHandler) {
         })
     );
 
-    // =====================================
-    // LOGOUT ==============================
-    // =====================================
     app.get("/logout", function (req, res) {
         req.logout();
         res.redirect("/");
@@ -60,28 +62,11 @@ module.exports = function (app, passport, userHandler) {
         res.render("success.html");
     });
 
-    app.get("/profile", loggedIn, async function (req, res) {
-        var newInvitations = await userHandler.getNewInvitations(req.user);
-        var pendingInvitations = await userHandler.getPendingInvitations(
-            req.user
-        );
-        var incomingRejections = await userHandler.getIncomingRejections(
-            req.user
-        );
-        var outgoingRejections = await userHandler.getOutgoingRejections(
-            req.user
-        );
-
-        res.render("editProfile.html", {
-            profile: req.user,
-            languages: languages,
-            invitations: newInvitations,
-            outgoing: pendingInvitations,
-            incomingRejections: incomingRejections,
-            outgoingRejections: outgoingRejections,
-        });
-    });
-
+    /*
+    =========================================================
+    FIND OTHER PEOPLE
+    =========================================================
+    */
     app.get("/user", loggedIn, function (req, res) {
         var userID = req.query.userID;
         userHandler.getProfileFromUserID(userID, function (err, result) {
@@ -116,6 +101,92 @@ module.exports = function (app, passport, userHandler) {
         }
     );
 
+    /*
+    =========================================================
+    EDIT OR UPDATE PROFILE
+    =========================================================
+    */
+    app.get("/profile", loggedIn, async function (req, res) {
+        var newInvitations = await userHandler.getNewInvitations(req.user);
+        var pendingInvitations = await userHandler.getPendingInvitations(
+            req.user
+        );
+        var incomingRejections = await userHandler.getIncomingRejections(
+            req.user
+        );
+        var outgoingRejections = await userHandler.getOutgoingRejections(
+            req.user
+        );
+
+        res.render("editProfile.html", {
+            profile: req.user,
+            languages: languages,
+            invitations: newInvitations,
+            outgoing: pendingInvitations,
+            incomingRejections: incomingRejections,
+            outgoingRejections: outgoingRejections,
+        });
+    });
+
+    app.post("/addFluency", loggedIn, function (req, res) {
+        var newLanguage = req.body.addedFluency;
+        userHandler.addFluency(req.user, newLanguage, function () {
+            res.redirect("back");
+        });
+    });
+
+    app.post("/removeFluency", loggedIn, function (req, res) {
+        var newLanguage = req.body.removedFluency;
+        userHandler.removeFluency(req.user, newLanguage, function () {
+            res.redirect("back");
+        });
+    });
+
+    app.post("/addLearning", loggedIn, function (req, res) {
+        var newLanguage = req.body.addedLearning;
+        userHandler.addLearning(req.user, newLanguage, function () {
+            res.redirect("back");
+        });
+    });
+
+    app.post("/removeLearning", loggedIn, function (req, res) {
+        var newLanguage = req.body.removedLearning;
+        userHandler.removeLearning(req.user, newLanguage, function () {
+            res.redirect("back");
+        });
+    });
+
+    app.post("/updateBio", loggedIn, function (req, res) {
+        var newBio = req.body.newBio;
+        userHandler.updateBio(req.user, newBio, function () {
+            res.redirect("back");
+        });
+    });
+
+    /*
+    =========================================================
+    BOARD POSTS
+    =========================================================
+    */
+    app.post("/createPost", loggedIn, function (req, res) {
+        var postLangage = req.body.postLangage || req.query.postLangage;
+        var postContent = req.body.postContent || req.query.postContent;
+        var timestamp = Date.now();
+        var post = {
+            langauge: postLangage,
+            content: postContent,
+            timestamp: timestamp,
+        };
+        userHandler.createPost(req.user, post, function () {
+            res.redirect("back");
+        });
+    });
+
+    /*
+    =========================================================
+    CHATS INVITES AND MESSAGE
+    =========================================================
+    */
     app.get("/chats", loggedIn, function (req, res) {
         userHandler.getAcceptedChats(req.user, function (chatList) {
             userHandler.getAcceptedGroups(req.user, function (groupList) {
@@ -180,41 +251,6 @@ module.exports = function (app, passport, userHandler) {
         userHandler.inviteOtherToGroup(req.user, groupID, userID, function () {
             console.log("here");
             //done
-        });
-    });
-
-    app.post("/addFluency", loggedIn, function (req, res) {
-        var newLanguage = req.body.addedFluency;
-        userHandler.addFluency(req.user, newLanguage, function () {
-            res.redirect("back");
-        });
-    });
-
-    app.post("/removeFluency", loggedIn, function (req, res) {
-        var newLanguage = req.body.removedFluency;
-        userHandler.removeFluency(req.user, newLanguage, function () {
-            res.redirect("back");
-        });
-    });
-
-    app.post("/addLearning", loggedIn, function (req, res) {
-        var newLanguage = req.body.addedLearning;
-        userHandler.addLearning(req.user, newLanguage, function () {
-            res.redirect("back");
-        });
-    });
-
-    app.post("/removeLearning", loggedIn, function (req, res) {
-        var newLanguage = req.body.removedLearning;
-        userHandler.removeLearning(req.user, newLanguage, function () {
-            res.redirect("back");
-        });
-    });
-
-    app.post("/updateBio", loggedIn, function (req, res) {
-        var newBio = req.body.newBio;
-        userHandler.updateBio(req.user, newBio, function () {
-            res.redirect("back");
         });
     });
 

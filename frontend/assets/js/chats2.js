@@ -22,7 +22,7 @@ var fontSize = parseFloat(style);
 */
 
 function newCloseDrawer(drawer) {
-    if (window.innerWidth < 576) {
+    if (window.innerWidth < 768) {
         let p = drawer.parent();
         drawer.removeClass("open");
         drawer.attr("data-open-drawer", "0");

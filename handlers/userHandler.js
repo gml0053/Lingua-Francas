@@ -2,7 +2,7 @@ const fs = require("fs");
 var userModel = require("../models/user.js");
 var directChatModel = require("../models/directChat.js");
 var groupChatModel = require("../models/groupChat.js");
-var groupChatModel = require("../models/groupChat.js");
+var boardPostModel = require("../models/boardPost.js");
 
 let rawdata = fs.readFileSync("resources/language-codes.json");
 let languages = JSON.parse(rawdata);
@@ -17,6 +17,11 @@ function getCode(languageName, callback) {
 }
 
 module.exports = {
+    /*
+    ============================================================
+                    USERS AND LANGUAGES
+    ============================================================
+    */
     listAllUsers(callback) {
         userModel.find({}, function (err, result) {
             callback(result);
@@ -139,6 +144,32 @@ module.exports = {
         );
     },
 
+    /*
+    ============================================================
+                    BOARD POSTS
+    ============================================================
+    */
+
+    async createPost(user, post, callback) {
+        var thisUser = await userModel.findById(user._id);
+        var newPost = new boardPostModel();
+        newPost.posterID = thisUser._id;
+        newPost.posterName = thisUser.displayName;
+        newPost.posterImage = thisUser.image;
+        newPost.language = post.language;
+        newPost.content = post.content;
+        newPost.timestamp = post.timestamp;
+        await newPost.save();
+        thisUser.boardPosts.push(newPost._id);
+        await thisUser.save();
+        callback();
+    },
+
+    /*
+    ============================================================
+                    MESSAGES PRIVATE AND GROUP
+    ============================================================
+    */
     async inviteToChat(user, inviteeID, callback) {
         var initiator = await userModel.findById(user._id);
         var invitee = await userModel.findById(inviteeID);

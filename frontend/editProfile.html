@@ -2,8 +2,6 @@
 
 <!--stylesheets-->
 {%block head%}
-<link rel="stylesheet" href="assets/css/customStyles.css" />
-<link rel="stylesheet" href="assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css" />
 <style>
     .card,
     .fake-card {
@@ -142,6 +140,47 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form action="/createPost" method="POST">
+                        <div class="form-group">
+                            <label for="postContent">Create new Post</label>
+                            <textarea
+                                name="postContent"
+                                id="postContent"
+                                class="form-control"
+                                rows="5"
+                                aria-describedby="helpId"
+                            ></textarea>
+                            <small id="helpId" class="text-muted"
+                                >Posts are public, so everyone can see
+                                them!</small
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="postLanguage">Language</label>
+                            <select
+                                class="form-control"
+                                name="postLanguage"
+                                id="postLanguagepostLanguage"
+                            >
+                                {% for language in languages %}
+                                <option>{{language.English}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Post!
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col">
             <div class="card shadow">

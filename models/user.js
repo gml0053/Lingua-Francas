@@ -25,6 +25,7 @@ var userSchema = mongoose.Schema({
     dateRegistered: String, //for now; this will be a timestamp later
     privateChats: [String], //IDs of private chats this user is a part of
     groupChats: [String], //IDs of group chats this user is a part of
+    boardPosts: [String], //IDs of posts this user made
 });
 
 // methods ======================

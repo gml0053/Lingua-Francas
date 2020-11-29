@@ -1,0 +1,32 @@
+<!--Use the single left column base-->
+{% extends "oneColumnTemplate.html" %}
+
+<!--Head Content-->
+{% block head %}
+<style></style>
+{% endblock %}
+
+<!--Body Content-->
+{% block body %}
+<main
+    style="
+        padding: 15px;
+        padding-top: 30px;
+        padding-bottom: 0px;
+        padding-right: 30px;
+        padding-left: 30px;
+    "
+>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <ul class="list-group list-group-flush">
+                    {% for post in boardPosts %}
+                    <div class="list-group-item"></div>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
