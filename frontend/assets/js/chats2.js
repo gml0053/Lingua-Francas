@@ -149,6 +149,7 @@ $(function () {
 
     if (roomID != "none") {
         getMessages(roomID);
+        $(".chatRoom[roomID='" + roomID + "']").addClass("active-convo");
         socket.emit("joinRoom", {
             userID: userID,
             roomID: roomID,
@@ -217,7 +218,9 @@ $(function () {
             isGroup: $(this).attr("isGroup"),
             displayName: displayName,
         });
+        $(".chatRoom[roomID='" + roomID + "']").removeClass("active-convo");
         roomID = $(this).attr("roomID");
+        $(".chatRoom[roomID='" + roomID + "']").addClass("active-convo");
         isInGroup = $(this).attr("isGroup");
         changeContact(roomID);
         newCloseDrawer(drawer);

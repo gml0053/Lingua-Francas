@@ -8,7 +8,7 @@
 <!--Pullout-->
 {% block pullout %}
 <div id="chat-list-container" style="height: 100%; max-height: 100%">
-    <ul class="list-group" style="color: rgb(208, 208, 208)">
+    <ul class="list-group" style="color: white">
         <li
             class="list-group-item createGroup"
             style="
@@ -17,16 +17,17 @@
                 padding-left: 10px;
             "
         >
-            <img
-                style="
-                    width: 35px;
-                    height: 35px;
-                    margin-right: 15px;
-                    background: rgb(96, 96, 96);
-                    border-radius: 50%;
-                "
-            />
-            <span> Create a new group </span>
+            <div class="d-flex flex-row align-items-center">
+                <i
+                    class="icon-people"
+                    style="
+                        font-size: 30px;
+                        margin-left: 5px;
+                        margin-right: 20px;
+                    "
+                ></i>
+                <span> Create a new group </span>
+            </div>
         </li>
         {% for chat in chats %}
         <!--class active-convo-->
@@ -52,28 +53,9 @@
             />
             <span> {{chat.name}} </span>
         </li>
-        {% else %}
-        <li
-            class="list-group-item"
-            style="
-                background: rgba(255, 255, 255, 0);
-                border-style: none;
-                padding-left: 10px;
-            "
-        >
-            <img
-                style="
-                    width: 35px;
-                    height: 35px;
-                    margin-right: 15px;
-                    background: rgb(96, 96, 96);
-                    border-radius: 50%;
-                "
-            />
-            <span> You don't have any active chats yet </span>
-        </li>
         {%endfor%} {% for group in groups %}
         <!--class active-convo-->
+
         <li
             class="list-group-item chatRoom"
             style="
@@ -84,26 +66,27 @@
             roomID="{{ group.id }}"
             isGroup="true"
         >
-            <img
-                style="
-                    width: 35px;
-                    height: 35px;
-                    margin-right: 15px;
-                    background: rgb(96, 96, 96);
-                    border-radius: 50%;
-                "
-                src="{{group.image}}"
-            />
-            <span> {{group.name}} </span>
-            <button
-                type="button"
-                class="btn btn-primary add-people"
-                groupID="{{group.id}}"
-                data-toggle="modal"
-                data-target="#exampleModalCenter"
-            >
-                Add people
-            </button>
+            <div class="d-flex flex-row align-items-center">
+                <img
+                    style="
+                        width: 35px;
+                        height: 35px;
+                        margin-right: 15px;
+                        background: rgb(96, 96, 96);
+                        border-radius: 50%;
+                    "
+                    src="{{group.image}}"
+                /><span class="text-truncate flex-shrink-1">{{group.name}}</span
+                ><button
+                    class="btn flex-shrink-0 ml-auto add-people"
+                    type="button"
+                    groupID="{{group.id}}"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter"
+                >
+                    <i class="icon-plus" style="color: white"></i>
+                </button>
+            </div>
         </li>
         {%endfor%}
     </ul>
