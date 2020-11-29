@@ -115,7 +115,7 @@ function addNewMessage({ user, message, displayName }) {
 
     var receivedMsg, myMsg;
     var senderSpan = ``;
-    if (isInGroup) {
+    if (isInGroup == "true") {
         senderSpan = `<span class="small">${displayName}<br></span>`;
     }
     if (messageBox.innerHTML == "") {
@@ -144,6 +144,7 @@ function addNewMessage({ user, message, displayName }) {
     ----------------------------------------------
 */
 $(function () {
+    isInGroup = messageBox.getAttribute("isGroup");
     updateTextbox("");
 
     if (roomID != "none") {
