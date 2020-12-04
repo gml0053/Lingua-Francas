@@ -25,21 +25,29 @@
     <div class="col">
         <div class="card search-card">
             <div class="card-body">
-                <form>
+                <div>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"
-                                >Search all users</span
+                                >Search all users by display name</span
                             >
                         </div>
-                        <input type="text" class="form-control" />
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="name-search"
+                        />
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
+                            <button
+                                class="btn btn-primary"
+                                id="search-button"
+                                type="button"
+                            >
                                 Go!
                             </button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -47,7 +55,7 @@
 <div class="row">
     <div class="col">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" id="users">
                 {% for item in allUsers %}
                 <div class="profile-item">
                     <div class="row">
@@ -114,4 +122,5 @@
 {%block scripts%}
 <script src="assets/js/Off-Canvas-Sidebar-Drawer-Navbar.js"></script>
 <script src="assets/js/Off-Canvas-Sidebar-Drawer-Navbar-1.js"></script>
+<script src="assets/js/search.js"></script>
 {%endblock%}

@@ -144,6 +144,19 @@ module.exports = {
         );
     },
 
+    searchByName(searchQuery, callback) {
+        userModel.find(
+            { $text: { $search: searchQuery } },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    callback(result);
+                }
+            }
+        );
+    },
+
     /*
     ============================================================
                     BOARD POSTS
@@ -218,7 +231,6 @@ module.exports = {
         var groupChat = await newGroup.save();
         initiator.groupChats.push(groupChat._id);
         await initiator.save();
-        console.log(newGroup);
         callback();
     },
 
@@ -303,7 +315,6 @@ module.exports = {
                 },
             ],
         });
-        console.log(accepted);
         if (accepted.length > 0) {
             var grabComponents = new Promise(function (resolve, reject) {
                 accepted.forEach(async function (chat, index, array) {

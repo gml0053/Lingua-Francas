@@ -28,6 +28,10 @@ var userSchema = mongoose.Schema({
     boardPosts: [String], //IDs of posts this user made
 });
 
+userSchema.index({
+    displayName: "text",
+});
+
 // methods ======================
 // generating a hash
 userSchema.methods.generateHash = function (password) {

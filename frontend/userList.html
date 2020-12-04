@@ -1,0 +1,52 @@
+{% for item in matchedUsers %}
+<div class="profile-item">
+    <div class="row">
+        <div class="col-auto">
+            <img
+                class="rounded-circle"
+                src="{{ item.image }}"
+                style="width: 60px; height: 60px"
+            />
+        </div>
+        <div class="col d-flex d-xl-flex align-items-xl-center">
+            <span style="font-size: 24px">{{ item.displayName }}</span>
+        </div>
+        <div class="col-2">
+            <div
+                class="d-flex flex-row flex-wrap align-items-center flag-container"
+            >
+                {% for language in item.fluentIn %}
+                <img
+                    class="miniflag"
+                    src="https://flagcdn.com/{{language.code.slice(-2) | lower}}.svg"
+                    width="30"
+                    alt="{{language.code}}"
+                />
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-2">
+            <div
+                class="d-flex flex-row flex-wrap align-items-center flag-container"
+            >
+                {% for language in item.learning %}
+                <img
+                    class="miniflag"
+                    src="https://flagcdn.com/{{language.code.slice(-2) | lower}}.svg"
+                    width="30"
+                    alt="{{language.code}}"
+                />
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-auto d-flex d-xl-flex align-items-xl-center">
+            <a
+                class="btn btn-primary"
+                href="/user?userID={{item._id}}"
+                role="button"
+                >More</a
+            >
+        </div>
+    </div>
+</div>
+{%endfor%}

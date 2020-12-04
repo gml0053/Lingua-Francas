@@ -101,6 +101,25 @@ module.exports = function (app, passport, userHandler) {
         }
     );
 
+    app.get(
+        "/searchUsers",
+        loggedIn,
+        function (req, res) {
+            var searchQuery = req.body.textQuery || req.query.textQuery;
+            userHandler.searchByName(searchQuery, function (matchedUsers) {
+                res.render("userList.html", {
+                    matchedUsers: matchedUsers,
+                });
+            });
+        },
+        function (err, html) {
+            if (!err) {
+                conssole.log("sending html");
+                res.send(html);
+            }
+        }
+    );
+
     /*
     =========================================================
     EDIT OR UPDATE PROFILE
@@ -251,7 +270,6 @@ module.exports = function (app, passport, userHandler) {
     });
 
     app.post("/sendInvite", loggedIn, function (req, res) {
-        console.log("inviting");
         userID = req.body.userID || req.query.userID;
         groupID = req.body.groupID || req.query.groupID;
         userHandler.inviteOtherToGroup(req.user, groupID, userID, function () {
